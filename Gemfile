@@ -41,8 +41,10 @@ gem 'font-awesome-sass', '~> 5.5.0'
 gem 'bootstrap'
 gem 'jquery-rails'
 
+gem 'devise'
+gem 'simple_form'
+
 # install later
-# gem 'devise'
 # gem 'cancancan'
 # gem 'acts-as-taggable-on'
 
@@ -53,6 +55,7 @@ gem 'breadcrumbs_on_rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
   gem 'faker', '~> 1.9.1'
 end
 
