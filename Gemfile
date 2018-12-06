@@ -41,8 +41,10 @@ gem 'font-awesome-sass', '~> 5.5.0'
 gem 'bootstrap'
 gem 'jquery-rails'
 
+gem 'devise'
+gem 'simple_form'
+
 # install later
-# gem 'devise'
 # gem 'cancancan'
 # gem 'acts-as-taggable-on'
 
