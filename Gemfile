@@ -37,10 +37,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # bootstrap 4 starter pack
-# gem 'font-awesome-sass', '~> 5.5.0'
-# gem 'bootstrap'
-# gem 'jquery-rails'
-# gem 'jquery-turbolinks'
+gem 'font-awesome-sass', '~> 5.5.0'
+gem 'bootstrap'
+gem 'jquery-rails'
 
 # install later
 # gem 'devise'
