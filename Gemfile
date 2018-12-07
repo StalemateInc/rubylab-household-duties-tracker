@@ -42,6 +42,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 
 gem 'devise'
+gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 
 # install later
