@@ -21,3 +21,22 @@ passwords = %w[RfFvMdWyOm5bJl AlQdI70rAlAoGnV QcKn8mTqQ4Xv5f2c Jz9hFvN24uAjQp De
     confirmation_sent_at: Time.now - 10.seconds
   )
 end
+
+5.times do |n|
+  Group.create(
+    name: 'The ' + Faker::Name.last_name.pluralize,
+    password: 'asdfzx'
+  )
+end
+
+users = User.all.to_a
+groups = Group.all.to_a
+10.times do |n|
+  user = users[Random.rand(10)]
+  group = groups[Random.rand(5)]
+  Membership.create(
+    group_id: group.id,
+    user_id: user.id,
+    role: :adult
+  )
+end
