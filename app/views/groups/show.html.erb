@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-sm">
       Group name: <%= @group.name %><br/>
-      Is public: <%= @group.visible_to_all %>
+      Is public: <%= @group.visible_to_all %><br/>
+      <%= link_to "Edit group", edit_group_path(@group), class: "btn btn-warning btn-md"%>
     </div>
   </div>
 </div>

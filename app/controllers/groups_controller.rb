@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+
+  # GET /groups
   def index
     @groups = current_user.groups
   end
@@ -18,7 +20,9 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  # GET /groups/:id/edit
   def edit
+    redirect_to groups_path unless check_priviledge
     @group = Group.find(params[:id])
   end
 
@@ -28,6 +32,7 @@ class GroupsController < ApplicationController
     redirect_to root_path unless check_priviledge
   end
 
+  # PATCH/PUT groups/:id
   def update
     @group = Group.find(params[:id])
 
@@ -36,6 +41,7 @@ class GroupsController < ApplicationController
     end
   end
 
+  # DELETE group/:id
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
