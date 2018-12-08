@@ -11,10 +11,10 @@ PASSWORDS = %w[qwerty AlQdI70rAlAoGnV QcKn8mTqQ4Xv5f2c Jz9hFvN24uAjQp DeRhJoD1 R
                NzYj1tTkM Ht5cH8Aj AtDdUoFzAp L1MhIyDjZz So1fAl6iDiUoU IoJ0CkH27b1 Uq3iIbGa
                Xq3kUwSf18I09gQ HvT506P0T AjFnCiAkG6 9rB2Pl3qXx P8VoT4Ci2 20Ql5yJx7rTzQ9G Vr56OhIsM5L6].freeze
 
-PASSWORDS.length.times do |n|
+PASSWORDS.each do |password|
   User.create(
     email: Faker::Internet.email,
-    password: PASSWORDS[n],
+    password: password,
     display_name: Faker::Name.first_name + ' ' + Faker::Name.last_name,
     profile_picture_path: nil,
     confirmed_at: Time.now,
@@ -22,7 +22,7 @@ PASSWORDS.length.times do |n|
   )
 end
 
-(PASSWORDS.length / 2).times do |n|
+(PASSWORDS.length / 2).times do |_n|
   Group.create(
     name: 'The ' + Faker::Name.last_name.pluralize,
     password: 'asdfzx'
