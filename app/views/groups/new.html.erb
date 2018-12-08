@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2>Create a new group</h2>
+      <%= simple_form_for(@group, url: groups_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :name,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email"} %>
+          <%= f.input :password,
+                      required: true,
+                      autofocus: true,
+                      input_html: {autocomplete: "password"} %>
+          <%= f.input :visible_to_all, as: :boolean%>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Create a group" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
