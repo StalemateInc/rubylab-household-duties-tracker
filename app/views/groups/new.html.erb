@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2>Create a new group</h2>
+      <%= simple_form_for(@group, url: groups_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+
+        <%= render :partial => 'form', locals: {f: f} %>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Create a group" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
