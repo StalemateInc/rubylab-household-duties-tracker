@@ -2,6 +2,10 @@ class GroupsController < ApplicationController
 
   # GET /groups
   def index
+    unless can? :read_public, Group
+      redirect_to root_path
+      return
+    end
     @groups = current_user.groups
   end
 
@@ -17,19 +21,23 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
+    unless can? :create, Group
+      redirect_to root_path
+      return
+    end
     @group = Group.new
   end
 
   # GET /groups/:id/edit
   def edit
-    redirect_to groups_path unless check_priviledge
     @group = Group.find(params[:id])
+    redirect_to groups_path unless can? :update, @group
   end
 
   # GET groups/:id
   def show
     @group = Group.find(params[:id])
-    redirect_to root_path unless check_priviledge
+    redirect_to root_path unless can? :read, @group
   end
 
   # PATCH/PUT groups/:id
@@ -44,23 +52,20 @@ class GroupsController < ApplicationController
   # DELETE group/:id
   def destroy
     @group = Group.find(params[:id])
-    @group.destroy
+    if can? :destroy, @group
+      @group.destroy
+    end
 
     redirect_to groups_path
   end
 
   private
 
-  def check_priviledge
-    current_user.groups.include?(Group.find(params[:id])) &&
-        current_user.memberships.find_by(group_id: params[:id]).role == "adult"
-  end
-
   def add_current_user_as_adult(group)
     membership = Membership.create(
       group_id: group.id,
       user_id: current_user.id,
-      role: :adult
+      role_id: Role.find_by(text_name: 'group_owner').id
     )
     membership.save
   end

@@ -45,8 +45,7 @@ gem 'devise'
 # gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 
-# install later
-# gem 'cancancan'
+gem 'cancancan'
 # gem 'acts-as-taggable-on'
 
 gem 'sidekiq', '~> 5.2.3'

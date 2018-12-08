@@ -1,5 +1,5 @@
 class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :group
-  enum role: %i[adult child]
+  belongs_to :role
 end

@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :memberships
   has_many :groups, through: :memberships, dependent: :destroy
+  has_many :roles, through: :memberships
+
 end
