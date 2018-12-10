@@ -4,7 +4,7 @@ class Role < ApplicationRecord
 
   roles.each do |role, _n|
     define_singleton_method(role.to_sym) do
-      Role.find_by(role: role.to_sym).id
+      Role.find_by(role: role.to_sym)
     end
   end
 end
