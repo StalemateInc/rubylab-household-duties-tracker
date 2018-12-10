@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :find_group, except: %i[index create new]
 
   # GET /groups
   def index
@@ -14,7 +15,6 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      add_current_user_as_adult(@group)
       redirect_to @group
     end
   end
@@ -26,24 +26,21 @@ class GroupsController < ApplicationController
       return
     end
     @group = Group.new
+    @group.memberships.build
   end
 
   # GET /groups/:id/edit
   def edit
-    @group = Group.find(params[:id])
     redirect_to groups_path unless can? :update, @group
   end
 
   # GET groups/:id
   def show
-    @group = Group.find(params[:id])
     redirect_to root_path unless can? :read, @group
   end
 
   # PATCH/PUT groups/:id
   def update
-    @group = Group.find(params[:id])
-
     if @group.update(group_params)
       redirect_to @group
     end
@@ -51,7 +48,6 @@ class GroupsController < ApplicationController
 
   # DELETE group/:id
   def destroy
-    @group = Group.find(params[:id])
     if can? :destroy, @group
       @group.destroy
     end
@@ -61,16 +57,13 @@ class GroupsController < ApplicationController
 
   private
 
-  def add_current_user_as_adult(group)
-    membership = Membership.create(
-      group_id: group.id,
-      user_id: current_user.id,
-      role_id: Role.find_by(text_name: 'group_owner').id
-    )
-    membership.save
+  def find_group
+    @group = Group.find(params[:id])
   end
 
+
   def group_params
-    params.require(:group).permit(:name, :password, :visible_to_all)
+    params.require(:group).permit(:name, :password, :visible_to_all,
+                                  memberships_attributes: %i[group_id user_id role_id])
   end
 end

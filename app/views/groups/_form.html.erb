@@ -8,4 +8,9 @@
               autofocus: false,
               input_html: { autocomplete: "password" } %>
   <%= f.input :visible_to_all, as: :boolean %>
+  <% if @group.id.nil? %>
+    <%= f.simple_fields_for :memberships do |ff|%>
+      <%= render :partial => 'memberships_form', locals: {ff: ff} %>
+    <% end %>
+  <% end %>
 </div>
