@@ -13,10 +13,7 @@ class GroupsController < ApplicationController
   # POST /groups
   def create
     @group = Group.new(group_params)
-
-    if @group.save
-      redirect_to @group
-    end
+    redirect_to @group if @group.save
   end
 
   # GET /groups/new
@@ -48,10 +45,7 @@ class GroupsController < ApplicationController
 
   # DELETE group/:id
   def destroy
-    if can? :destroy, @group
-      @group.destroy
-    end
-
+    @group.destroy if can? :destroy, @group
     redirect_to groups_path
   end
 
