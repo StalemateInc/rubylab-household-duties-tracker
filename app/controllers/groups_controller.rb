@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
 
   # GET groups/:id
   def show
-    redirect_to root_path unless can? :read, @group
+    redirect_to groups_path unless can? :read, @group
   end
 
   # PATCH/PUT groups/:id
