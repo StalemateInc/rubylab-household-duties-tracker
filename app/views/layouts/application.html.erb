@@ -4,14 +4,14 @@
     <title>HouseholdDuties</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <p>Current user: <%= current_user.email if user_signed_in? %></p>
-    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-warning btn-sm"%>
+  <body class="landing_body">
+    <%= render :partial => "landing/landing_nav" if user_signed_in? %>
 
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
