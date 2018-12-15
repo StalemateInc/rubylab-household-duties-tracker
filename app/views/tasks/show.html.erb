@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      Task Title: <%= @task.title %><br/>
+      Description: <%= @task.description %><br/>
+      Time To Complete: <%= @task.ttc %><br/>
+      Created by: <%= @task.creator.email %><br/>
+      Executing by: <%= @task.executor.email %><br/>
+      <%= link_to "Destroy task", group_task_path(@task.group_id, @task), class: "btn btn-md btn-danger", method: "delete" %>
+    </div>
+  </div>
+</div>

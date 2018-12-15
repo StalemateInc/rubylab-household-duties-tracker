@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h2>Tasks for group "<%= @group.name %>"</h2>
+      <% @tasks.each do |task| %>
+        <div class="card">
+          Title: <%= task.title %><br/>
+          Description: <%= truncate(task.description, length: 50) %><br/>
+          <%= link_to "More", group_task_path(@group,task), class: "btn btn-md btn-success" %><br/>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
