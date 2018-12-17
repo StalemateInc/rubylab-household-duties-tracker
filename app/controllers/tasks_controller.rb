@@ -24,7 +24,9 @@ class TasksController < ApplicationController
   def edit; end
 
   # GET /groups/:group_id/tasks/:id
-  def show; end
+  def show
+    redirect_to groups_path unless can? :read, @task
+  end
 
   # PATCH/PUT /groups/:group_id/tasks/:id
   def update
