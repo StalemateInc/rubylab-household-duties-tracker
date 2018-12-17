@@ -24,22 +24,28 @@
         <div class="row">
           <div class="col-6">
             Created by:
-            <%= @task.creator.email %>
+            <%= "#{@task.creator.display_name}<#{@task.creator.email}>" %>
           </div>
           <div class="col-6">
             Executed by:
-            <%= @task.executor.email %>
+            <%= "#{@task.executor.display_name}<#{@task.executor.email}>" %>
           </div>
         </div>
       </div>
     </div>
     <hr/>
-    <div class="row align-self-center">
-      <div class="col-lg-12">
-        <i class="fa fa-clock fa-2x"></i>
-        <%= tag.span(id: "expire_time_#{@task.id}", class: "expire_timer", data: {expires_at: @task.expires_at.iso8601, id: @task.id }) %>
+      <div class="row align-self-center">
+        <div class="col-lg-12">
+          <i class="fa fa-clock fa-2x"></i>
+          <% if @task.in_progress? || @task.finished? || @task.closed? %>
+            <%= tag.span(id: "expire_time_#{@task.id}", class: "expire_timer", data: {expires_at: @task.expires_at.iso8601, id: @task.id }) %>
+          <% elsif @task.opened? || @task.ready? %>
+            <%= content_tag(:span, 'Not started yet') %>
+          <% else %>
+            <%= content_tag(:span, 'On pause') %>
+          <% end %>
+        </div>
       </div>
-    </div>
     <hr/>
     <div class="row">
       <div class="col-lg-12">

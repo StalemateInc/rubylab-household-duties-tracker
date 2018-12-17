@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/:id/edit
   def edit
-    redirect_to groups_path unless can? :update, @group
+    redirect_to groups_path unless can? :edit, @group
   end
 
   # GET groups/:id

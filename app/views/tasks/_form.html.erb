@@ -1,13 +1,17 @@
 <div class="form-inputs" xmlns="">
   <div class="row">
     <div class="col-lg-8 col-sm-12">
-      <%= f.input :title, required: true, autofocus: true, input_html: { autocomplete: "title" } %>
-      <%= f.input :description, input_html: { autocomplete: "description" } %>
-      <%= f.input :executor_id, collection: @group.users.map {|u| [u.email, u.id] }, include_blank: false, input_html: { autocomplete: "executor" } %>
+        <%= field_set_tag nil, class: "#{'disabled' unless @task.new_record? and can? :edit, @task}" do %>
+          <%= f.input :title, required: true, autofocus: true, input_html: { autocomplete: "title" } %>
+          <%= f.input :description, input_html: { autocomplete: "description" } %>
+          <%= f.input :executor_id, collection: @group.users.map {|u| [u.display_name, u.id] }, include_blank: false, input_html: { autocomplete: "executor" } %>
+        <% end %>
     </div>
-    <div class="col-lg-4 col-sm-12">
-      Expires at:<br/>
-      <%= f.input_field :expires_at, as: :string, label: false, required: true, input_html: { autocomplete: "expires_at" }%>
-    </div>
+    <% if can? :estimate, @task %>
+      <div class="col-lg-4 col-sm-12">
+        Expires at:<br/>
+        <%= f.input_field :expires_at, as: :string, label: false, required: true, input_html: { autocomplete: "expires_at" }%>
+      </div>
+    <% end %>
   </div>
 </div>
