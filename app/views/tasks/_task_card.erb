@@ -1,0 +1,11 @@
+<div class="card">
+  <h4 class="card-header">
+    <i class="fa fa-clock"></i>
+    <%= tag.span(id: "expire_timer_#{task.id}", class: "expire_timer", data: {expires_at: task.expires_at.iso8601, id: task.id }) %>
+  </h4>
+  <div class="card-body">
+    <h4 class="card-title"><%= task.title %></h4>
+    <p class="card-text"><%= task.description  %></p>
+    <%= link_to "More", group_task_path(group, task.id), class: "btn btn-md btn-success" %>
+  </div>
+</div>

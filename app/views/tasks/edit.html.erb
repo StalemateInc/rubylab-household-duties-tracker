@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2>Edit task</h2>
+      <%= simple_form_for(@task, url: group_task_path, method: :patch) do |f| %>
+        <%= f.error_notification %>
+
+        <%= render :partial => 'form', locals: {f: f} %>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Save changes" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

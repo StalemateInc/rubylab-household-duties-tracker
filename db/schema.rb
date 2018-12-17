@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_12_14_153553) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.interval "ttc"
+    t.datetime "expires_at"
     t.bigint "creator_id"
     t.bigint "executor_id"
     t.bigint "group_id"

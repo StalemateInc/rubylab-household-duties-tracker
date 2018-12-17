@@ -1,35 +1,25 @@
-convertMinsToHoursMins = (minutes) ->
-  hours = Math.floor(minutes / 60)
-  mins = minutes % 60
-  [
-    hours
-    mins
-  ]
-
-convertHoursMinsToMins = (hours, minutes) ->
-  +hours * 60 + +minutes
-
-formIntervalString = (hours, minutes) ->
-  hours + ' hours ' + minutes + ' minutes'
+startEveryTimer = (string_selector = '.expire_timer') ->
+  timersSpans = $(string_selector)
+  $.each timersSpans, (_index, timerSpan) ->
+    timer = new Countdown(
+      selector: '#' + $(timerSpan).attr('id')
+      msgBefore: ''
+      msgAfter: 'Expired.'
+      msgPattern: '{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left'
+      dateEnd: new Date($(timerSpan).data('expires-at')))
+    return
+  return
 
 $(document).on 'turbolinks:load', ->
   'use strict'
-
-  slider = $('#no_model_ttc_slider')
-  hours_input = $('#no_model_ttc_hours')
-  minutes_input = $('#no_model_ttc_minutes')
-  ttc = $('#task_ttc')
-
-  slider.on 'input', ->
-    results = convertMinsToHoursMins(slider.val())
-    hours_input.val(results[0])
-    minutes_input.val(results[1])
-    ttc.val(formIntervalString(results[0], results[1]))
+  $ ->
+    $('#task_expires_at').datetimepicker
+      locale: 'en-gb'
+      inline: true
+      format: 'YYYY-MM-DD HH:mm'
+      defaultDate: Date()
+      icons:
+        time: 'fas fa-clock'
     return
-  $('#no_model_ttc_hours, #no_model_ttc_minutes').on 'change', ->
-    hours = hours_input.val();
-    minutes = minutes_input.val();
-    slider.val(convertHoursMinsToMins(hours, minutes))
-    ttc.val(formIntervalString(hours, minutes))
-    return
+  startEveryTimer()
   return

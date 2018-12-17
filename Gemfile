@@ -41,6 +41,8 @@ gem 'font-awesome-sass', '~> 5.5.0'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'momentjs-rails'
+gem 'bootstrap4-datetime-picker-rails'
 
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'
