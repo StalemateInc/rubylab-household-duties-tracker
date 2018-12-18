@@ -1,7 +1,6 @@
 <div class="card">
   <h4 class="card-header">
-    <i class="fa fa-clock"></i>
-    <%= tag.span(id: "expire_timer_#{task.id}", class: "expire_timer", data: {expires_at: task.expires_at.iso8601, id: task.id }) %>
+    <%= render partial: "timer", locals: { task: task } %>
   </h4>
   <div class="card-body">
     <h4 class="card-title"><%= task.title %></h4>
