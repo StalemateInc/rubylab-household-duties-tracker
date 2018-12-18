@@ -3,7 +3,9 @@ class EstimationController < ApplicationController
   before_action :find_group
   before_action :find_task
 
-  def estimate; end
+  def estimate
+    redirect_back_to_task unless @task.executor == current_user
+  end
 
   def send_estimate
     params[:task][:status] = :ready
