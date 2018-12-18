@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   root to: 'landing#index'
   get '/index', to: 'landing#index'
   resources :groups do
+    get '/member/new', to: 'memberships#new'
+    post '/member/new', to: 'memberships#create'
     resources :tasks do
       get '/estimate', to: 'estimation#estimate'
-      get '/estimate/view', to: 'estimation#view'
       patch '/estimate', to: 'estimation#send_estimate'
       post '/estimate/confirm', to: 'estimation#confirm'
       post '/estimate/reject', to: 'estimation#reject'

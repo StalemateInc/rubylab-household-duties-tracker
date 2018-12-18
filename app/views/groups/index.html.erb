@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h2>Public groups:</h2>
+      <% if @public_groups.empty? %>
+        No public groups present, sorry.
+      <% else %>
+        <%  @public_groups.each do |g|  %>
+          <%= render partial: "group_card", locals: {group: g} %>
+        <%  end  %>
+      <%  end %>
+      <hr/>
+      <h2>My groups:</h2>
+      <% @my_groups.each do |g| %>
+        <%= render partial: "group_card", locals: {group: g} %>
+      <% end %>
+    </div>
+  </div>
+</div>

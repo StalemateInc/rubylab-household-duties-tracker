@@ -4,11 +4,10 @@ class GroupsController < ApplicationController
 
   # GET /groups
   def index
-    unless can? :read_public, Group
-      redirect_to root_path
-      return
+    if can? :read_public, Group
+      @public_groups = Group.where(visible_to_all: true)
     end
-    @groups = current_user.groups
+    @my_groups = current_user.groups
   end
 
   # POST /groups

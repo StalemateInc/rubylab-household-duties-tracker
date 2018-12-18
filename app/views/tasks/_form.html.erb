@@ -4,7 +4,8 @@
         <%= field_set_tag nil, class: "#{'disabled' unless @task.new_record? and can? :edit, @task}" do %>
           <%= f.input :title, required: true, autofocus: true, input_html: { autocomplete: "title" } %>
           <%= f.input :description, input_html: { autocomplete: "description" } %>
-          <%= f.input :executor_id, collection: @group.users.map {|u| [u.display_name, u.id] }, include_blank: false, input_html: { autocomplete: "executor" } %>
+          <%= f.input :executor_id, collection: @group.users.map {|u| ["#{u.display_name} <#{u.email}>", u.id] },
+                      include_blank: false, input_html: { autocomplete: "executor" } %>
         <% end %>
     </div>
   </div>

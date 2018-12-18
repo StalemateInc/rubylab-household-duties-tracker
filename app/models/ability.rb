@@ -17,6 +17,15 @@ class Ability
       can :read, Task do |task|
         task.visible_to_all || task.creator == user || task.executor == user
       end
+      can :add_users, Group do |group|
+        get_corresponding_role_for_group(user, group).in?([Role.adult, Role.group_owner])
+      end
+      can :remove_users, Group do |group|
+        get_corresponding_role_for_group(user, group).in?([Role.adult, Role.group_owner])
+      end
+      can :manage_roles, Group do |group|
+        get_corresponding_role_for_group(user, group) == Role.group_owner
+      end
       can :create, Task
       can :edit, Task do |task|
         task.creator == user ||
