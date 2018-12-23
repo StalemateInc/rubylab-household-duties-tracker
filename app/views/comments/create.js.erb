@@ -1,0 +1,20 @@
+<% if @comment.parent %>
+  $comment_parent = $("#comment_<%= @comment.parent.id %> > ul");
+  $comment_form = $("#comment_<%= @comment.parent.id %> .comment-form form");
+<% else %>
+  $comment_parent = $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-list");
+  $comment_form = $("#comments-widget-of-commentable-<%= @commentable.id %> .comment-form form");
+<% end %>
+$comment_count = $('#comments-count-of-commentable-<%= @commentable.id %>');
+<% if @comment.errors.empty? %>
+  $comment_count.html("<%= @commentable.comments.size %>");
+  $comment_parent.append("<%=j render @comment %>");
+  $comment_form.first().trigger("reset");
+  <% if @comment.parent %>
+    $comment_form.first().remove();
+    $comment = $("#comment_<%= @comment.parent.id %>");
+    $restore_link = $comment.find('a.delete-comment-link')[0];
+    $reply_link = $comment.find('a.reply-comment-link')[0];
+    $reply_link.href = $restore_link.href + "/reply";
+  <% end %>
+<% end %>

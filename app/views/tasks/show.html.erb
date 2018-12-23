@@ -59,6 +59,7 @@
     <div class="row">
       <div class="col-lg-12">
         <!-- comments section will be here -->
+        <%= render partial: "comments/widget", locals: {commentable: @task} %>
       </div>
     </div>
     <div class="card-block">

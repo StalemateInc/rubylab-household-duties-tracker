@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     get '/member/new', to: 'memberships#new'
     post '/member/new', to: 'memberships#create'
     resources :tasks do
+      resources :comments, only: %i[create edit update destroy] do
+        member do
+          get :reply
+        end
+      end
       get '/estimate', to: 'estimation#estimate'
       patch '/estimate', to: 'estimation#send_estimate'
       post '/estimate/confirm', to: 'estimation#confirm'

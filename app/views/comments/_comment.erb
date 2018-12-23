@@ -1,0 +1,24 @@
+ <li class="list-unstyled comment" id="comment_<%= comment.id %>">
+
+    <div class="media">
+      <div class="comment-profile pull-left">
+        <img class="comment-profile-pic rounded-circle mx-3 mb-2" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Oops"/>
+      </div>
+      <div class="media-body">
+        <div class="comment-info">
+          <span class="media-meta pull-right"><%= comment.user.display_name + ' commmented at '%><%= comment.created_at %><%= " (edited) " if comment.edited? %></span>
+          <h5 class="pull-right"><%= comment.content %></h5>
+          <small>
+            <% task = comment.commentable; group = task.group %>
+            <%= link_to 'Reply', polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
+            <%= link_to 'Edit', edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
+            <%= link_to 'Destroy', polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: "Are you sure?"}, class: "delete-comment-link"%>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <%= render comment.replies if comment.replies.any? %>
+    </ul>
+  </li>
