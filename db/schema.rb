@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_161656) do
+ActiveRecord::Schema.define(version: 2018_12_24_235224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_161656) do
     t.boolean "visible_to_all", default: false, null: false
     t.integer "rating", limit: 2, default: 0
     t.integer "status", default: 0
+    t.datetime "new_expires_at"
     t.index ["creator_id"], name: "index_tasks_on_creator_id"
     t.index ["executor_id"], name: "index_tasks_on_executor_id"
     t.index ["group_id"], name: "index_tasks_on_group_id"

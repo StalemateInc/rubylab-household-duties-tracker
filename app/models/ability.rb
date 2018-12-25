@@ -35,11 +35,14 @@ class Ability
       can(:estimate, Task) { |task| task.executor == user }
       can(:start, Task) { |task| task.creator == user }
       can :pause, Task do |task|
-        user == task.executor ||
+        user == task.executor || user == task.creator ||
           get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner])
       end
+      can :resume, Task do |task|
+        user == task.executor || user == task.creator ||
+            get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner])
+      end
       can(:close, Task) { |task| task.creator == user }
-      can(:rate, Task) { |task| task.creator == user }
     end
   end
 

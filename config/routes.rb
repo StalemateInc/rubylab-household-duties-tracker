@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       patch '/estimate', to: 'estimation#send_estimate'
       post '/estimate/confirm', to: 'estimation#confirm'
       post '/estimate/reject', to: 'estimation#reject'
+      get '/estimate/pause', to: 'estimation#prompt_pause'
+      post '/estimate/pause', to: 'estimation#pause'
+      post '/estimate/unpause', to: 'estimation#unpause'
     end
   end
 end

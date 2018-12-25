@@ -6,3 +6,14 @@
 <% else %>
   <%= content_tag(:span, 'On pause') %>
 <% end %>
+
+<% if task.pausable? && can?(:pause, task) %>
+  <%= link_to group_task_estimate_pause_path(task.group, task), class: "btn btn-md btn-warning", remote: true,
+      method: (if task.creator == current_user then :post else :get end) do%>
+    <i class="fas fa-pause"></i>
+  <% end %>
+<!--  <a class="btn btn-md btn-warning"><i class="fas fa-pause"></i></a>-->
+<% end %>
+<% if task.stoppable? && can?(:close, task) %>
+  <a class="btn btn-md btn-danger"><i class="fas fa-stop"></i></a>
+<% end %>

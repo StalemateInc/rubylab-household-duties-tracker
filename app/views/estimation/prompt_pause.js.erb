@@ -1,0 +1,31 @@
+form = "<%= j render "pause_form" %>"
+$form = $(form);
+
+$form.on('hidden.bs.modal', function (e) {
+    $form.remove();
+});
+$form.on("shown.bs.modal", function (e) {
+    var $picker = $($form.find('#estimation_new_expires_at').first())
+    $picker.datetimepicker({
+        locale: 'en-gb',
+        inline: true,
+        format: 'YYYY-MM-DD HH:mm',
+        minDate: moment().add(5, 'minutes'),
+        defaultDate: moment().add(5, 'minutes'),
+        icons: {
+            time: 'fas fa-clock'
+        }
+    });
+    var $time_checkbox = $($form.find('#estimation_need_more_time'));
+    var $picker_div = $($form.find('#datetimepicker-toggler'));
+    $time_checkbox.change(function () {
+       if (this.checked) {
+           $picker.prop('disabled', false)
+           $picker_div.removeClass("d-none");
+       } else {
+           $picker.prop('disabled', true);
+           $picker_div.addClass("d-none");
+       }
+    });
+});
+$form.modal('show');

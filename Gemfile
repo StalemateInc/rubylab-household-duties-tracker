@@ -50,7 +50,8 @@ gem 'simple_form'
 
 gem 'cancancan'
 # gem 'acts-as-taggable-on'
-
+#
+gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
 gem 'mailgun'
 gem 'breadcrumbs_on_rails'
