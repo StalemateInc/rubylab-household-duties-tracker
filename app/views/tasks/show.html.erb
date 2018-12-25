@@ -40,10 +40,25 @@
           <%= content_tag(:h4, "#{@task.executor.display_name} estimated that the work could be finished at") %>
           <%= content_tag(:h2, "#{@task.expires_at}") %>
           <% until_estimate = ActiveSupport::Duration.build(@task.expires_at - DateTime.now) %>
-          <%= content_tag(:span, "It is #{until_estimate.parts[:days]} days, #{until_estimate.parts[:hours]} hours and #{until_estimate.parts[:minutes]} minutes from now") %><br/>
+          <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from now") %><br/>
           <span>Do you agree?</span>
           <div>
-            <%= link_to "Confirm estimate", group_task_estimate_confirm_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
+            <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
+            <%= link_to "Reject estimate", group_task_estimate_reject_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-danger" %>
+          </div>
+        </div>
+      </div>
+      <hr/>
+    <% elsif @task.paused? && @task.new_expires_at && can?(:start, @task)%>
+      <div class="row text-center">
+        <div class="col-12">
+          <%= content_tag(:h4, "#{@task.executor.display_name} requests more time, now the deadline is") %>
+          <%= content_tag(:h2, "#{@task.new_expires_at}") %>
+          <% until_estimate = ActiveSupport::Duration.build(@task.new_expires_at - @task.expires_at) %>
+          <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from after previous estimate") %><br/>
+          <span>Do you agree?</span>
+          <div>
+            <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
             <%= link_to "Reject estimate", group_task_estimate_reject_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-danger" %>
           </div>
         </div>

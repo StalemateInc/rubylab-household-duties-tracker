@@ -14,12 +14,4 @@ class Task < ApplicationRecord
     !(finished? || closed?)
   end
 
-  def reject_estimation
-    update(expires_at: nil, status: :opened)
-  end
-
-  def confirm_estimation
-    update(status: :in_progress)
-  end
-
 end

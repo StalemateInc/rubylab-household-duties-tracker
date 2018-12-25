@@ -42,6 +42,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'momentjs-rails'
+gem 'moment_timezone-rails'
 gem 'bootstrap4-datetime-picker-rails'
 
 gem 'devise'

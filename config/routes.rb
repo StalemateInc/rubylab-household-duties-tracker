@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
       get '/estimate', to: 'estimation#estimate'
       patch '/estimate', to: 'estimation#send_estimate'
-      post '/estimate/confirm', to: 'estimation#confirm'
+      post '/estimate/accept', to: 'estimation#accept'
       post '/estimate/reject', to: 'estimation#reject'
       get '/estimate/pause', to: 'estimation#prompt_pause'
       post '/estimate/pause', to: 'estimation#pause'

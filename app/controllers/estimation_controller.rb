@@ -12,12 +12,14 @@ class EstimationController < ApplicationController
     redirect_back_to_task if @task.update(estimation_create_params)
   end
 
-  def confirm
-    redirect_back_to_task if @task.confirm_estimation
+  def accept
+    acceptance = AcceptEstimation.call(task: @task)
+    redirect_back_to_task if acceptance.success?
   end
 
   def reject
-    redirect_back_to_task if @task.reject_estimation
+    rejection = RejectEstimation.call(task: @task)
+    redirect_back_to_task if rejection.success?
   end
 
   # GET groups/:group_id/tasks/:task_id/estimate/pause
@@ -56,11 +58,11 @@ class EstimationController < ApplicationController
   end
 
   def estimation_pause_params_task
-    params.require(:estimation).permit(:new_expires_at)
+    params.require(:estimation).permit(:new_expires_at) if params[:estimation].present?
   end
 
   def estimation_pause_params_comment
-    params.require(:estimation).permit(:content, :new_expires_at)
+    params.require(:estimation).permit(:content, :new_expires_at) if params[:estimation].present?
   end
 
 end

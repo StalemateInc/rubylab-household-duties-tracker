@@ -2,7 +2,11 @@ class PauseTask
   include Interactor
 
   def call
-    context.task_params[:status] = :paused
+    if context.task_params.nil?
+      context.task_params = ActionController::Parameters.new(status: :paused).permit!
+    else
+      context.task_params[:status] = :paused
+    end
     unless context.task.update(context.task_params)
       context.fail!(message: 'Failed to pause selected task!')
     end

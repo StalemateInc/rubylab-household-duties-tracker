@@ -18,6 +18,7 @@
 //= require popper
 //= require bootstrap
 //= require moment
+//= require moment-timezone-with-data-2010-2020
 //= require tempusdominus-bootstrap-4.js
 //= require countdown.min
 //= require_tree .
