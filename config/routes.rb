@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   devise_for :user
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'landing#index'
   get '/index', to: 'landing#index'
   resources :groups do
@@ -18,7 +17,8 @@ Rails.application.routes.draw do
       post '/estimate/reject', to: 'estimation#reject'
       get '/estimate/pause', to: 'estimation#prompt_pause'
       post '/estimate/pause', to: 'estimation#pause'
-      post '/estimate/unpause', to: 'estimation#unpause'
+      post '/estimate/resume', to: 'estimation#resume'
+      post '/estimate/stop', to: 'estimation#stop'
     end
   end
 end

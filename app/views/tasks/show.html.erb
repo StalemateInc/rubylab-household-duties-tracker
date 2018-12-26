@@ -38,7 +38,7 @@
       <div class="row text-center">
         <div class="col-12">
           <%= content_tag(:h4, "#{@task.executor.display_name} estimated that the work could be finished at") %>
-          <%= content_tag(:h2, "#{@task.expires_at}") %>
+          <%= content_tag(:h2, "#{@task.expires_at.utc.in_time_zone(session[:timezone])}") %>
           <% until_estimate = ActiveSupport::Duration.build(@task.expires_at - DateTime.now) %>
           <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from now") %><br/>
           <span>Do you agree?</span>
@@ -53,7 +53,7 @@
       <div class="row text-center">
         <div class="col-12">
           <%= content_tag(:h4, "#{@task.executor.display_name} requests more time, now the deadline is") %>
-          <%= content_tag(:h2, "#{@task.new_expires_at}") %>
+          <%= content_tag(:h2, "#{@task.new_expires_at.in_time_zone(session[:timezone])}") %>
           <% until_estimate = ActiveSupport::Duration.build(@task.new_expires_at - @task.expires_at) %>
           <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from after previous estimate") %><br/>
           <span>Do you agree?</span>
@@ -66,14 +66,13 @@
       <hr/>
     <% end %>
     <div class="row">
-      <div class="col-lg-12 timer_column">
+      <div class="col-lg-12 timer_column_<%= @task.id %>">
         <%= render partial: "timer", locals: {task: @task} %>
       </div>
     </div>
     <hr/>
     <div class="row">
       <div class="col-lg-12">
-        <!-- comments section will be here -->
         <%= render partial: "comments/widget", locals: {commentable: @task} %>
       </div>
     </div>

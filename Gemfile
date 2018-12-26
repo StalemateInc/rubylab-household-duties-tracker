@@ -44,6 +44,7 @@ gem 'jquery-ui-rails'
 gem 'momentjs-rails'
 gem 'moment_timezone-rails'
 gem 'bootstrap4-datetime-picker-rails'
+gem 'js_cookie_rails'
 
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'

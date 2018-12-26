@@ -5,13 +5,14 @@ $form.on('hidden.bs.modal', function (e) {
     $form.remove();
 });
 $form.on("shown.bs.modal", function (e) {
-    var $picker = $($form.find('#estimation_new_expires_at').first())
+    var $picker = $($form.find('#estimation_new_expires_at').first());
+    var $startDate = moment().add(5, 'minutes');
     $picker.datetimepicker({
         locale: 'en-gb',
         inline: true,
         format: 'YYYY-MM-DD HH:mm',
-        minDate: moment().add(5, 'minutes'),
-        defaultDate: moment().add(5, 'minutes'),
+        minDate: $startDate,
+        defaultDate: $startDate,
         icons: {
             time: 'fas fa-clock'
         }

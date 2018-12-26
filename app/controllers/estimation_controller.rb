@@ -9,6 +9,7 @@ class EstimationController < ApplicationController
 
   def send_estimate
     params[:task][:status] = :ready
+    params[:task][:expires_at] = Time.parse(params[:task][:expires_at]).utc.to_s
     redirect_back_to_task if @task.update(estimation_create_params)
   end
 
@@ -35,6 +36,29 @@ class EstimationController < ApplicationController
       if pausing.success?
         format.html { redirect_back(fallback_location: @task) }
         format.json { head :no_content }
+        format.js { render 'estimation/reload_timer' }
+      end
+    end
+  end
+
+  # POST groups/:group_id/tasks/:task_id/estimate/resume
+  def resume
+    if @task.update(status: :in_progress)
+      params[:resume] = ""
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: @task) }
+        format.json { head :no_content }
+        format.js { render 'estimation/reload_timer' }
+      end
+    end
+  end
+
+  def stop
+    if @task.update(status: :finished)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: @task) }
+        format.json { head :no_content }
+        format.js { render 'estimation/reload_timer' }
       end
     end
   end

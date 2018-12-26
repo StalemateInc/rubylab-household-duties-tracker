@@ -13,5 +13,4 @@ class Task < ApplicationRecord
   def stoppable?
     !(finished? || closed?)
   end
-
 end

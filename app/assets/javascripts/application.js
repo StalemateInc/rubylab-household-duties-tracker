@@ -18,7 +18,15 @@
 //= require popper
 //= require bootstrap
 //= require moment
+//= require moment/en-gb.js
+//= require moment/ru.js
 //= require moment-timezone-with-data-2010-2020
 //= require tempusdominus-bootstrap-4.js
 //= require countdown.min
+//= require js.cookie
 //= require_tree .
+
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+if (Cookies.get('timezone') === undefined) {
+    Cookies.set('timezone', timezone, {expires: 24});
+}
