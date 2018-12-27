@@ -2,10 +2,10 @@ class PauseTask
   include Interactor
 
   def call
-    if context.task_params.nil?
+    if context.task_params.nil? || context.task_params.empty?
       context.task_params = ActionController::Parameters.new(status: :paused).permit!
     else
-      context.task_params[:new_created_at] = Time.parse(context.task_params[:new_created_at]).utc.to_s
+      context.task_params[:new_expires_at] = Time.parse(context.task_params[:new_expires_at]).utc.iso8601
       context.task_params[:status] = :paused
     end
     unless context.task.update(context.task_params)

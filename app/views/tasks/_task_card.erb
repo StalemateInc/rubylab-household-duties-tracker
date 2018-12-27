@@ -1,7 +1,18 @@
 <div class="card">
-  <h4 class="card-header timer_column_<%= task.id %>">
-    <%= render partial: "timer", locals: { task: task } %>
-  </h4>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-8">
+        <h4 class="timer_column_<%= task.id %>">
+          <%= render partial: "timer", locals: { task: task } %>
+        </h4>
+      </div>
+      <div class="col-4">
+        <div class="rating-column float-right">
+          <input id="card-rating-<%= task.id %>" name="rating" class="rating card-rating" value="<%= task.rating %>" data-min="0" data-max="5" data-step="1">
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card-body">
     <h4 class="card-title"><%= task.title %></h4>
     <p class="card-text"><%= task.description  %></p>

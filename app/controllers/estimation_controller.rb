@@ -43,7 +43,8 @@ class EstimationController < ApplicationController
 
   # POST groups/:group_id/tasks/:task_id/estimate/resume
   def resume
-    if @task.update(status: :in_progress)
+    resuming = ResumeTask.call(task: @task)
+    if resuming.success?
       params[:resume] = ""
       respond_to do |format|
         format.html { redirect_back(fallback_location: @task) }

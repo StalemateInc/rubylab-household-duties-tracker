@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   layout "dashboard"
-  before_action :find_task, except: %i[index create new]
+  before_action :find_task, only: %i[edit show update destroy]
   before_action :find_group, except: %i[show destroy]
 
   # GET /groups/:group_id/tasks
@@ -39,6 +39,21 @@ class TasksController < ApplicationController
     redirect_to group_tasks_path
   end
 
+  def prompt_rate
+    @task = Task.find(params[:task_id])
+  end
+
+  def rate
+    @task = Task.find(params[:task_id])
+    if @task.update(rating: rate_params[:rating], status: :closed)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: @task) }
+        format.json { render :no_content }
+        format.js
+      end
+    end
+  end
+
   private
 
   def set_current_user_as_creator
@@ -56,5 +71,9 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :description,
                                  :creator_id, :executor_id)
+  end
+
+  def rate_params
+    params.require(:task).permit(:rating)
   end
 end

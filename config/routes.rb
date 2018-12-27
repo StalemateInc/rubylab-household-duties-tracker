@@ -11,8 +11,10 @@ Rails.application.routes.draw do
           get :reply
         end
       end
+      get '/rate', to: 'tasks#prompt_rate'
+      post '/rate', to: 'tasks#rate'
       get '/estimate', to: 'estimation#estimate'
-      patch '/estimate', to: 'estimation#send_estimate'
+      post '/estimate', to: 'estimation#send_estimate'
       post '/estimate/accept', to: 'estimation#accept'
       post '/estimate/reject', to: 'estimation#reject'
       get '/estimate/pause', to: 'estimation#prompt_pause'

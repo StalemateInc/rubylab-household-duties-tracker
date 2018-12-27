@@ -19,6 +19,7 @@ $form.on("shown.bs.modal", function (e) {
     });
     var $time_checkbox = $($form.find('#estimation_need_more_time'));
     var $picker_div = $($form.find('#datetimepicker-toggler'));
+    $picker.prop('disabled', true)
     $time_checkbox.change(function () {
        if (this.checked) {
            $picker.prop('disabled', false)

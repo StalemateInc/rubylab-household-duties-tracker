@@ -3,10 +3,10 @@
   <%= tag.span(id: "expire_time_#{task.id}", class: "expire_timer", data: {expires_at: task.expires_at.iso8601, id: task.id }) %>
 <% elsif task.opened? || task.ready? %>
   <%= content_tag(:span, 'Not started yet', id: "expire_time_#{task.id}") %>
-<% elsif task.finished? || task.closed? %>
-  <%= content_tag(:span, 'Finished', id: "expire_time_#{task.id}") %>
-<% else %>
+<% elsif task.paused? %>
   <%= content_tag(:span, 'On pause', id: "expire_time_#{task.id}") %>
+<% else %>
+  <%= content_tag(:span, 'Finished', id: "expire_time_#{task.id}") %>
 <% end %>
 
 <% if task.paused? && can?(:resume, task) %>
@@ -16,16 +16,23 @@
   <% end %>
 <% end %>
 
-<% if task.pausable? && can?(:pause, task) %>
+<% if task.in_progress? && can?(:pause, task) %>
   <%= link_to group_task_estimate_pause_path(task.group, task), class: "btn btn-md btn-warning", remote: true,
-      method: (if task.creator == current_user then :post else :get end), id: "pause_button_#{task.id}" do%>
+      method: (if task.creator == current_user then :post else :get end), id: "pause_button_#{task.id}" do %>
     <i class="fas fa-pause"></i>
   <% end %>
-
 <% end %>
-<% if task.stoppable? && can?(:close, task) %>
+
+<% if task.stoppable? && can?(:stop, task) %>
   <%= link_to group_task_estimate_stop_path(task.group, task), class: "btn btn-md btn-danger", remote: true,
-      method: :post, id: "finish_button_#{task.id}" do%>
+      method: :post, id: "finish_button_#{task.id}" do %>
     <i class="fas fa-stop"></i>
+  <% end %>
+<% end %>
+
+<% if task.finished? && can?(:rate, task) %>
+  <%= link_to group_task_rate_path(task.group, task), class: "btn btn-md btn-primary", remote: :true,
+              id: "rate_button_#{task.id}" do %>
+    <i class="fas fa-star"></i>
   <% end %>
 <% end %>

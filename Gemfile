@@ -49,6 +49,7 @@ gem 'js_cookie_rails'
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
+gem 'time_difference'
 
 gem 'cancancan'
 # gem 'acts-as-taggable-on'

@@ -14,35 +14,37 @@ class Ability
       can :destroy, Group do |group|
         get_corresponding_role_for_group(user, group) == Role.group_owner
       end
-      can :read, Task do |task|
-        task.visible_to_all || task.creator == user || task.executor == user
-      end
       can :add_users, Group do |group|
         get_corresponding_role_for_group(user, group).in?([Role.adult, Role.group_owner])
       end
       can :remove_users, Group do |group|
-        get_corresponding_role_for_group(user, group).in?([Role.adult, Role.group_owner])
+        get_corresponding_role_for_group(user, group) == Role.group_owner
       end
       can :manage_roles, Group do |group|
         get_corresponding_role_for_group(user, group) == Role.group_owner
       end
+      can :read_public, Task
+      can :read, Task do |task|
+        task.creator == user || task.executor == user ||
+          get_corresponding_role_for_group(user, task.group).in?([Role.group_owner, Role.adult])
+      end
       can :create, Task
       can :edit, Task do |task|
-        task.creator == user ||
-          get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner])
+        task.executor != user && (task.creator == user ||
+          get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner]))
       end
       can(:destroy, Task) { |task| task.creator == user }
       can(:estimate, Task) { |task| task.executor == user }
       can(:start, Task) { |task| task.creator == user }
       can :pause, Task do |task|
-        user == task.executor || user == task.creator ||
-          get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner])
+        [task.executor, task.creator].include?(user)
       end
       can :resume, Task do |task|
-        user == task.executor || user == task.creator ||
-            get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner])
+        [task.executor, task.creator].include?(user)
       end
-      can(:close, Task) { |task| task.creator == user }
+      can(:stop, Task) { |task| task.creator == user }
+      can(:rate, Task) { |task| task.creator == user }
+      can :comment, Task
     end
   end
 

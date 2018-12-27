@@ -24,6 +24,8 @@
 //= require tempusdominus-bootstrap-4.js
 //= require countdown.min
 //= require js.cookie
+//= require star-rating/star-rating
+//= require star-rating/themes/krajee-fas/theme
 //= require_tree .
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

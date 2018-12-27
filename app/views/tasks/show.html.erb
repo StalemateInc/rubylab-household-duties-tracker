@@ -3,13 +3,9 @@
       <div class="card-title col-md-8">
         <h4><%= @task.title %></h4>
       </div>
-      <div class="col-md-4">
-        <i class="fa fa-star float-right"></i>
-        <i class="fa fa-star float-right"></i>
-        <i class="fa fa-star float-right"></i>
-        <i class="fa fa-star float-right"></i>
-        <i class="fa fa-star float-right"></i>
-    </div>
+      <div id="rating-div" class="col-md-4">
+        <%= render partial: "rating_widget", locals: { task: @task } %>
+      </div>
   </div>
   <div class="card-body">
     <div class="row">
@@ -38,9 +34,8 @@
       <div class="row text-center">
         <div class="col-12">
           <%= content_tag(:h4, "#{@task.executor.display_name} estimated that the work could be finished at") %>
-          <%= content_tag(:h2, "#{@task.expires_at.utc.in_time_zone(session[:timezone])}") %>
-          <% until_estimate = ActiveSupport::Duration.build(@task.expires_at - DateTime.now) %>
-          <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from now") %><br/>
+          <%= content_tag(:h2, "#{@task.expires_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')}") %>
+          <%= content_tag(:span, "It is #{TimeDifference.between(@task.expires_at, Time.now).humanize} from now.")  %><br/>
           <span>Do you agree?</span>
           <div>
             <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
@@ -53,9 +48,8 @@
       <div class="row text-center">
         <div class="col-12">
           <%= content_tag(:h4, "#{@task.executor.display_name} requests more time, now the deadline is") %>
-          <%= content_tag(:h2, "#{@task.new_expires_at.in_time_zone(session[:timezone])}") %>
-          <% until_estimate = ActiveSupport::Duration.build(@task.new_expires_at - @task.expires_at) %>
-          <%= content_tag(:span, "It is #{until_estimate.parts[:days]} day(s), #{until_estimate.parts[:hours]} hour(s) and #{until_estimate.parts[:minutes]} minute(s) from after previous estimate") %><br/>
+          <%= content_tag(:h2, "#{@task.new_expires_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')}") %>
+          <%= content_tag(:span, "It is #{TimeDifference.between(@task.expires_at, Time.now).humanize} after the previous estimate.") %><br/>
           <span>Do you agree?</span>
           <div>
             <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
