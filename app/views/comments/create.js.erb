@@ -6,7 +6,7 @@
   $comment_form = $("#comments-widget-of-commentable-<%= @commentable.id %> .comment-form form");
 <% end %>
 $comment_count = $('#comments-count-of-commentable-<%= @commentable.id %>');
-<% if @comment.errors.empty? %>
+<% if @comment.errors.nil? || @comment.errors.empty? %>
   $comment_count.html("<%= @commentable.comments.size %>");
   $comment_parent.append("<%=j render @comment %>");
   $comment_form.first().trigger("reset");

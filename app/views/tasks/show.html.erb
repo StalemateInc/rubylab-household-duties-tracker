@@ -30,7 +30,7 @@
       </div>
     </div>
     <hr/>
-    <% if @task.ready? && can?(:start, @task) %>
+    <% if @task.pending? && can?(:start, @task) %>
       <div class="row text-center">
         <div class="col-12">
           <%= content_tag(:h4, "#{@task.executor.display_name} estimated that the work could be finished at") %>

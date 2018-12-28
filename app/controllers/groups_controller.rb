@@ -4,24 +4,19 @@ class GroupsController < ApplicationController
 
   # GET /groups
   def index
-    if can? :read_public, Group
-      @public_groups = Group.where(visible_to_all: true)
-    end
-    @my_groups = current_user.groups
+    @public_groups = Group.where(visible_to_all: true) if can? :read_public, Group
+    @user_groups = current_user.groups
   end
 
   # POST /groups
   def create
-    @group = Group.new(group_params)
-    redirect_to @group if @group.save
+    redirect_to @group if @group.save(group_params)
   end
 
   # GET /groups/new
   def new
-    unless can? :create, Group
-      redirect_to root_path
-      return
-    end
+    return redirect_to root_path unless can? :create, Group
+
     @group = Group.new
     @group.memberships.build
   end
@@ -38,9 +33,7 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT groups/:id
   def update
-    if @group.update(group_params)
-      redirect_to @group
-    end
+    redirect_to @group if @group.update(group_params)
   end
 
   # DELETE group/:id
@@ -54,7 +47,6 @@ class GroupsController < ApplicationController
   def find_group
     @group = Group.find(params[:id])
   end
-
 
   def group_params
     params.require(:group).permit(:name, :password, :visible_to_all,

@@ -9,52 +9,60 @@ class Ability
       end
       can :create, Group
       can :edit, Group do |group|
-        get_corresponding_role_for_group(user, group) == Role.group_owner
+        find_corresponding_role_for_group(user, group).group_owner?
       end
       can :destroy, Group do |group|
-        get_corresponding_role_for_group(user, group) == Role.group_owner
+        find_corresponding_role_for_group(user, group).group_owner?
       end
       can :add_users, Group do |group|
-        get_corresponding_role_for_group(user, group).in?([Role.adult, Role.group_owner])
+        find_corresponding_role_for_group(user, group).in?([Role.adult.last, Role.group_owner.last])
       end
       can :remove_users, Group do |group|
-        get_corresponding_role_for_group(user, group) == Role.group_owner
+        find_corresponding_role_for_group(user, group).group_owner?
       end
       can :manage_roles, Group do |group|
-        get_corresponding_role_for_group(user, group) == Role.group_owner
+        find_corresponding_role_for_group(user, group).group_owner?
       end
       can :read_public, Task
       can :read, Task do |task|
-        task.creator == user || task.executor == user ||
-          get_corresponding_role_for_group(user, task.group).in?([Role.group_owner, Role.adult])
+        creator?(task, user) || executor?(task, user) ||
+          find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
       end
       can :create, Task
       can :edit, Task do |task|
-        task.executor != user && (task.creator == user ||
-          get_corresponding_role_for_group(user, task.group).in?([Role.adult, Role.group_owner]))
+        !executor?(task, user) && (creator?(task, user) ||
+          find_corresponding_role_for_group(user, task.group).in?([Role.adult.last, Role.group_owner.last]))
       end
-      can(:destroy, Task) { |task| task.creator == user }
-      can(:estimate, Task) { |task| task.executor == user }
-      can(:start, Task) { |task| task.creator == user }
+      can(:destroy, Task) { |task| creator?(task, user)}
+      can(:estimate, Task) { |task| executor?(task, user) }
+      can(:start, Task) { |task| creator?(task, user) }
       can :pause, Task do |task|
-        [task.executor, task.creator].include?(user)
+        [task.executor, task.creator].any? user
       end
       can :resume, Task do |task|
-        [task.executor, task.creator].include?(user)
+        [task.executor, task.creator].any? user
       end
-      can(:stop, Task) { |task| task.creator == user }
-      can(:rate, Task) { |task| task.creator == user }
+      can(:stop, Task) { |task| creator?(task, user) }
+      can(:rate, Task) { |task| creator?(task, user) }
       can :comment, Task
     end
   end
 
   private
 
+  def executor?(task, user)
+    task.executor == user
+  end
+
+  def creator?(task, user)
+    task.creator == user
+  end
+
   def find_corresponding_group_for_task(task)
     Group.find(task.group)
   end
 
-  def get_corresponding_role_for_group(user, group)
+  def find_corresponding_role_for_group(user, group)
     member = user.memberships.find_by(group: group)
     member&.role
   end

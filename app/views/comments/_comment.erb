@@ -6,8 +6,8 @@
       </div>
       <div class="media-body">
         <div class="comment-info">
-          <span class="media-meta pull-right"><%= comment.user.display_name + ' commmented at '%><%= comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S') %><%= " (edited) " if comment.edited? %></span>
-          <h5 class="pull-right"><%= comment.content %></h5>
+          <span class="media-meta pull-right"><%= comment.user.display_name + ' commmented at '%><%= comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S') %><%= " (edited)" if comment.edited? %></span>
+          <h5 class="pull-right"><%= '[Requested postponement]: ' if comment.postpone? %><%= comment.content %></h5>
           <small>
             <% task = comment.commentable; group = task.group %>
             <%= link_to 'Reply', polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>

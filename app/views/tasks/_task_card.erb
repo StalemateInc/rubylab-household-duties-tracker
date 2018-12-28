@@ -18,7 +18,7 @@
     <p class="card-text"><%= task.description  %></p>
     <% if task.executor == current_user && task.opened? %>
       <%= link_to "Estimation required", group_task_estimate_path(group, task.id), class: "btn btn-md btn-primary" %>
-    <% elsif task.creator == current_user && task.ready? %>
+    <% elsif task.creator == current_user && task.pending? %>
       <%= link_to "Estimation set", group_task_path(group, task.id), class: "btn btn btn-warning" %>
     <% else %>
       <%= link_to "More", group_task_path(group, task.id), class: "btn btn-md btn-success" %>

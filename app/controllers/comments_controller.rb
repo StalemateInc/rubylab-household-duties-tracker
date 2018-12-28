@@ -1,13 +1,14 @@
 class CommentsController < ApplicationController
 
-  before_action :set_commentable
-  before_action :set_comment, only: %i[edit update destroy reply]
+  before_action :find_commentable
+  before_action :find_comment, only: %i[edit update destroy reply]
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
+    result = CreateComment.call(comment_params: comment_params, commentable: @commentable, user: current_user)
+    success = result.success?
+    @comment = result.comment
     respond_to do |format|
-      if @comment.save
+      if success
         format.html { redirect_to @commentable }
         format.json { render json: @comment }
       else
@@ -32,11 +33,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
     respond_to do |format|
-      format.html { redirect_to @commentable }
-      format.json { head :no_content }
-      format.js
+      if @comment.destroy
+        format.html { redirect_to @commentable }
+        format.json { head :no_content }
+        format.js
+      end
     end
   end
 
@@ -46,11 +48,11 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_comment
+  def find_comment
     @comment = Comment.find(params[:id])
   end
 
-  def set_commentable
+  def find_commentable
     @commentable = Task.find(params[:task_id])
   end
 

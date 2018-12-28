@@ -8,19 +8,19 @@ class EstimationController < ApplicationController
   end
 
   def send_estimate
-    params[:task][:status] = :ready
+    params[:task][:status] = :pending
     params[:task][:expires_at] = Time.parse(params[:task][:expires_at]).utc.to_s
     redirect_back_to_task if @task.update(estimation_create_params)
   end
 
   def accept
-    acceptance = AcceptEstimation.call(task: @task)
-    redirect_back_to_task if acceptance.success?
+    result = AcceptEstimation.call(task: @task)
+    redirect_back_to_task if result.success?
   end
 
   def reject
-    rejection = RejectEstimation.call(task: @task)
-    redirect_back_to_task if rejection.success?
+    result = RejectEstimation.call(task: @task)
+    redirect_back_to_task if result.success?
   end
 
   # GET groups/:group_id/tasks/:task_id/estimate/pause
@@ -28,12 +28,13 @@ class EstimationController < ApplicationController
 
   # POST groups/:group_id/tasks/:task_id/estimate/pause
   def pause
-    pausing = PauseSelectedTask.call(task_params: estimation_pause_params_task,
-                                     comment_params: estimation_pause_params_comment,
-                                     task: @task,
-                                     user: current_user)
+    result = PauseSelectedTask.call(task_params: estimation_pause_params_task,
+                                    comment_params: estimation_pause_params_comment,
+                                    commentable: @task,
+                                    task: @task,
+                                    user: current_user)
     respond_to do |format|
-      if pausing.success?
+      if result.success?
         format.html { redirect_back(fallback_location: @task) }
         format.json { head :no_content }
         format.js { render 'estimation/reload_timer' }

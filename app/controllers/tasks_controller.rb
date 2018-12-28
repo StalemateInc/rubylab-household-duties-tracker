@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
   layout "dashboard"
+  before_action :set_current_user_as_creator, only: :create
   before_action :find_task, only: %i[edit show update destroy]
   before_action :find_group, except: %i[show destroy]
+  before_action :find_task_for_rating, only: %i[prompt_rate rate]
 
   # GET /groups/:group_id/tasks
   def index
@@ -10,7 +12,6 @@ class TasksController < ApplicationController
 
   # POST /groups/:group_id/tasks
   def create
-    set_current_user_as_creator
     @task = @group.tasks.build(task_params)
     redirect_to [@group, @task] if @task.save
   end
@@ -39,13 +40,10 @@ class TasksController < ApplicationController
     redirect_to group_tasks_path
   end
 
-  def prompt_rate
-    @task = Task.find(params[:task_id])
-  end
+  def prompt_rate; end
 
   def rate
-    @task = Task.find(params[:task_id])
-    if @task.update(rating: rate_params[:rating], status: :closed)
+    if @task.update(rate_params.merge(status: :closed))
       respond_to do |format|
         format.html { redirect_back(fallback_location: @task) }
         format.json { render :no_content }
@@ -57,7 +55,7 @@ class TasksController < ApplicationController
   private
 
   def set_current_user_as_creator
-    params[:task][:creator_id] = current_user.id.to_s
+    params[:task][:creator_id] = current_user.id
   end
 
   def find_group
@@ -66,6 +64,10 @@ class TasksController < ApplicationController
 
   def find_task
     @task = Task.find(params[:id])
+  end
+
+  def find_task_for_rating
+    @task = Task.find(params[:task_id])
   end
 
   def task_params

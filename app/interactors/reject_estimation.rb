@@ -1,19 +1,16 @@
-class RejectEstimation
-  include Interactor
+class RejectEstimation < BaseInteractor
 
   def call
     params = {}
     if context.task.new_expires_at
       params[:new_expires_at] = nil
       params[:status] = :in_progress
-      context.action = "reject initial etimation"
+      context.action = 'rejection of initial estimation'
     else
       params[:expires_at] = nil
       params[:status] = :opened
-      context.action = "reject pause estimation"
+      context.action = 'rejection of pause estimation'
     end
-    unless context.task.update(params)
-      context.fail!(message: "Failed to #{context.action} for task №#{task.id}!")
-    end
+    fail_with_message(context.action, context.task) unless context.task.update(params)
   end
 end

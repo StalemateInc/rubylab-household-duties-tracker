@@ -1,5 +1,5 @@
 class PauseSelectedTask
   include Interactor::Organizer
 
-  organize PauseTask, CreatePauseComment
+  organize PauseTask, CreateComment
 end

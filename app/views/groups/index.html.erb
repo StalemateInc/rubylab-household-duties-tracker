@@ -11,7 +11,7 @@
       <%  end %>
       <hr/>
       <h2>My groups:</h2>
-      <% @my_groups.each do |g| %>
+      <% @user_groups.each do |g| %>
         <%= render partial: "group_card", locals: {group: g} %>
       <% end %>
     </div>

@@ -1,15 +1,11 @@
-class AcceptEstimation
-  include Interactor
+class AcceptEstimation < BaseInteractor
 
   def call
-    params = {}
+    params = { status: :in_progress }
     if context.task.new_expires_at
       params[:expires_at] = context.task.new_expires_at
       params[:new_expires_at] = nil
     end
-    params[:status] = :in_progress
-    unless context.task.update(params)
-      context.fail!(message: "Failed to accept estimation for task №#{task.id}!")
-    end
+    fail_with_message('estimation acceptance', context.task) unless context.task.update(params)
   end
 end

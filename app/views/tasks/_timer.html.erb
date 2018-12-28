@@ -1,7 +1,7 @@
 <i class="fa fa-clock"></i>
 <% if task.in_progress? %>
   <%= tag.span(id: "expire_time_#{task.id}", class: "expire_timer", data: {expires_at: task.expires_at.iso8601, id: task.id }) %>
-<% elsif task.opened? || task.ready? %>
+<% elsif task.opened? || task.pending? %>
   <%= content_tag(:span, 'Not started yet', id: "expire_time_#{task.id}") %>
 <% elsif task.paused? %>
   <%= content_tag(:span, 'On pause', id: "expire_time_#{task.id}") %>
