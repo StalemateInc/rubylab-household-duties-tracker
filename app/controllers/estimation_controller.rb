@@ -2,6 +2,7 @@ class EstimationController < ApplicationController
   layout "dashboard"
   before_action :find_group
   before_action :find_task
+  before_action :find_last_postpone_comment, only: %i[accept reject]
 
   def estimate
     redirect_back_to_task unless @task.executor == current_user
@@ -14,12 +15,16 @@ class EstimationController < ApplicationController
   end
 
   def accept
-    result = AcceptEstimation.call(task: @task)
+    result = AcceptSelectedEstimation.call(task: @task, user: current_user, commentable: @task,
+                                      comment_params: {content: '', parent: @parent}, comment_type: :acceptance)
+    # result = AcceptEstimation.call(task: @task)
     redirect_back_to_task if result.success?
   end
 
   def reject
-    result = RejectEstimation.call(task: @task)
+    result = RejectSelectedEstimation.call(task: @task, user: current_user, commentable: @task, parent: @parent,
+                                     comment_params: {content: '', parent: @parent}, comment_type: :rejection)
+    # result = RejectEstimation.call(task: @task)
     redirect_back_to_task if result.success?
   end
 
@@ -77,6 +82,10 @@ class EstimationController < ApplicationController
 
   def find_task
     @task = Task.find(params[:task_id])
+  end
+
+  def find_last_postpone_comment
+    @parent = Comment.last_postpone_comment(@task)
   end
 
   def estimation_create_params

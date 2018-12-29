@@ -1,10 +1,11 @@
+<% present @task do |task_presenter| %>
 <div class="card">
   <div class="card-header row">
     <div class="card-title col-md-8">
-      <h4><%= @task.title %></h4>
+      <h4><%= task_presenter.title %></h4>
     </div>
     <div id="rating-div" class="col-md-4">
-      <%= render partial: "rating_widget", locals: { task: @task } %>
+      <%= render partial: "rating_widget", locals: { task: task_presenter } %>
     </div>
   </div>
   <div class="card-body">
@@ -12,7 +13,7 @@
       <div class="col-lg-7">
         <div class="card-text">
           Description: <br/>
-          <%= @task.description %><br/>
+          <%= task_presenter.description %><br/>
         </div>
       </div>
       <hr/>
@@ -20,66 +21,59 @@
         <div class="row">
           <div class="col-6">
             Created by:
-            <%= "#{@task.creator.display_name}<#{@task.creator.email}>" %>
+            <%= task_presenter.creator_with_email %>
           </div>
           <div class="col-6">
             Assigned to:
-            <%= "#{@task.executor.display_name}<#{@task.executor.email}>" %>
+            <%= task_presenter.executor_with_email %>
           </div>
         </div>
       </div>
       <div class="col-lg-1">
         <div class="comment-counter-div">
           <i class="far fa-comment-alt comment-counter-icon fa-2x"></i>
-          <span id="comments-count-of-commentable-<%= @task.id %>"><%= @task.comments.size %></span>
+          <span id="comments-count-of-commentable-<%= task_presenter.id %>"><%= task_presenter.comment_count %></span>
         </div>
       </div>
     </div>
     <hr/>
-    <% if @task.pending? && can?(:start, @task) %>
+    <% if task_presenter.got_initial_estimate? %>
       <div class="row text-center">
         <div class="col-12">
-          <%= content_tag(:h4, "#{@task.executor.display_name} estimated that the work could be finished at") %>
-          <%= content_tag(:h2, "#{@task.expires_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')}") %>
-          <%= content_tag(:span, "It is #{TimeDifference.between(@task.expires_at, Time.now).humanize} from now.")  %><br/>
-          <span>Do you agree?</span>
-          <div>
-            <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
-            <%= link_to "Reject estimate", group_task_estimate_reject_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-danger" %>
-          </div>
+          <%= content_tag(:h4, "#{task_presenter.executor_name} estimated that the work could be finished at") %>
+          <%= content_tag(:h2, "#{task_presenter.formatted_expires_at(session[:timezone])}") %>
+          <%= content_tag(:span, "It is #{task_presenter.between_expires_at_and_now} from now.")  %><br/>
+          <%= render partial: "estimation/estimation_buttons", locals: {presenter: task_presenter} %>
         </div>
       </div>
       <hr/>
-    <% elsif @task.paused? && @task.new_expires_at && can?(:start, @task)%>
+    <% elsif task_presenter.got_additional_estimate? %>
       <div class="row text-center">
         <div class="col-12">
-          <%= content_tag(:h4, "#{@task.executor.display_name} requests more time, now the deadline is") %>
-          <%= content_tag(:h2, "#{@task.new_expires_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')}") %>
-          <%= content_tag(:span, "It is #{TimeDifference.between(@task.expires_at, Time.now).humanize} after the previous estimate.") %><br/>
-          <span>Do you agree?</span>
-          <div>
-            <%= link_to "Confirm estimate", group_task_estimate_accept_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-success" %>
-            <%= link_to "Reject estimate", group_task_estimate_reject_path(@task.group_id, @task), method: :post, class: "btn btn-md btn-danger" %>
-          </div>
+          <%= content_tag(:h4, "#{task_presenter.executor_name} requests more time, now the deadline is") %>
+          <%= content_tag(:h2, "#{task_presenter.formatted_new_expires_at(session[:timezone])}") %>
+          <%= content_tag(:span, "It is #{task_presenter.between_new_expires_at_and_expires_at} after the previous estimate.") %><br/>
+          <%= render partial: "estimation/estimation_buttons", locals: { task: task_presenter } %>
         </div>
       </div>
       <hr/>
     <% end %>
     <div class="row">
-      <div class="col-lg-12 timer_column_<%= @task.id %> text-center">
+      <div class="col-lg-12 timer_column_<%= task_presenter.id %> text-center">
         <%= render partial: "timer", locals: {task: @task} %>
       </div>
     </div>
     <hr/>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-lg-12">
-        <%= render partial: "comments/widget", locals: {commentable: @task} %>
+        <%= render partial: "comments/widget", locals: {commentable: task_presenter} %>
       </div>
     </div>
     <div class="card-block">
-      <%= link_to "Edit task", edit_group_task_path(@task.group_id, @task), class: "btn btn-md btn-warning" %>
-      <%= link_to "Destroy task", group_task_path(@task.group_id, @task), class: "btn btn-md btn-danger", method: "delete" %>
-      <%= link_to "Back", group_tasks_path(@task.group_id), class: "btn btn-md btn-info" %>
+      <%= link_to "Edit task", edit_group_task_path(@task.group, @task), class: "btn btn-md btn-warning" %>
+      <%= link_to "Destroy task", group_task_path(@task.group, @task), class: "btn btn-md btn-danger", method: "delete" %>
+      <%= link_to "Back", group_tasks_path(@task.group), class: "btn btn-md btn-info" %>
     </div>
   </div>
 </div>
+<% end %>

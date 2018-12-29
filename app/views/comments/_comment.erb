@@ -7,7 +7,15 @@
       <div class="media-body">
         <div class="comment-info">
           <span class="media-meta pull-right"><%= comment.user.display_name + ' commmented at '%><%= comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S') %><%= " (edited)" if comment.edited? %></span>
-          <h5 class="pull-right"><%= '[Requested postponement]: ' if comment.postpone? %><%= comment.content %></h5>
+          <h5 class="pull-right">
+            <% case comment.comment_type.to_sym
+            when :regular%><%= comment.content %>
+            <% when :postpone %><%= "[Requested postponement] Reason: #{comment.content}" %>
+            <% when :acceptance %><%= '[Request accepted]' %>
+            <% when :rejection %><%= '[Request rejected]' %>
+            <% else %><%= 'Malformed comment, sorry :(' %>
+            <% end %>
+          </h5>
           <small>
             <% task = comment.commentable; group = task.group %>
             <%= link_to 'Reply', polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
@@ -19,6 +27,6 @@
     </div>
 
     <ul>
-      <%= render comment.replies if comment.replies.any? %>
+      <%= render comment.comments if comment.comments.any? %>
     </ul>
   </li>
