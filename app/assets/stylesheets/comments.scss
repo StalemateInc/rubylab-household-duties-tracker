@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .comment-profile-pic {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
   max-height: 64px;
   max-width: 64px;
   object-fit: contain;

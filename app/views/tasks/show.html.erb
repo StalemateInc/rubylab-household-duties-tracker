@@ -1,18 +1,18 @@
 <div class="card">
-    <div class="card-header row">
-      <div class="card-title col-md-8">
-        <h4><%= @task.title %></h4>
-      </div>
-      <div id="rating-div" class="col-md-4">
-        <%= render partial: "rating_widget", locals: { task: @task } %>
-      </div>
+  <div class="card-header row">
+    <div class="card-title col-md-8">
+      <h4><%= @task.title %></h4>
+    </div>
+    <div id="rating-div" class="col-md-4">
+      <%= render partial: "rating_widget", locals: { task: @task } %>
+    </div>
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-7">
         <div class="card-text">
           Description: <br/>
-          <%= @task.description %>
+          <%= @task.description %><br/>
         </div>
       </div>
       <hr/>
@@ -23,9 +23,15 @@
             <%= "#{@task.creator.display_name}<#{@task.creator.email}>" %>
           </div>
           <div class="col-6">
-            Executed by:
+            Assigned to:
             <%= "#{@task.executor.display_name}<#{@task.executor.email}>" %>
           </div>
+        </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="comment-counter-div">
+          <i class="far fa-comment-alt comment-counter-icon fa-2x"></i>
+          <span id="comments-count-of-commentable-<%= @task.id %>"><%= @task.comments.size %></span>
         </div>
       </div>
     </div>
@@ -60,7 +66,7 @@
       <hr/>
     <% end %>
     <div class="row">
-      <div class="col-lg-12 timer_column_<%= @task.id %>">
+      <div class="col-lg-12 timer_column_<%= @task.id %> text-center">
         <%= render partial: "timer", locals: {task: @task} %>
       </div>
     </div>

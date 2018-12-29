@@ -1,7 +1,7 @@
 class CreateComment < BaseInteractor
 
   def call
-    if context.comment_params.presence || context.comment_params.presence
+    if context.comment_params.presence || !context.comment_params.blank?
       expiration_date = context.comment_params.delete(:new_expires_at)
       comment = context.commentable.comments.build(context.comment_params)
       comment.postpone = expiration_date.present?
