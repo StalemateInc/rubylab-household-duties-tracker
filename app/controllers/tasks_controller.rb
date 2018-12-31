@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
   # POST /groups/:group_id/tasks
   def create
-    @task = @group.tasks.build(task_params)
+    @task = @group.tasks.create(task_params)
     redirect_to [@group, @task] if @task.save
   end
 
@@ -71,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description,
+    params.require(:task).permit(:title, :description, :category_id,
                                  :creator_id, :executor_id)
   end
 

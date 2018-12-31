@@ -16,6 +16,7 @@
 //= require activestorage
 //= require turbolinks
 //= require popper
+//= require select2-full
 //= require bootstrap
 //= require moment
 //= require moment/en-gb.js

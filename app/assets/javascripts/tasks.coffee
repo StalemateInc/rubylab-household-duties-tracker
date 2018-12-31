@@ -30,4 +30,15 @@ $(document).on 'turbolinks:load', ->
   startEveryTimer()
   showCardRatings()
   displayRatingWidget()
+  $($('.category-select')[0]).select2
+    width: 'resolve'
+    theme: 'classic'
+    placeholder: 'Select category'
+    minimumResultsForSearch: Infinity
+    ajax:
+      url: '/categories'
+      dataType: 'json'
+      type: "GET"
+      delay: 150
+    cache: true
   return

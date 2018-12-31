@@ -6,6 +6,7 @@
           <%= f.input :description, input_html: { autocomplete: "description" } %>
           <%= f.input :executor_id, collection: @group.users.map {|u| ["#{u.display_name} <#{u.email}>", u.id] },
                       include_blank: false, input_html: { autocomplete: "executor" } %>
+          <%= f.input :category_id, collection: {}, input_html: {class: "category-select"} %>
         <% end %>
     </div>
   </div>

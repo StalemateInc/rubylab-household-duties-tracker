@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_29_122249) do
+ActiveRecord::Schema.define(version: 2018_12_31_000406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
@@ -65,6 +73,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_122249) do
     t.integer "rating", limit: 2, default: 0
     t.integer "status", default: 0
     t.datetime "new_expires_at"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_tasks_on_category_id"
     t.index ["creator_id"], name: "index_tasks_on_creator_id"
     t.index ["executor_id"], name: "index_tasks_on_executor_id"
     t.index ["group_id"], name: "index_tasks_on_group_id"
@@ -89,4 +99,5 @@ ActiveRecord::Schema.define(version: 2018_12_29_122249) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "tasks", "categories"
 end

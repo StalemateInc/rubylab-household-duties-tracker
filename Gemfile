@@ -45,12 +45,14 @@ gem 'momentjs-rails'
 gem 'moment_timezone-rails'
 gem 'bootstrap4-datetime-picker-rails'
 gem 'js_cookie_rails'
+gem 'select2-rails'
 
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 gem 'time_difference'
 
+gem 'ancestry'
 gem 'cancancan'
 # gem 'acts-as-taggable-on'
 #

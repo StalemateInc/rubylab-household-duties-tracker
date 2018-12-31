@@ -1,3 +1,12 @@
+require 'yaml'
+
+def load_category(category, parent = nil)
+  category.each do |key, value|
+    sub = Category.create(name: key, parent: parent)
+    load_category(value, sub) unless value.nil?
+  end
+end
+
 if Rails.env.development?
   USER_PASSWORD = 'user_pass'.freeze
   GROUP_PASSWORD = 'group_pass'.freeze
@@ -36,4 +45,7 @@ if Rails.env.development?
       role_id: Role.adult.id
     )
   end
+
+  categories = YAML.load_file "lib/assets/categories.yaml"
+  load_category(categories)
 end
