@@ -58,6 +58,7 @@ gem 'cancancan'
 #
 gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
+gem 'sidekiq-cron'
 gem 'mailgun'
 gem 'breadcrumbs_on_rails'
 
