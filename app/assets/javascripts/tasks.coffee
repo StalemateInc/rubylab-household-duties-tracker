@@ -8,7 +8,12 @@
       msgBefore: ''
       msgAfter: 'Expired.'
       msgPattern: '{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left'
-      dateEnd: moment(data_expires).tz(clientTimeZone)._d)
+      onEnd: ->
+        $.ajax
+          url: ''.concat('/groups/', $(timerSpan).data('group'), '/tasks/', $(timerSpan).data('id'), '/estimate/stop')
+          method: 'POST'
+        return
+      dateEnd: moment(data_expires).toDate())
     return
   return
 

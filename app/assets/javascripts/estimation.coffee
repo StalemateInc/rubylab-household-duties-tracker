@@ -8,8 +8,8 @@ $(document).on 'turbolinks:load', ->
       locale: 'en-gb'
       inline: true
       format: 'YYYY-MM-DD HH:mm'
-      defaultDate: Date()
-      minDate: Date()
+      minDate: moment().add(5, 'minutes')
+      defaultDate: moment().add(5, 'minutes')
       icons:
         time: 'fas fa-clock'
     return
