@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: 'landing#index'
   get '/index', to: 'landing#index'
   resource :categories, only: %i[show]
+  resource :tags, only: %i[show]
   resources :groups do
     get '/member/new', to: 'memberships#new'
     post '/member/new', to: 'memberships#create'

@@ -30,20 +30,39 @@ displayRatingWidget = () ->
     return
   return
 
-$(document).on 'turbolinks:load', ->
-  'use strict'
-  startEveryTimer()
-  showCardRatings()
-  displayRatingWidget()
+showCategoriesSelector = () ->
   $($('.category-select')[0]).select2
     width: 'resolve'
-    theme: 'classic'
+    theme: 'bootstrap'
     placeholder: 'Select category'
     minimumResultsForSearch: Infinity
     ajax:
       url: '/categories'
       dataType: 'json'
       type: "GET"
-      delay: 150
+      delay: 350
     cache: true
+  return
+
+showTags = () ->
+  $($('.tags-select')[0]).select2
+    tags: true
+    multiple: true
+    theme: 'bootstrap'
+    tokenSeparators: [',', ' ']
+    ajax:
+      url: '/tags'
+      dataType: 'json'
+      type: "GET"
+      delay: 350
+    cache: true
+  return
+
+$(document).on 'turbolinks:load', ->
+  'use strict'
+  startEveryTimer()
+  showCardRatings()
+  displayRatingWidget()
+  showCategoriesSelector()
+  showTags()
   return

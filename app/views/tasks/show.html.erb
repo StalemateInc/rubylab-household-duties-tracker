@@ -15,7 +15,10 @@
           Description: <br/>
           <%= task_presenter.description %><br/>
           Category:
-          <%= hierarchy_string(task_presenter.category) %>
+          <%= hierarchy_string(task_presenter.category) %><br/>
+          <% @task.tag_list.each do |tag| %>
+            <a class="tag" href="#"><%= tag %></a>
+          <% end %>
         </div>
       </div>
       <hr/>

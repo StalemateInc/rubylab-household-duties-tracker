@@ -72,7 +72,7 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :description, :category_id,
-                                 :creator_id, :executor_id)
+                                 :creator_id, :executor_id, tag_list: [])
   end
 
   def rate_params

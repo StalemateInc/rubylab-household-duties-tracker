@@ -52,10 +52,10 @@ gem 'devise'
 gem 'simple_form'
 gem 'time_difference'
 
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'ancestry'
 gem 'cancancan'
-# gem 'acts-as-taggable-on'
-#
+
 gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
 gem 'sidekiq-cron'
