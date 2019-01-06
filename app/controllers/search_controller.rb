@@ -1,23 +1,36 @@
-require 'elasticsearch/dsl'
-
 class SearchController < ApplicationController
-  include Elasticsearch::DSL
+  layout "dashboard"
 
-  def search
-    query = build_search_query(params[:query])
-    begin
-      results = Elasticsearch::Model.search(query, [Task, Group]).results.to_a
-    rescue Faraday::ConnectionFailed
-      results = [].concat(Task.full_text_search(params[:query]), Group.full_text_search(params[:query]))
-                  .select { |entity| can?(:read, entity) }
-      results = records_to_json(results)
-    end
+  def index
+    params = search_params
+    return if params.blank?
+
+    search_result = PerformTextSearch.call(user: params[:user] ? User.find(params[:user]) : nil || current_user,
+                                           only: params[:only],
+                                           query: params[:query])
     respond_to do |format|
-      format.json { render json: results }
+      if search_result.success?
+        content = search_result.content
+        if search_result.elastic_failed.nil?
+          format.html { split_record_array(content.records.to_a) }
+          format.json { render json: content.results.to_a }
+        else
+          format.html { split_record_array(content) }
+          format.json { render json: records_to_json(content) }
+        end
+      else
+        format.html { @results = nil }
+        format.json { head :no_content }
+      end
     end
   end
 
-  def index; end
+  private
+
+  def split_record_array(content)
+    @groups = content.select { |result| result.class == Group }
+    @tasks = content.select { |result| result.class == Task }
+  end
 
   def records_to_json(records)
     items = records.to_a
@@ -32,29 +45,8 @@ class SearchController < ApplicationController
     end.to_json
   end
 
-  def build_search_query(q)
-    query = q.downcase.split(' ').map { |query| query + '*' }.join(' AND ')
-    search_query = {
-      "query": {
-        "bool": {
-          "must": [
-            {
-              "query_string": {
-                "query": query.to_s,
-                "analyze_wildcard": true,
-                "default_field": '*'
-              }
-            }
-          ],
-          "filter": [{
-            "term": {
-              "accessible_by": current_user.id
-            }
-         }]
-        }
-      }
-    }
-    search_query.to_json
+  def search_params
+    params.permit(:format, :query, :user, only: [])
   end
 
 end

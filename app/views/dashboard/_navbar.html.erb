@@ -7,11 +7,13 @@
     <i class="fa fa-bars"></i>
   </a>
 
-  <form method="get" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+  <form method="get" action="<%= search_path %>" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
     <div class="input-group scrollable-dropdown-menu">
-      <input type="text" class="form-control navbar-input typeahead" style="min-width: 350px" placeholder="Search for...">
+      <input class="form-control navbar-input typeahead" type="text" name="query" placeholder="Search for..."/>
+      <input id="groups_navbar_check" class="d-none" type="checkbox" name="only[]" value="groups" checked/>
+      <input id="task_navbar_check" class="d-none" type="checkbox" name="only[]" value="tasks" checked/>
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">
+        <button class="btn btn-primary" type="submit">
           <i class="fas fa-search"></i>
         </button>
       </div>

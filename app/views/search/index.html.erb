@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <form action="">
+        <div class="input-group mb-3">
+          <input name="query" type="text" class="form-control" placeholder="Search for..." aria-label="Search for">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary search-button" type="submit">Search</button>
+          </div>
+        </div>
+        <div>
+          Search for:<br/>
+          <input id="groups_check" type="checkbox" name="only[]" value="groups" checked/>
+          <label for="groups_check">Groups</label>
+          <input id="tasks_check" type="checkbox" name="only[]" value="tasks" checked/>
+          <label for="tasks_check">Tasks</label>
+        </div>
+      </form>
+      <hr/>
+      <% if @groups.present? %>
+        <div id="groups-search">
+            <h2>Groups:</h2>
+            <% @groups.each do |group| %>
+              <%= render partial: "groups/group_card", locals: {group: group} %><br/>
+            <% end %>
+            <%= "No groups matched the search criteria." if @groups.empty? %>
+        </div>
+      <% end %>
+
+      <% if @tasks.present? %>
+        <div id="tasks-search">
+            <h2>Tasks:</h2>
+            <% @tasks.each do |task| %>
+              <%= render partial: "tasks/task_card", locals: {group: task.group, task: task} %><br/>
+            <% end %>
+            <%= "No tasks matched the search criteria." if @tasks.empty? %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

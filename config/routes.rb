@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :user
   root to: 'landing#index'
   get '/index', to: 'landing#index'
-  get '/search', to: 'search#search'
+  get '/search', to: 'search#index'
   resource :categories, only: %i[show]
   resource :tags, only: %i[show]
   resources :groups do

@@ -1,7 +1,7 @@
 fetchQuery = null
 fetchResultsCallback = null
 fetchResults = _.debounce((->
-  $.get '/search?query=' + fetchQuery, (data) ->
+  $.get '/search.json?query=' + fetchQuery + '&only[]=groups&only[]=tasks', (data) ->
     data = rebuild_response(data)
     if fetchResultsCallback
       fetchResultsCallback data

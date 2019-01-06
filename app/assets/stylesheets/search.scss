@@ -8,4 +8,17 @@
   .search-result-button {
     line-height: 1.0;
   }
+  .navbar-input {
+    min-width: 350px;
+  }
+}
+
+.search-button {
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.search-button:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
