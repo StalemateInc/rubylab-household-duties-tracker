@@ -27,7 +27,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item disabled" href="#"><%= current_user.display_name %></a>
-        <a class="dropdown-item" href="#">Profile</a>
+        <%= link_to "Profile", user_profile_path, class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
       </div>

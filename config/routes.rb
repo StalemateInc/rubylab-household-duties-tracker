@@ -6,8 +6,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :user
   root to: 'landing#index'
+  devise_for :user, controllers: { registrations: 'users/registrations' }
+  devise_scope :user do
+    get '/user/profile', to: 'users/registrations#show'
+    get '/user/profile/edit', to: 'users/registrations#edit'
+  end
   get '/index', to: 'landing#index'
   get '/search', to: 'search#index'
   resource :categories, only: %i[show]
