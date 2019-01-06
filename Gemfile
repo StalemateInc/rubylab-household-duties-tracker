@@ -46,6 +46,7 @@ gem 'moment_timezone-rails'
 gem 'bootstrap4-datetime-picker-rails'
 gem 'js_cookie_rails'
 gem 'select2-rails'
+gem 'twitter-typeahead-rails'
 
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'
@@ -53,6 +54,7 @@ gem 'simple_form'
 gem 'time_difference'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'active_record_union'
 gem 'ancestry'
 gem 'cancancan'
 
@@ -61,11 +63,16 @@ gem 'sidekiq', '~> 5.2.3'
 gem 'sidekiq-cron'
 gem 'mailgun'
 gem 'breadcrumbs_on_rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-persistence'
+gem 'elasticsearch-rails'
+gem 'elasticsearch-dsl'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
+  gem 'pry-rails'
   gem 'faker', '~> 1.9.1'
 end
 

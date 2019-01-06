@@ -27,6 +27,8 @@
 //= require js.cookie
 //= require star-rating/star-rating
 //= require star-rating/themes/krajee-fas/theme
+//= require twitter/typeahead.min
+//= require underscore-min
 //= require_tree .
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
