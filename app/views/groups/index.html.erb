@@ -6,15 +6,19 @@
       <% if @public_groups.empty? %>
         No public groups present, sorry.
       <% else %>
+        <div class="scrolling-wrapper-flexbox">
         <%  @public_groups.each do |g|  %>
           <%= render partial: "group_card", locals: {group: g} %>
         <%  end  %>
+        </div>
       <% end %>
       <hr/>
       <h2>My groups:</h2>
-      <% @user_groups.each do |g| %>
-        <%= render partial: "group_card", locals: {group: g} %>
-      <% end %>
+      <div class="scrolling-wrapper-flexbox">
+        <% @user_groups.each do |g| %>
+          <%= render partial: "group_card", locals: {group: g} %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

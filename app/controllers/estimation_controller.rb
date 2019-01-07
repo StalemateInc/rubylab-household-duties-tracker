@@ -85,7 +85,7 @@ class EstimationController < ApplicationController
   end
 
   def find_last_postpone_comment
-    @parent = Comment.last_postpone_comment(@task)
+    @parent = Comment.last_postpone_comment(@task).last
   end
 
   def estimation_create_params

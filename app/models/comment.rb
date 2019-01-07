@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   enum comment_type: %i[regular postpone acceptance rejection]
   validates :content, presence: true, allow_blank: true
 
-  scope :last_postpone_comment, ->(subject) { where(comment_type: :postpone, commentable: subject).last }
+  scope :last_postpone_comment, ->(subject) { where(comment_type: :postpone, commentable: subject) }
 
   def edited?
     created_at != updated_at

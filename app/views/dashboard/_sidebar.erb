@@ -1,10 +1,10 @@
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav toggled">
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <%= link_to root_path, class: 'nav-link' do %>
       <i class="fas fa-fw fa-globe"></i>
       <span>Home</span>
-    </a>
+    <% end %>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="groupsDropdown" role="button" data-toggle="dropdown">

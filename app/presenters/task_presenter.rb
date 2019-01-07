@@ -39,7 +39,7 @@ class TaskPresenter < BasePresenter
   end
 
   def got_initial_estimate?
-    @model_pending && h.can?(:start, @model)
+    @model.pending? && h.can?(:start, @model)
   end
 
   def got_additional_estimate?
