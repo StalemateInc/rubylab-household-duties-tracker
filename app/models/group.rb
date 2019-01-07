@@ -17,7 +17,6 @@ class Group < ApplicationRecord
   accepts_nested_attributes_for :memberships
 
   scope :text_contains, ->(query) { where('LOWER(name) LIKE ?', "%#{query.downcase}%")}
-
   scope :full_text_search, ->(query) { text_contains(query) }
 
   def as_indexed_json(options = {})
@@ -28,6 +27,6 @@ class Group < ApplicationRecord
 
   def accessible_by
     abilities = User.all.each_with_object({}) { |user, hash| hash[user.id] = Ability.new(user) }
-    visible_to_all? ? :everyone : abilities.select { |_key, value| value.can?(:read, self) }.keys
+    visible_to_all? ? -1 : abilities.select { |_key, value| value.can?(:read, self) }.keys
   end
 end

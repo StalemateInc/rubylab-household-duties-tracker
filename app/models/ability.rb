@@ -5,11 +5,11 @@ class Ability
     if user.present?
       can :read_public, Group, visible_to_all: true
       can :read, Group do |group|
-        group.memberships.find_by(user: user)
+        group.visible_to_all? || member?(group, user)
       end
       can :create, Group
       can :edit, Group do |group|
-        find_corresponding_role_for_group(user, group).group_owner?
+        find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :destroy, Group do |group|
         find_corresponding_role_for_group(user, group).group_owner?
@@ -26,7 +26,7 @@ class Ability
       can :read_public, Task
       can :read, Task do |task|
         creator?(task, user) || executor?(task, user) ||
-          find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
+            find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
       end
       can :create, Task
       can :edit, Task do |task|
@@ -58,8 +58,8 @@ class Ability
     task.creator == user
   end
 
-  def find_corresponding_group_for_task(task)
-    Group.find(task.group)
+  def member?(group, user)
+    group.memberships.find_by(user: user).present?
   end
 
   def find_corresponding_role_for_group(user, group)

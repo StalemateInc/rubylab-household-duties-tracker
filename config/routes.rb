@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   root to: 'landing#index'
   devise_for :user, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
-    get '/user/profile', to: 'users/registrations#show'
-    get '/user/profile/edit', to: 'users/registrations#edit'
+    get '/user', to: 'users/registrations#show'
   end
   get '/index', to: 'landing#index'
   get '/search', to: 'search#index'

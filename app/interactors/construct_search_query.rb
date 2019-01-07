@@ -18,17 +18,20 @@ class ConstructSearchQuery
           "must": [
             {
               "query_string": {
-                "query": query.to_s,
+                "query": query,
                 "analyze_wildcard": true,
                 "default_field": '*'
               }
+            },
+            {
+              "bool": {
+                "should": [
+                  { "term": { "accessible_by": user.id } },
+                  { "term": { "accessible_by": -1 } }
+                ]
+              }
             }
-          ],
-          "filter": [{
-            "term": {
-              "accessible_by": user.id
-            }
-          }]
+          ]
         }
       }
     }

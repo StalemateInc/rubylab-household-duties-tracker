@@ -21,7 +21,7 @@ if Rails.env.development?
       email: "usermail#{n}@example.com",
       password: USER_PASSWORD,
       display_name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
-      profile_picture_path: nil,
+      avatar: nil,
       confirmed_at: Time.now,
       confirmation_sent_at: CONFIRMATION_SENT_SECONDS_AGO.seconds.ago
     )

@@ -53,20 +53,21 @@ gem 'devise'
 gem 'simple_form'
 gem 'time_difference'
 
-gem 'acts-as-taggable-on', '~> 6.0'
 gem 'active_record_union'
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'ancestry'
 gem 'cancancan'
-
+gem 'carrierwave'
+gem 'file_validators'
 gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
 gem 'sidekiq-cron'
 gem 'mailgun'
+gem 'mini_magick'
 gem 'breadcrumbs_on_rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-persistence'
 gem 'elasticsearch-rails'
-gem 'elasticsearch-dsl'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

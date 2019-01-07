@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-7 col-md-5">
-
       <div class="text-center">
-        <img class="profile-pic img-responsive rounded-circle" src="https://www.startalkradio.net/wp-content/uploads/2015/03/elon-musk-600x600-300x300.jpg" alt="avatar">
+        <%= image_tag(current_user.avatar.profile.url, alt:'Avatar', class: "profile-pic img-responsive rounded-circle") %>
         <h2 class="mt-2"><%= current_user.display_name %></h2>
         <div>
           <i class="fab fa-facebook-f btn btn-sm btn-primary"></i>
@@ -11,10 +10,9 @@
           <i class="fab fa-vk btn btn-sm btn-primary"></i>
           <i class="fab fa-google btn btn-sm btn-danger"></i>
         </div>
-      </div><br>
+      </div><br/>
       <div class="text-center">
         <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-md btn-danger mx-3' %>
-        <%= link_to "Back", :back, class: 'btn btn-md btn-primary mx-3' %>
       </div>
 
     </div>
@@ -22,7 +20,6 @@
       <h2>Edit profile</h2>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= f.error_notification %>
-
         <div class="form-inputs">
           <%= f.input :email, required: true, autofocus: true %>
 
@@ -44,13 +41,13 @@
                       hint: "we need your current password to confirm your changes",
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
+          <%= f.input :avatar, as: :file %>
         </div>
-
         <div class="form-actions">
           <%= f.button :submit, "Update" %>
+          <%= link_to "Back", :back, class: 'btn btn-md btn-primary mx-3' %>
         </div>
       <% end %>
-
     </div>
   </div>
 </div>
