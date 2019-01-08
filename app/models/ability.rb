@@ -26,24 +26,19 @@ class Ability
       can :read_public, Task
       can :read, Task do |task|
         creator?(task, user) || executor?(task, user) ||
-            find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
+          find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
       end
       can :create, Task
-      can :edit, Task do |task|
-        !executor?(task, user) && (creator?(task, user) ||
-          find_corresponding_role_for_group(user, task.group).in?([Role.adult.last, Role.group_owner.last]))
+      can [:edit, :update], Task do |task|
+        false
       end
-      can(:destroy, Task) { |task| creator?(task, user)}
+      can(:destroy, Task) { |task| creator?(task, user) }
       can(:estimate, Task) { |task| executor?(task, user) }
       can(:start, Task) { |task| creator?(task, user) }
-      can :pause, Task do |task|
+      can %i[prompt_pause pause resume], Task do |task|
         [task.executor, task.creator].any? user
       end
-      can :resume, Task do |task|
-        [task.executor, task.creator].any? user
-      end
-      can(:stop, Task) { |task| creator?(task, user) }
-      can(:rate, Task) { |task| creator?(task, user) }
+      can(%i[accept reject stop prompt_rate rate], Task) { |task| creator?(task, user) }
       can :comment, Task
     end
   end

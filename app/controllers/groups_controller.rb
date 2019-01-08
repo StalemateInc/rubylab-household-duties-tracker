@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   layout "dashboard"
   before_action :authenticate_user!
+  authorize_resource
   before_action :find_group, except: %i[index create new]
 
   # GET /groups

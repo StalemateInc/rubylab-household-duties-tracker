@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i[edit show update destroy]
   before_action :find_group, except: %i[show destroy]
   before_action :find_task_for_rating, only: %i[prompt_rate rate]
+  authorize_resource :task, through: :group
 
   # GET /groups/:group_id/tasks
   def index
@@ -41,7 +42,13 @@ class TasksController < ApplicationController
     redirect_to group_tasks_path
   end
 
-  def prompt_rate; end
+  def prompt_rate
+    respond_to do |format|
+      format.html { render file: "#{Rails.root}/public/404.html", layout: true, status: 404 }
+      format.json { head :no_content }
+      format.js
+    end
+  end
 
   def rate
     if @task.update(rate_params.merge(status: :closed))

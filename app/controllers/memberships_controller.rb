@@ -3,9 +3,13 @@ class MembershipsController < ApplicationController
   before_action :find_group
   before_action :authenticate_user!
 
-  def new; end
+
+  def new
+    authorize! :add_users, @group
+  end
 
   def create
+    authorize! :add_users, @group
     @user = User.find_by(email: params[:user][:email])
     unless Membership.exists?(user_id: @user, group_id: @group)
       membership = { user: @user, role: Role.child }
