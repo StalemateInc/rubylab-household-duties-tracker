@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <h2>Edit group: </h2>
+      <h2><%= t('groups.edit.heading') %> </h2>
       <%= simple_form_for(@group, url: group_path, method: :patch) do |f| %>
         <%= f.error_notification %>
 
         <%= render :partial => 'form', locals: {f: f} %>
 
         <div class="form-actions">
-          <%= f.button :submit, "Save changes" %>
-          <%= link_to "Back", group_path, class: "btn btn-info btn-md" %>
-          <%= link_to "Delete this group", group_path, method: :delete, class: "btn btn-danger btn-md" %>
+          <%= f.button :submit, t('common.save_changes') %>
+          <%= link_to t('common.back'), group_path, class: "btn btn-info btn-md" %>
+          <%= link_to t('group.edit.delete'), group_path, method: :delete, class: "btn btn-danger btn-md" %>
         </div>
 
       <% end %>

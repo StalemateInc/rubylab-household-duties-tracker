@@ -48,3 +48,33 @@ en:
       groups: "Groups"
       home: "Home"
       tasks: "Tasks"
+  groups:
+    index:
+      public_groups:
+        heading: "Public groups"
+        empty: "No public groups present, sorry."
+      my_groups:
+        heading: "My groups"
+        empty: "No groups found."
+    new:
+      heading: "Create new group"
+      action: "Create"
+    edit:
+      heading: "Edit group"
+    show:
+      invite: "Invite user"
+      tasks: "See tasks"
+  common:
+    back: "Back"
+    save_changes: "Save changes"
+    more: "More"
+  group:
+    show:
+      name: "Group name:"
+      public: "Is public:"
+    edit:
+      delete: "Delete group"
+    card:
+      member: "member"
+      members:
+        amount: "Members amount: "

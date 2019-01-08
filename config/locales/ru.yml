@@ -17,3 +17,33 @@ ru:
       groups: "Группы"
       home: "Главная"
       tasks: "Задачи"
+  groups:
+    index:
+      public_groups:
+        heading: "Публичые группы"
+        empty: "Публичных групп не найдено."
+      my_groups:
+        heading: "Мои группы"
+        empty: "Группы не найдены"
+    new:
+      heading: "Создать новую группу"
+      action: "Создать"
+    edit:
+      heading: "Редактировать группу"
+    show:
+      invite: "Пригласить пользователя"
+      tasks: "К задачам"
+  common:
+    back: "Назад"
+    save_changes: "Сохранить изменения"
+    more: "Подробнее"
+  group:
+    show:
+      name: "Название группы:"
+      public: "Публичная группа:"
+    edit:
+      delete: "Удалить группу"
+    card:
+      member: "участник"
+      members:
+        amount: "Количество участников: "
