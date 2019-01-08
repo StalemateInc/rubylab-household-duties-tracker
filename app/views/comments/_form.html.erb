@@ -1,12 +1,12 @@
 <div class="comment-form">
   <%= simple_form_for [comment.commentable.group, comment.commentable, comment], remote: true do | f | %>
     <%= f.hidden_field :parent_id %>
-    <%= f.input :content, label: false, placeholder: (f.object.parent_id.nil? ? 'Comment this task.' : 'Leave a reply.'),
+    <%= f.input :content, label: false, placeholder: (f.object.parent_id.nil? ? t('comment.action.comment.heading') : t('comment.action.reply.heading')),
                 wrapper_html: { class: 'mb-1' },
                 input_html: { rows: 3, data:{ 'comment-id': (comment.persisted? ? comment.id : 'new') }} %>
     <div class="float-right">
-      <%= f.submit "Leave comment", class: 'btn btn-primary btn-sm float-xs-right' %>
-      <%= link_to "Cancel", "#", 'data-reply': comment.parent_id.present?, class: 'cancel-comment-link btn btn-primary btn-sm float-xs-right ml-1' if comment.persisted? or comment.parent %></div>
+      <%= f.submit t('comment.action.comment.action'), class: 'btn btn-primary btn-sm float-xs-right' %>
+      <%= link_to t('common.cancel'), "#", 'data-reply': comment.parent_id.present?, class: 'cancel-comment-link btn btn-primary btn-sm float-xs-right ml-1' if comment.persisted? or comment.parent %></div>
     <div class="clearfix"></div>
   <% end %>
 </div>

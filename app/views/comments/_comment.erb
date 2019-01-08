@@ -6,21 +6,21 @@
       </div>
       <div class="media-body">
         <div class="comment-info">
-          <span class="media-meta pull-right"><%= comment.user.display_name + ' commmented at '%><%= comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S') %><%= " (edited)" if comment.edited? %></span>
+          <span class="media-meta pull-right"><%= t('comment.stamp', display_name: comment.user.display_name, var: comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')) %><%= t('comment.edited') if comment.edited? %></span>
           <h5 class="pull-right">
             <% case comment.comment_type.to_sym
             when :regular%><%= comment.content %>
-            <% when :postpone %><%= "[Requested postponement] Reason: #{comment.content}" %>
-            <% when :acceptance %><%= '[Request accepted]' %>
-            <% when :rejection %><%= '[Request rejected]' %>
-            <% else %><%= 'Malformed comment, sorry :(' %>
+            <% when :postpone %><%= t('comment.postpone', content: comment.content) %>
+            <% when :acceptance %><%= t('comment.accepted') %>
+            <% when :rejection %><%= t('comment.rejected') %>
+            <% else %><%= t('comment.malformed') %>
             <% end %>
           </h5>
           <small>
             <% task = comment.commentable; group = task.group %>
-            <%= link_to 'Reply', polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
-            <%= link_to 'Edit', edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
-            <%= link_to 'Destroy', polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: "Are you sure?"}, class: "delete-comment-link"%>
+            <%= link_to t('comment.action.reply.action'), polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
+            <%= link_to t('comment.action.edit.action'), edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
+            <%= link_to t('comment.action.delete.action'), polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: t('common.confirm')}, class: "delete-comment-link"%>
           </small>
         </div>
       </div>

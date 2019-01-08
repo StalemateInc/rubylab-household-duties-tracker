@@ -11,7 +11,7 @@
   </head>
 
   <body class="landing_body">
-    <%= render :partial => "landing/landing_nav" if user_signed_in? %>
+    <%= render :partial => "landing/landing_nav" %>
 
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>

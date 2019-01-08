@@ -39,6 +39,7 @@ ru:
     more: "Подробнее"
     close: "Закрыть"
     confirm: "Вы уверены?"
+    cancel: "Отмена"
   group:
     show:
       name: "Название группы:"
@@ -49,6 +50,10 @@ ru:
       member: "участник"
       members:
         amount: "Количество участников: "
+    member:
+      invite:
+        heading: "Пригласить пользователя"
+        action: "Пригласить"
   tasks:
     index:
       create: "Создать задачу"
@@ -138,3 +143,20 @@ ru:
     tasks:
       empty: "Подходящие по критериям поиска задачи не найдены."
       heading: "Задачи"
+  comment:
+    action:
+      comment:
+        heading: "Оставьте свой комментарий."
+        action: "Комментировать"
+      reply:
+        heading: "Оставьте ответ"
+        action: "Ответить"
+      edit:
+        action: "Редактировать"
+      delete:
+        action: "Удалить"
+    edited: "(ред.)"
+    postpone: "[Запросил отсрочку] Причина: %{content}"
+    accepted: "[Заявка одобрена]"
+    rejected: "[Заявка отклонена]"
+    malformed: "Ошибка при чтении комментария"

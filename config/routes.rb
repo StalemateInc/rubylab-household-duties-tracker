@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   get '/index', to: 'landing#index'
   get '/search', to: 'search#index'
+  match 'lang/:locale', to: 'index#change_locale', as: :change_locale, via: [:get]
   resource :categories, only: %i[show]
   resource :tags, only: %i[show]
   resources :groups do

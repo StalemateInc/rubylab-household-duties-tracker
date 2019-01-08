@@ -10,7 +10,7 @@
       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
     <body class="sidebar-toggled">
-      <%= render partial: "dashboard/navbar" %>
+      <%= render partial: "dashboard/navbar", locals: { user_signed_in?: user_signed_in? } %>
       <div id="wrapper">
         <%= render partial: "dashboard/sidebar" %>
 

@@ -70,6 +70,7 @@ en:
     more: "More"
     close: "Close"
     confirm: "Are you sure?"
+    cancel: "Cancel"
   group:
     show:
       name: "Group name:"
@@ -80,6 +81,10 @@ en:
       member: "member"
       members:
         amount: "Members amount: "
+    member:
+      invite:
+        heading: "Invite user"
+        action: "Invite"
   tasks:
     index:
       create: "Create task"
@@ -170,3 +175,21 @@ en:
     tasks:
       empty: "No tasks matched the search criteria."
       heading: "Tasks"
+  comment:
+    action:
+      comment:
+        heading: "Оставьте свой комментарий."
+        action: "Комментировать"
+      reply:
+        heading: "Оставьте ответ"
+        action: "Ответить"
+      edit:
+        action: "Edit"
+      delete:
+        action: "Destroy"
+    stamp: "%{display_name} commmented at %{var}"
+    edited: "(edited)"
+    postpone: "[Requested postponement] Reason: %{content}"
+    accepted: "[Request accepted]"
+    rejected: "[Request rejected]"
+    malformed: "Malformed comment, sorry :("

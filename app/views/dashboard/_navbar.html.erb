@@ -1,36 +1,52 @@
 <!-- Navbar -->
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-  <!-- Brand -->
-  <%= link_to 'Household Duties App', root_path, class: 'navbar-brand mr-1' %>
-  <a id="sidebarToggle" class="btn btn-link btn-sm text-white order-1 order-sm-0" href="#">
-    <i class="fa fa-bars"></i>
+  <% if user_signed_in? %>
+    <%= link_to 'Household Duties App', root_path, class: 'navbar-brand mr-1' %>
+    <a id="sidebarToggle" class="btn btn-link btn-sm text-white order-1 order-sm-0" href="#">
+      <i class="fa fa-bars"></i>
+    </a>
+
+    <form method="get" action="<%= search_path %>" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <div class="input-group scrollable-dropdown-menu">
+        <input class="form-control navbar-input typeahead" type="text" name="query" placeholder="<%= t('search.placeholder') %>"/>
+        <input id="groups_navbar_check" class="d-none" type="checkbox" name="only[]" value="groups" checked/>
+        <input id="task_navbar_check" class="d-none" type="checkbox" name="only[]" value="tasks" checked/>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  <% end %>
+
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <%= t(I18n.locale) %>
+    <span class="caret"></span>
   </a>
-
-  <form method="get" action="<%= search_path %>" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-    <div class="input-group scrollable-dropdown-menu">
-      <input class="form-control navbar-input typeahead" type="text" name="query" placeholder="Search for..."/>
-      <input id="groups_navbar_check" class="d-none" type="checkbox" name="only[]" value="groups" checked/>
-      <input id="task_navbar_check" class="d-none" type="checkbox" name="only[]" value="tasks" checked/>
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </div>
-  </form>
-
-  <ul class="navbar-nav ml-auto ml-md-0">
-    <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-        <%= image_tag(current_user.avatar.navbar.url, alt: 'avatar', class: 'rounded-circle') %>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item disabled" href="#"><%= current_user.display_name %></a>
-        <%= link_to t('dashboard.nav.profile'), user_path, class: "dropdown-item" %>
-        <div class="dropdown-divider"></div>
-        <%= link_to t('dashboard.nav.logout'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
-      </div>
-    </li>
+  <ul class="dropdown-menu" role="menu">
+    <li class="header">Select a language</li>
+    <% I18n.available_locales.each do |lang| %>
+      <li>
+        <%= link_to t(lang), change_locale_path(lang) %>
+      </li>
+    <% end %>
   </ul>
+
+  <% if user_signed_in? %>
+    <ul class="navbar-nav ml-auto ml-md-0">
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+          <%= image_tag(current_user.avatar.navbar.url, alt: 'avatar', class: 'rounded-circle') %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item disabled" href="#"><%= current_user.display_name %></a>
+          <%= link_to t('dashboard.nav.profile'), user_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to t('dashboard.nav.logout'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+        </div>
+      </li>
+    </ul>
+  <% end %>
 </nav>
