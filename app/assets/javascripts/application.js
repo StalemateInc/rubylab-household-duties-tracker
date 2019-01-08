@@ -27,6 +27,8 @@
 //= require js.cookie
 //= require star-rating/star-rating
 //= require star-rating/themes/krajee-fas/theme
+//= require star-rating/locales/LANG.js
+//= require star-rating/locales/ru.js
 //= require twitter/typeahead.min
 //= require underscore-min
 //= require_tree .

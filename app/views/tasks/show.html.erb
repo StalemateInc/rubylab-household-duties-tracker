@@ -12,9 +12,9 @@
     <div class="row">
       <div class="col-lg-7">
         <div class="card-text">
-          Description: <br/>
+          <%= t('tasks.show.description') %> <br/>
           <%= task_presenter.description %><br/>
-          Category:
+          <%= t('tasks.show.category') %>
           <%= hierarchy_string(task_presenter.category) %><br/>
           <% @task.tag_list.each do |tag| %>
             <a class="tag" href="#"><%= tag %></a>
@@ -25,11 +25,11 @@
       <div class="col-lg-4">
         <div class="row">
           <div class="col-6">
-            Created by:
+            <%= t('tasks.show.created_by') %>
             <%= task_presenter.creator_with_email %>
           </div>
           <div class="col-6">
-            Assigned to:
+            <%= t('tasks.show.assigned_to') %>
             <%= task_presenter.executor_with_email %>
           </div>
         </div>
@@ -45,9 +45,9 @@
     <% if task_presenter.got_initial_estimate? %>
       <div class="row text-center">
         <div class="col-12">
-          <%= content_tag(:h4, "#{task_presenter.executor_name} estimated that the work could be finished at") %>
+          <%= content_tag(:h4, t('tasks.show.estimation.first', executor_name: task_presenter.executor_name)) %>
           <%= content_tag(:h2, "#{task_presenter.formatted_expires_at(session[:timezone])}") %>
-          <%= content_tag(:span, "It is #{task_presenter.between_expires_at_and_now} from now.")  %><br/>
+          <%= content_tag(:span, t('tasks.show.estimation.between_first', between_expires_at_and_now: task_presenter.between_expires_at_and_now)) %><br/>
           <%= render partial: "estimation/estimation_buttons", locals: {presenter: task_presenter} %>
         </div>
       </div>
@@ -55,9 +55,9 @@
     <% elsif task_presenter.got_additional_estimate? %>
       <div class="row text-center">
         <div class="col-12">
-          <%= content_tag(:h4, "#{task_presenter.executor_name} requests more time, now the deadline is") %>
+          <%= content_tag(:h4, t('tasks.show.estimation.repeated', executor_name: task_presenter.executor_name)) %>
           <%= content_tag(:h2, "#{task_presenter.formatted_new_expires_at(session[:timezone])}") %>
-          <%= content_tag(:span, "It is #{task_presenter.between_new_expires_at_and_expires_at} after the previous estimate.") %><br/>
+          <%= content_tag(:span, t('tasks.show.estimation.between_repeated', between_new_expires_at_and_expires_at: task_presenter.between_new_expires_at_and_expires_at)) %><br/>
           <%= render partial: "estimation/estimation_buttons", locals: { task: task_presenter } %>
         </div>
       </div>
@@ -75,9 +75,9 @@
       </div>
     </div>
     <div class="card-block">
-      <%= link_to "Edit task", edit_group_task_path(@task.group, @task), class: "btn btn-md btn-warning" %>
-      <%= link_to "Destroy task", group_task_path(@task.group, @task), class: "btn btn-md btn-danger", method: "delete" %>
-      <%= link_to "Back", group_tasks_path(@task.group), class: "btn btn-md btn-info" %>
+      <%= link_to t('tasks.show.edit'), edit_group_task_path(@task.group, @task), class: "btn btn-md btn-warning" %>
+      <%= link_to t('tasks.show.destroy'), group_task_path(@task.group, @task), class: "btn btn-md btn-danger", method: "delete" %>
+      <%= link_to t('common.back'), group_tasks_path(@task.group), class: "btn btn-md btn-info" %>
     </div>
   </div>
 </div>

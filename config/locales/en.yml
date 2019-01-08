@@ -68,6 +68,7 @@ en:
     back: "Back"
     save_changes: "Save changes"
     more: "More"
+    close: "Close"
   group:
     show:
       name: "Group name:"
@@ -78,3 +79,37 @@ en:
       member: "member"
       members:
         amount: "Members amount: "
+  tasks:
+    index:
+      create: "Create task"
+      heading: "Tasks for group"
+    new:
+      heading: "Create a new task"
+      action: "Create a task"
+    show:
+      description: "Description:"
+      category: "Category:"
+      created_by: "Created by:"
+      assigned_to: "Assigned to:"
+      estimation:
+        first: "%{executor_name} estimated that the work could be finished at"
+        between_first: "It is %{between_expires_at_and_now} from now."
+        repeated: "%{executor_name} requests more time, now the deadline is"
+        between_repeated: "It is %{between_new_expires_at_and_expires_at} after the previous estimate."
+        required: "Estimation required"
+        set: "Estimation set"
+      edit: "Edit task"
+      destroy: "Destroy task"
+    edit:
+      heading: "Edit task"
+  timer:
+    status:
+      not_started: "Not started yet"
+      paused: "On pause"
+      finished: "Finished"
+  rating:
+    current: "Current rating:"
+    rate:
+      heading: "Rate the results of this task:"
+      title: "Rate the task \"%{title}\""
+      submit: "Submit rating"

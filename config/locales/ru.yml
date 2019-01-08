@@ -37,6 +37,7 @@ ru:
     back: "Назад"
     save_changes: "Сохранить изменения"
     more: "Подробнее"
+    close: "Закрыть"
   group:
     show:
       name: "Название группы:"
@@ -47,3 +48,37 @@ ru:
       member: "участник"
       members:
         amount: "Количество участников: "
+  tasks:
+    index:
+      create: "Создать задачу"
+      heading: "Задачи для группы"
+    new:
+      heading: "Создать новую задачу"
+      action: "Создать задачу"
+    show:
+      description: "Описание:"
+      category: "Категория:"
+      created_by: "Создал(а) задачу:"
+      assigned_to: "Исполняет задачу:"
+      estimation:
+        first: "%{executor_name} оценил(а), что задача может быть выполнена к"
+        between_first: "Это через %{between_expires_at_and_now} от текущего момента"
+        repeated: "%{executor_name} запрашивает больше времени, новый срок:"
+        between_repeated: "Это через %{between_new_expires_at_and_expires_at} от предыдущего оценки"
+        required: "Требуется оценка времени"
+        set: "Получена оценка времени"
+      edit: "Редактировать задачу"
+      destroy: "Удалить задачу"
+    edit:
+      heading: "Редактировать задачу"
+  timer:
+    status:
+      not_started: "Не запущена"
+      paused: "На паузе"
+      finished: "Закончена"
+  rating:
+    current: "Текущий рейтинг:"
+    rate:
+      heading: "Оцените результаты выполнения задания:"
+      title: "Оцените задачу \"%{title}\""
+      submit: "Подтвердить рейтинг"
