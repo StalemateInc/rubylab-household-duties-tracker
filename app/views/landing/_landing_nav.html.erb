@@ -1,4 +1,4 @@
 <div class="navbar navbar-light landing_nav justify-content-end">
-    <span class="mr-2 align-text-center">Logged as:<%= current_user.email %></span>
+    <span class="mr-2 align-text-center"><%= t('landing.nav.logged_as') %><%= current_user.email %></span>
     <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-warning btn-sm" %>
 </div>

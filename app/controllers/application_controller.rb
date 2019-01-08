@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  before_action :set_locale
+
   def after_sign_in_path_for(resource)
     groups_path
   end
@@ -6,4 +9,9 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path(resource)
     index_path
   end
+
+  def set_locale
+    I18n.locale = current_user.try(:locale) || I18n.default_locale
+  end
+
 end

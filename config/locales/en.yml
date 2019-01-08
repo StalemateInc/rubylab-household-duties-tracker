@@ -31,3 +31,20 @@
 
 en:
   hello: "Hello world"
+  landing:
+    index:
+      hello: "Nice to meet you, please, proceed to login or signing up procedure."
+      tip: "To start managing duties like a boss, first you need to"
+      or: "or"
+      login: "Log in"
+      signup: "Sign up"
+    nav:
+      logged_as: "Logged as:"
+  dashboard:
+    nav:
+      profile: "Profile"
+      logout: "Log out"
+    side:
+      groups: "Groups"
+      home: "Home"
+      tasks: "Tasks"

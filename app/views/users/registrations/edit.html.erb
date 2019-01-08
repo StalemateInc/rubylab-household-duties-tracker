@@ -41,7 +41,19 @@
                       hint: "we need your current password to confirm your changes",
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
-          <%= f.input :avatar, as: :file %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :avatar, as: :file %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :locale,
+                          as: :select,
+                          collection: [["English", 'en'],["Russian", 'ru']],
+                          input_html: { autocomplete: "locale" },
+                          include_blank: false,
+                          include_hidden: false %>
+            </div>
+          </div>
         </div>
         <div class="form-actions">
           <%= f.button :submit, "Update" %>

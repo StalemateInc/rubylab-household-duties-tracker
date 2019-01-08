@@ -3,16 +3,16 @@
   <li class="nav-item">
     <%= link_to root_path, class: 'nav-link' do %>
       <i class="fas fa-fw fa-globe"></i>
-      <span>Home</span>
+      <span><%= t('dashboard.side.home') %></span>
     <% end %>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="groupsDropdown" role="button" data-toggle="dropdown">
       <i class="fas fa-fw fa-users"></i>
-      <span>Groups</span>
+      <span><%= t('dashboard.side.groups') %></span>
     </a>
     <div class="dropdown-menu">
-      <h6 class="dropdown-header">Groups</h6>
+      <h6 class="dropdown-header"><%= t('dashboard.side.groups') %></h6>
       <% current_user.groups.each do |group| %>
         <%= link_to group.name, group, class: 'dropdown-item' %>
       <% end %>
@@ -21,6 +21,6 @@
   <li class="nav-item">
     <a class="nav-link" href="#">
       <i class="fas fa-fw fa-tasks"></i>
-      <span>Tasks</span></a>
+      <span><%= t('dashboard.side.tasks') %></span></a>
   </li>
 </ul>
