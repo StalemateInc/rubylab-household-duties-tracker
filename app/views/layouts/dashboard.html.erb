@@ -10,18 +10,17 @@
       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
     <body class="sidebar-toggled">
-    <% console %>
-       <%= render partial: "dashboard/navbar" %>
-       <div id="wrapper">
-         <%= render partial: "dashboard/sidebar" %>
+      <%= render partial: "dashboard/navbar" %>
+      <div id="wrapper">
+        <%= render partial: "dashboard/sidebar" %>
 
-         <div id="content-wrapper">
-           <div class="container-fluid">
+        <div id="content-wrapper">
+          <div class="container-fluid">
              <!-- Page content -->
-             <%= yield %>
-           </div>
-         </div>
-       </div>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
 
     </body>
 </html>
