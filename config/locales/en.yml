@@ -69,6 +69,7 @@ en:
     save_changes: "Save changes"
     more: "More"
     close: "Close"
+    confirm: "Are you sure?"
   group:
     show:
       name: "Group name:"
@@ -113,3 +114,46 @@ en:
       heading: "Rate the results of this task:"
       title: "Rate the task \"%{title}\""
       submit: "Submit rating"
+  stats:
+    rating:
+      average: "My average rating"
+    tasks:
+      active: "Active tasks"
+      finished: "Finished tasks"
+      created: "Created tasks"
+    heading: "Personal statistics"
+  user:
+    profile:
+      name: "Name"
+      email: "Email"
+      birthdate: "Date of birth"
+      registration_date: "Joined"
+      edit:
+        action: "Edit profile"
+      cancel:
+        action: "Cancel my account"
+      register:
+        action: "Sign up"
+        min_char_hint: "%{var} characters minimum"
+        leave_blank_hint: "leave it blank if you don't want to change it"
+        confirm_pass_hint: "we need your current password to confirm your changes"
+      awaiting_confirmation: "Currently waiting confirmation for:"
+      update:
+        action: "Update profile"
+      stats: "Activity"
+  locale:
+    en: "English"
+    ru: "Russian"
+  search:
+    placeholder: "Search for..."
+    action: "Search"
+    by:
+      heading: "Search for:"
+      groups: "Groups"
+      tasks: "Tasks"
+    groups:
+      empty: "No groups matched the search criteria."
+      heading: "Groups"
+    tasks:
+      empty: "No tasks matched the search criteria."
+      heading: "Tasks"

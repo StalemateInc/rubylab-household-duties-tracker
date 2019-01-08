@@ -3,7 +3,7 @@
     <div class="col-lg-12 card-container">
       <div class="card mx-auto">
         <div class="card-content">
-          <h2>Sign up</h2>
+          <h2><%= t('user.profile.register.action') %></h2>
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= f.error_notification %>
 
@@ -14,7 +14,7 @@
                           input_html: { autocomplete: "email" }%>
               <%= f.input :password,
                           required: true,
-                          hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                          hint: (t('user.profile.register.min_char_hint', var: @minimum_password_length) if @minimum_password_length),
                           input_html: { autocomplete: "new-password" } %>
               <%= f.input :password_confirmation,
                           required: true,
@@ -22,7 +22,7 @@
             </div>
 
             <div class="form-actions">
-              <%= f.button :submit, "Sign up" %>
+              <%= f.button :submit, t('user.profile.register.action') %>
             </div>
             <br/>
           <% end %>

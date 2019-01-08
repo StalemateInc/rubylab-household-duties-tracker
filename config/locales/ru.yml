@@ -38,6 +38,7 @@ ru:
     save_changes: "Сохранить изменения"
     more: "Подробнее"
     close: "Закрыть"
+    confirm: "Вы уверены?"
   group:
     show:
       name: "Название группы:"
@@ -82,3 +83,46 @@ ru:
       heading: "Оцените результаты выполнения задания:"
       title: "Оцените задачу \"%{title}\""
       submit: "Подтвердить рейтинг"
+  stats:
+    rating:
+      average: "Мой средний рейтинг"
+    tasks:
+      active: "Активных задач"
+      finished: "Выполненных задач"
+      created: "Создал(а) задач"
+    heading: "Личная статистика"
+  user:
+    profile:
+      name: "Имя"
+      email: "Электронная почта"
+      birthdate: "Дата рождения"
+      registration_date: "Зарегистрирован(а)"
+      edit:
+        action: "Редактировать профиль"
+      cancel:
+        action: "Удалить мой аккаунт"
+      register:
+        action: "Создать аккаунт"
+        min_char_hint: "минимум %{var} символов"
+        leave_blank_hint: "оставьте пустым, если не собираетесь менять"
+        confirm_pass_hint: "нам нужен ваш текущий пароль, чтобы подтвердить изменения"
+      awaiting_confirmation: "В данный момент ожидается подтверждение от:"
+      update:
+        action: "Обновить профиль"
+      stats: "Активность"
+  locale:
+    en: "Английский"
+    ru: "Русский"
+  search:
+    placeholder: "Искать..."
+    action: "Поиск"
+    by:
+      heading: "Искать по:"
+      groups: "Группам"
+      tasks: "Задачам"
+    groups:
+      empty: "Подходящие по критериям поиска группы не найдены."
+      heading: "Группы"
+    tasks:
+      empty: "Подходящие по критериям поиска задачи не найдены."
+      heading: "Задачи"
