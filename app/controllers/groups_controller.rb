@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   layout "dashboard"
+  before_action :authenticate_user!
   before_action :find_group, except: %i[index create new]
 
   # GET /groups
@@ -10,7 +11,8 @@ class GroupsController < ApplicationController
 
   # POST /groups
   def create
-    redirect_to @group if @group.save(group_params)
+    @group = Group.new(group_params)
+    redirect_to @group if @group.save
   end
 
   # GET /groups/new

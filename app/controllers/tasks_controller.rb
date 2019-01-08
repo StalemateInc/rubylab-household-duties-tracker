@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   layout "dashboard"
+  before_action :authenticate_user!
   before_action :set_current_user_as_creator, only: :create
   before_action :find_task, only: %i[edit show update destroy]
   before_action :find_group, except: %i[show destroy]

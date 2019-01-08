@@ -1,6 +1,7 @@
 class MembershipsController < ApplicationController
   layout "dashboard"
   before_action :find_group
+  before_action :authenticate_user!
 
   def new; end
 

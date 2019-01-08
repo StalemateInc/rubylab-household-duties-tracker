@@ -1,5 +1,6 @@
 class EstimationController < ApplicationController
   layout "dashboard"
+  before_action :authenticate_user!
   before_action :find_group
   before_action :find_task
   before_action :find_last_postpone_comment, only: %i[accept reject]
