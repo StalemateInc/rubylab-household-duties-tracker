@@ -14,7 +14,12 @@ class MembershipsController < ApplicationController
     redirect_to group_path(@group)
   end
 
-  def destroy; end
+  def destroy
+    @membership = current_user.memberships.find_by(group: @group)
+    if @membership.destroy
+      redirect_to groups_path
+    end
+  end
 
   private
 

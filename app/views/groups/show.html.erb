@@ -12,6 +12,11 @@
         <%= link_to "Invite user", group_member_new_path(@group), class: "btn btn-md btn-info" %>
       <% end %>
       <%= link_to "See tasks", group_tasks_path(@group), class: "btn btn-md btn-success" %>
+      <% if @group.in? current_user.groups %>
+        <%= link_to group_member_path(@group), method: :delete, class: "btn btn-md- btn-danger" do %>
+          <i class="fas fa-door-open"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

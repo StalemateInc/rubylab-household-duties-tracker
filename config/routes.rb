@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :groups do
     get '/member/new', to: 'memberships#new'
     post '/member/new', to: 'memberships#create'
+    delete '/member', to: 'memberships#destroy'
     resources :tasks do
       resources :comments, only: %i[create edit update destroy] do
         member do
