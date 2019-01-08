@@ -2,7 +2,7 @@
   <div class="row">
     <% if can? :estimate, @task %>
       <div class="col-lg-4 col-sm-12">
-        Expires at:<br/>
+        <%= t('tasks.show.estimation.expires') %><br/>
         <%= f.input_field :expires_at, as: :string, label: false, required: true, input_html: { autocomplete: "expires_at" }%>
       </div>
     <% end %>
