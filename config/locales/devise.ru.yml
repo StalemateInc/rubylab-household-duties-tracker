@@ -65,6 +65,14 @@ ru:
       forgot_password: "Забыли пароль?"
       no_instructions: "Не получили инструкции по подтверждению?"
       no_unlock_instructions: "Не получили инструкции по разблокировке?"
+      password_change:
+        heading: "Сменить Ваш пароль"
+        action: "Изменить пароль"
+        confirm: "Подтвердите свой новый пароль"
+        new_password: "Новый пароль"
+      recover:
+        heading: "Забыли свой пароль?"
+        action: "Выслать инструкции по сбросу пароля"
   errors:
     messages:
       already_confirmed: "уже подтверждена. Пожалуйста, попробуйте войти в систему"

@@ -64,6 +64,14 @@ en:
       forgot_password: "Forgot your password?"
       no_instructions: "Didn't receive confirmation instructions?"
       no_unlock_instructions: "Didn't receive unlock instructions?"
+      password_change:
+        heading: "Change your password"
+        action: "Change password"
+        confirm: "Confirm your new password"
+        new_password: "New password"
+      recover:
+        heading: "Forgot your password?"
+        action: "Send me reset password instructions"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
