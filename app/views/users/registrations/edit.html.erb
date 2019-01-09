@@ -21,32 +21,37 @@
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
-          <%= f.input :email, required: true, autofocus: true %>
+          <%= f.input :email, label: t('simple_form.field.email'), required: true, autofocus: true %>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <p><%= t('user.profile.awaiting_confirmation') %> <%= resource.unconfirmed_email %></p>
           <% end %>
 
           <%= f.input :display_name,
+                      label: t('simple_form.field.display_name'),
                       required: true,
                       input_html: { autocomplete: "display_name" } %>
           <%= f.input :password,
+                      label: t('simple_form.field.password'),
                       hint: t('user.profile.register.leave_blank_hint'),
                       required: false,
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :password_confirmation,
+                      label: t('simple_form.field.password_confirmation'),
                       required: false,
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :current_password,
+                      label: t('simple_form.field.password_current'),
                       hint: t('user.profile.register.confirm_pass_hint'),
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
           <div class="row">
             <div class="col-md-6">
-              <%= f.input :avatar, as: :file %>
+              <%= f.input :avatar, label: t('simple_form.field.avatar'), as: :file %>
             </div>
             <div class="col-md-6">
               <%= f.input :locale,
+                          label: t('simple_form.field.language'),
                           as: :select,
                           collection: [[t('locale.en'), 'en'], [t('locale.ru'), 'ru']],
                           input_html: { autocomplete: "locale" },

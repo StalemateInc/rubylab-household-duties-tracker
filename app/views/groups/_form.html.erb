@@ -1,13 +1,15 @@
 <div class="form-inputs">
   <%= f.input :name,
+              label: t('simple_form.field.group_name'),
               required: true,
               autofocus: true,
               input_html: { autocomplete: "name" } %>
   <%= f.input :password,
+              label: t('simple_form.field.password'),
               required: true,
               autofocus: false,
               input_html: { autocomplete: "password" } %>
-  <%= f.input :visible_to_all, as: :boolean %>
+  <%= f.input :visible_to_all, as: :boolean, label: t('simple_form.field.make_public') %>
   <% if @group.id.nil? %>
     <%= f.simple_fields_for :memberships do |ff|%>
       <%= render :partial => 'memberships_form', locals: {ff: ff} %>

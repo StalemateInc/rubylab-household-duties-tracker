@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-lg-8 col-sm-12">
         <%= field_set_tag nil, class: "#{'disabled' unless @task.new_record? and can? :edit, @task}" do %>
-          <%= f.input :title, required: true, autofocus: true, input_html: { autocomplete: "title" } %>
-          <%= f.input :description, input_html: { autocomplete: "description" } %>
-          <%= f.input :executor_id,
+          <%= f.input :title, label: t('simple_form.field.title'), required: true, autofocus: true, input_html: {autocomplete: "title" } %>
+          <%= f.input :description, label: t('simple_form.field.description'), input_html: {autocomplete: "description" } %>
+          <%= f.input :executor_id, label: false,
                       include_blank: false, as: :hidden, class: "ui-widget-content" %>
-          <%= content_tag(:label, "Executor") %>
+          <%= content_tag(:label, t('simple_form.field.assign_to')) %>
           <%= content_tag(:div, '', id: 'droppable', style: "min-height: 34px; width: 100%; border: black 1px solid") %>
           <%= content_tag(:ul) do %>
             <% @group.users.each do |user| %>
@@ -14,8 +14,8 @@
                               data: {id: user.id, name: user.display_name }) %>
             <% end %>
           <% end %>
-          <%= f.input :category_id, collection: {}, input_html: {class: "category-select"} %>
-          <%= f.input :tag_list, as: :select, input_html: {multiple: true, class: "tags-select", autocomplete: "tag_list"} %>
+          <%= f.input :category_id, label: t('simple_form.field.category'), collection: {}, input_html: {class: "category-select"} %>
+          <%= f.input :tag_list, as: :select, label: t('simple_form.field.tags'), input_html: {multiple: true, class: "tags-select", autocomplete: "tag_list"} %>
         <% end %>
     </div>
   </div>
