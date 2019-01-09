@@ -18,6 +18,7 @@
 //= require popper
 //= require select2-full
 //= require bootstrap
+//= require jquery.ui.touch-punch.min
 //= require moment
 //= require moment/en-gb.js
 //= require moment/ru.js

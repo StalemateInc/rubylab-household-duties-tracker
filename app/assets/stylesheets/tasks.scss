@@ -50,3 +50,25 @@
   min-width: 34px;
   min-height: 34px;
 }
+
+.executor-div {
+  border-radius: 5px;
+  min-height: 60px;
+  width: 100%;
+  border: #ced4da 3px dashed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+}
+
+.user-card {
+  min-width: 300px;
+}
+.user-carousel {
+  padding-right: 0;
+  padding-left: 0;
+  border: #ced4da 1px solid;
+  border-radius: 5px;
+}

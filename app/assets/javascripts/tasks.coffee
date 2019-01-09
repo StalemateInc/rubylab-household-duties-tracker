@@ -77,10 +77,12 @@ showTags = () ->
 
 createDroppable = ()->
 
-  $('.ui-widget-content.draggable').draggable({ revert: true })
+  $('.ui-widget-content.draggable').draggable({ revert: true, appendTo: 'body', containment: 'window', scroll: false, helper: 'clone' })
   $('#droppable').droppable drop: (event, ui) ->
     $(this).html(ui.draggable[0].dataset.name)
     $('#task_executor_id').val(ui.draggable[0].dataset.id)
+    $(this).animate({ backgroundColor: "#aa93a7" }, 500 )
+      .animate({ backgroundColor: "#ffffff" }, 500 )
     return
   return
 

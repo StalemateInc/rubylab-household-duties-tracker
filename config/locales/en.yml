@@ -163,3 +163,5 @@ en:
     accepted: "[Request accepted]"
     rejected: "[Request rejected]"
     malformed: "Malformed comment, sorry :("
+  cancancan:
+    access_denied: "You are not authorized to perform this action"
