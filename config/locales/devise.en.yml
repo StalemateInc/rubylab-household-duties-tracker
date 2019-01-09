@@ -52,6 +52,18 @@ en:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+    form:
+      resend_confirmation: "Resend confirmation instructions"
+      resend: "Resend confirmation instructions"
+      login:
+        heading: "Log in"
+        action: "Log in"
+        omniauth: "Sign in with %{var}"
+      signup:
+        action: "Sign up"
+      forgot_password: "Forgot your password?"
+      no_instructions: "Didn't receive confirmation instructions?"
+      no_unlock_instructions: "Didn't receive unlock instructions?"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

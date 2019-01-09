@@ -58,6 +58,16 @@ showTags = () ->
     cache: true
   return
 
+createDroppable = ()->
+
+  $('.ui-widget-content.draggable').draggable({ revert: true })
+  $('#droppable').droppable drop: (event, ui) ->
+    $(this).html(ui.draggable[0].dataset.name)
+    $('#task_executor_id').val(ui.draggable[0].dataset.id)
+    return
+  return
+
+
 $(document).on 'turbolinks:load', ->
   'use strict'
   startEveryTimer()
@@ -65,4 +75,5 @@ $(document).on 'turbolinks:load', ->
   displayRatingWidget()
   showCategoriesSelector()
   showTags()
+  createDroppable()
   return

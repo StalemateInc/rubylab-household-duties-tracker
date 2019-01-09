@@ -4,8 +4,16 @@
         <%= field_set_tag nil, class: "#{'disabled' unless @task.new_record? and can? :edit, @task}" do %>
           <%= f.input :title, required: true, autofocus: true, input_html: { autocomplete: "title" } %>
           <%= f.input :description, input_html: { autocomplete: "description" } %>
-          <%= f.input :executor_id, collection: @group.users.map {|u| ["#{u.display_name} <#{u.email}>", u.id] },
-                      include_blank: false, input_html: { autocomplete: "executor" } %>
+          <%= f.input :executor_id,
+                      include_blank: false, as: :hidden, class: "ui-widget-content" %>
+          <%= content_tag(:label, "Executor") %>
+          <%= content_tag(:div, '', id: 'droppable', style: "min-height: 34px; width: 100%; border: black 1px solid") %>
+          <%= content_tag(:ul) do %>
+            <% @group.users.each do |user| %>
+              <%= content_tag(:li, user.display_name, class: "ui-widget-content draggable",
+                              data: {id: user.id, name: user.display_name }) %>
+            <% end %>
+          <% end %>
           <%= f.input :category_id, collection: {}, input_html: {class: "category-select"} %>
           <%= f.input :tag_list, as: :select, input_html: {multiple: true, class: "tags-select", autocomplete: "tag_list"} %>
         <% end %>
