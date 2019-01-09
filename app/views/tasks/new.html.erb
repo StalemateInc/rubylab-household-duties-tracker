@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2><%= t('tasks.new.heading') %></h2>
+      <%= simple_form_for(@task, url: group_tasks_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+
+        <%= render :partial => 'form', locals: {f: f} %>
+
+        <div class="form-actions">
+          <%= f.button :submit, t('tasks.new.action') %>
+          <%= link_to t('common.back'), group_tasks_path, class: "btn btn-info btn-md" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

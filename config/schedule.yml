@@ -1,0 +1,4 @@
+remove_expired_tasks:
+  cron: "*/5 * * * *"
+  class: "RemoveExpiredTasksJob"
+  queue: default

@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-8">
+        <h4 class="timer_column_<%= task.id %>">
+          <%= render partial: "tasks/timer", locals: { task: task } %>
+        </h4>
+      </div>
+      <div class="col-4">
+        <div class="rating-column float-right">
+          <input id="card-rating-<%= task.id %>" name="rating" class="rating card-rating" value="<%= task.rating %>" data-min="0" data-max="5" data-step="1">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title"><%= task.title %></h4>
+    <p class="card-text"><%= task.description  %></p>
+    <% if task.executor == current_user && task.opened? %>
+      <%= link_to t('tasks.show.estimation.required'), group_task_estimate_path(group, task.id), class: "btn btn-md btn-primary" %>
+    <% elsif task.creator == current_user && task.pending? %>
+      <%= link_to t('tasks.show.estimation.set'), group_task_path(group, task.id), class: "btn btn btn-warning" %>
+    <% else %>
+      <%= link_to t('common.more'), group_task_path(group, task.id), class: "btn btn-md btn-success" %>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<span><%= t('tasks.show.estimation.agree') %></span>
+<div>
+  <%= link_to t('tasks.show.estimation.accept'), group_task_estimate_accept_path(presenter.group, presenter), method: :post, class: "btn btn-md btn-success" %>
+  <%= link_to t('tasks.show.estimation.reject'), group_task_estimate_reject_path(presenter.group, presenter), method: :post, class: "btn btn-md btn-danger" %>
+</div>

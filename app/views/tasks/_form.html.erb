@@ -1,0 +1,37 @@
+<div class="form-inputs" xmlns="">
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+        <%= field_set_tag nil, class: "#{'disabled' unless @task.new_record? and can? :edit, @task}" do %>
+          <%= f.input :title, label: t('simple_form.field.title'), required: true, autofocus: true, input_html: {autocomplete: "title" } %>
+          <%= f.input :description, label: t('simple_form.field.description'), input_html: {autocomplete: "description" } %>
+          <%= f.input :executor_id, label: false,
+                      include_blank: false, as: :hidden, class: "ui-widget-content" %>
+          <%= content_tag(:label, t('simple_form.field.assign_to')) %>
+
+          <div class="row" style="margin-left: 0; margin-right: 0">
+            <div id="droppable" class="col-md-5 executor-div mb-3">
+              <%= t('simple_form.field.drop_here') %>
+            </div>
+            <div class="col-md-7 user-carousel mb-3">
+              <div style="max-height: 100px; overflow-y: scroll">
+                <% @group.users.each do |user| %>
+
+                  <div class="ui-widget-content draggable m-1 card user-card" data-id="<%= user.id %>" data-name="<%= user.display_name %>">
+                    <div class="card-header">
+                      <%= image_tag(user.avatar.navbar.url, alt: "Avatar", class: "rounded-circle") %>
+                      <%= user.display_name %>
+                    </div>
+                  </div>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+          <%= f.input :category_id, label: t('simple_form.field.category'), collection: {}, input_html: {class: "category-select"} %>
+          <%= f.input :tag_list, as: :select, label: t('simple_form.field.tags'), input_html: {multiple: true, class: "tags-select", autocomplete: "tag_list"} %>
+        <% end %>
+    </div>
+  </div>
+</div>

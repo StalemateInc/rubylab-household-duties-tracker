@@ -1,0 +1,11 @@
+$rating = $('#rating-div');
+if ($rating === undefined) {
+  $('.rating-column').each(function() {
+      this.empty();
+  })
+  showCardRatings();
+} else {
+  $rating.empty();
+  $rating.append('<%= j render partial: "rating_widget", locals: {task: @task} %>');
+  $("#shown-rating").rating({displayOnly: true, step: 1, language: 'en'});
+}

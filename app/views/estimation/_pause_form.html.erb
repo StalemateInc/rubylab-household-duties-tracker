@@ -1,0 +1,28 @@
+<div id="pause-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t('tasks.show.estimation.pause.heading', title: @task.title) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for :estimation, url: group_task_estimate_pause_path(@group, @task) do |form| %>
+        <div class="modal-body">
+            <%= form.input :content, as: :text, label: t('tasks.show.estimation.pause.reason'),
+                           placeholder: t('tasks.show.estimation.pause.reson_hint'),
+                           wrapper_html: { class: 'mb-1' },
+                           input_html: { rows: 3, data:{ 'comment-id': 'new' }} %>
+            <%= form.input :need_more_time, as: :boolean, label: t('tasks.show.estimation.pause.more_time') %>
+            <div id="datetimepicker-toggler" class="d-none">
+              <%= form.input :new_expires_at, as: :string, label: t('tasks.show.estimation.new'), input_html: {autocomplete: "expires_at" }%>
+            </div>
+        </div>
+        <div class="modal-footer form-actions">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= form.button :submit, t('tasks.show.estimation.pause.action'), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= group.name %></h4>
+    <p class="card-text"><%= t('group.card.members.amount') + group.memberships.count.to_s %></p>
+    <%= link_to t('common.more'), group_path(group), class: "btn btn-md btn-success" %>
+  </div>
+</div>

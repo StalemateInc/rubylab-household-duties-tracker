@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <%= link_to t('common.back'), group_path(@group), class: "btn btn-md btn-info" %>
+      <% if can? :create, Task %>
+        <%= link_to t('tasks.index.create'), new_group_task_path(@group), class: "btn btn-md btn-primary" %>
+      <% end %>
+      <h2><%= t('tasks.index.heading') + " \"#{@group.name}\"" %></h2>
+      <% @tasks.each do |task| %>
+        <%= render partial: "task_card", locals: {group: @group, task: task } %>
+        <br/>
+      <% end %>
+    </div>
+  </div>
+</div>

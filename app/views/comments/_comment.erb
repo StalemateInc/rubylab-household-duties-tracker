@@ -1,0 +1,32 @@
+ <li class="list-unstyled comment" id="comment_<%= comment.id %>">
+
+    <div class="media">
+      <div class="comment-profile pull-left">
+        <%= image_tag(comment.user.avatar.profile.url, alt: 'Avatar', class: 'comment-profile-pic rounded-circle mb-2') %>
+      </div>
+      <div class="media-body">
+        <div class="comment-info">
+          <span class="media-meta pull-right"><%= t('comment.stamp', display_name: comment.user.display_name, var: comment.created_at.in_time_zone(cookies[:timezone]).strftime('%Y-%m-%d %H:%M:%S')) %><%= t('comment.edited') if comment.edited? %></span>
+          <h5 class="pull-right">
+            <% case comment.comment_type.to_sym
+            when :regular%><%= comment.content %>
+            <% when :postpone %><%= t('comment.postpone', content: comment.content) %>
+            <% when :acceptance %><%= t('comment.accepted') %>
+            <% when :rejection %><%= t('comment.rejected') %>
+            <% else %><%= t('comment.malformed') %>
+            <% end %>
+          </h5>
+          <small>
+            <% task = comment.commentable; group = task.group %>
+            <%= link_to t('comment.action.reply.action'), polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
+            <%= link_to t('comment.action.edit.action'), edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
+            <%= link_to t('comment.action.delete.action'), polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: t('common.confirm')}, class: "delete-comment-link"%>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <%= render comment.comments if comment.comments.any? %>
+    </ul>
+  </li>

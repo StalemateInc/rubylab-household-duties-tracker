@@ -1,0 +1,2 @@
+$("#comment_<%= @comment.id %> > .media > .media-body .comment-info .reply-comment-link").removeAttr("href");
+$("#comment_<%= @comment.id %> > .media > .media-body .comment-info").after("<%= j render('comments/form', comment: @reply) %>");

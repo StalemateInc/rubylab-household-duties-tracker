@@ -11,7 +11,19 @@
  * It is generally better to create a new file per style scope.
  *
  */
+@import "jquery-ui";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap";
-
+@import "tempusdominus-bootstrap-4.css";
+@import "landing";
+@import "dashboard";
+@import "comments";
+@import "tasks";
+@import "star-rating/star-rating";
+@import "star-rating/themes/krajee-fas/theme";
+@import "select2";
+@import "select2-bootstrap";
+@import "typeahead";
+@import "groups";
+@import "search";

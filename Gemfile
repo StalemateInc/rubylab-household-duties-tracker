@@ -40,24 +40,44 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'font-awesome-sass', '~> 5.5.0'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'momentjs-rails'
+gem 'moment_timezone-rails'
+gem 'bootstrap4-datetime-picker-rails'
+gem 'js_cookie_rails'
+gem 'select2-rails'
+gem 'twitter-typeahead-rails'
 
 gem 'devise'
 # gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 
-# install later
-# gem 'cancancan'
-# gem 'acts-as-taggable-on'
+gem 'active_record_union'
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'ancestry'
+gem 'cancancan'
+gem 'carrierwave'
+gem 'dotiw'
+gem 'file_validators'
 
+gem 'omniauth-facebook'
+
+gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
-gem 'mailgun'
-gem 'breadcrumbs_on_rails'
+gem 'sidekiq-cron'
+gem 'mailgun-ruby', '~>1.1.6'
+gem 'mini_magick'
+gem 'elasticsearch-model'
+gem 'elasticsearch-persistence'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
+  gem 'pry-rails'
   gem 'faker', '~> 1.9.1'
+  gem 'erb2haml'
 end
 
 group :development do

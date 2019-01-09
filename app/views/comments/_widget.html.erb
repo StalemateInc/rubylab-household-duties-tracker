@@ -1,0 +1,9 @@
+<div id="comments-widget-of-commentable-<%= commentable.id %>" class="comments-widget">
+  <h4 class="comments-header">
+  </h4>
+  <ul class="comments-list">
+    <%= render commentable.comments.where(parent_id: nil).order("created_at ASC") %>
+  </ul>
+  <hr/>
+  <%= render partial: "comments/form", locals: { comment: commentable.comments.build } %>
+</div>

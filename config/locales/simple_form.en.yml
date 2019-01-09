@@ -29,3 +29,20 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+    field:
+      email: "Email"
+      password: "Password"
+      remember_me: "Remember me"
+      group_name: "Group name"
+      make_public: "Make public"
+      title: "Title"
+      description: "Description"
+      assign_to: "Assign to"
+      category: "Category"
+      tags: "Tags"
+      password_confirmation: "Password confirmation"
+      display_name: "Display name"
+      password_current: "Current password"
+      avatar: "Avatar"
+      language: "Language"
+      drop_here: "Drop card here"

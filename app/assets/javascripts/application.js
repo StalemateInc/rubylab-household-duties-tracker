@@ -11,9 +11,30 @@
 // about supported directives.
 //
 //= require jquery3
+//= require jquery-ui
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require popper
+//= require select2-full
 //= require bootstrap
+//= require jquery.ui.touch-punch.min
+//= require moment
+//= require moment/en-gb.js
+//= require moment/ru.js
+//= require moment-timezone-with-data-2010-2020
+//= require tempusdominus-bootstrap-4.js
+//= require countdown.min
+//= require js.cookie
+//= require star-rating/star-rating
+//= require star-rating/themes/krajee-fas/theme
+//= require star-rating/locales/LANG.js
+//= require star-rating/locales/ru.js
+//= require twitter/typeahead.min
+//= require underscore-min
 //= require_tree .
+
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+if (Cookies.get('timezone') === undefined) {
+    Cookies.set('timezone', timezone, {expires: 24});
+}

@@ -1,0 +1,5 @@
+$('.timer_column_<%= @task.id %>').empty();
+$('.timer_column_<%= @task.id %>').append("<%= j render partial: "tasks/timer", locals: { task: @task } %>");
+<% if params[:resume] %>
+  startEveryTimer();
+<% end %>

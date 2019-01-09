@@ -1,0 +1,24 @@
+<div class="container">
+  <%= render partial: "users/stats", locals: {user: current_user} %>
+  <div class="row">
+    <div class="col-md">
+      <h2><%= t('groups.index.public_groups.heading') %></h2>
+      <% if @public_groups.empty? %>
+        <%= t('groups.index.public_groups.empty') %>
+      <% else %>
+        <div class="scrolling-wrapper-flexbox">
+        <%  @public_groups.each do |g|  %>
+          <%= render partial: "group_card", locals: {group: g} %>
+        <%  end  %>
+        </div>
+      <% end %>
+      <hr/>
+      <h2><%= t('groups.index.my_groups.heading') %></h2>
+      <div class="scrolling-wrapper-flexbox">
+        <% @user_groups.each do |g| %>
+          <%= render partial: "group_card", locals: {group: g} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

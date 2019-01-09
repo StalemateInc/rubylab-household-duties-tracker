@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <form action="">
+        <div class="input-group mb-3">
+          <input name="query" type="text" class="form-control" placeholder="<%= t('search.placeholder') %>" aria-label="Search for">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary search-button" type="submit"><%= t('search.action') %></button>
+          </div>
+        </div>
+        <div>
+          <%= t('search.by.heading') %><br/>
+          <input id="groups_check" type="checkbox" name="only[]" value="groups" checked/>
+          <label for="groups_check"><%= t('search.by.groups') %></label>
+          <input id="tasks_check" type="checkbox" name="only[]" value="tasks" checked/>
+          <label for="tasks_check"><%= t('search.by.tasks') %></label>
+        </div>
+      </form>
+      <hr/>
+      <% if @groups.present? %>
+        <div id="groups-search">
+            <h2><%= t('search.groups.heading') %></h2>
+            <% @groups.each do |group| %>
+              <%= render partial: "groups/group_card", locals: {group: group} %><br/>
+            <% end %>
+            <%= t('search.groups.empty') if @groups.empty? %>
+        </div>
+      <% end %>
+
+      <% if @tasks.present? %>
+        <div id="tasks-search">
+            <h2><%= t('search.tasks.heading') %></h2>
+            <% @tasks.each do |task| %>
+              <%= render partial: "tasks/task_card", locals: {group: task.group, task: task} %><br/>
+            <% end %>
+            <%= t('search.tasks.empty') if @tasks.empty? %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

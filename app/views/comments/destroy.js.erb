@@ -1,0 +1,5 @@
+$comment_count = $('#comments-count-of-commentable-<%= @commentable.id %>');
+<% if @comment.errors.empty? %>
+  $comment_count.html("<%= @commentable.comments.size %>");
+  $("#comment_<%= @comment.id %>").remove();
+<% end %>

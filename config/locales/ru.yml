@@ -1,0 +1,174 @@
+ru:
+  hello: "Привет мир"
+  datetime:
+    dotiw:
+      words_connector: ','
+      last_word_connector: ' и '
+  landing:
+    index:
+      hello: "Рады знакомству, пожалуйста, войдите в систему или зарегистрируйтесь."
+      tip: "Чтобы начать планировать свои домашние задачи, сперва вам нужно"
+      or: "или"
+      login: "Войти в систему"
+      signup: "Создать аккаунт"
+      language_select: "Выберите язык"
+    nav:
+      logged_as: "Выполнен вход как:"
+  dashboard:
+    nav:
+      profile: "Профиль"
+      logout: "Выйти из системы"
+    side:
+      groups: "Группы"
+      home: "Главная"
+      tasks: "Задачи"
+  groups:
+    index:
+      public_groups:
+        heading: "Публичые группы"
+        empty: "Публичных групп не найдено."
+      my_groups:
+        heading: "Мои группы"
+        empty: "Группы не найдены"
+    new:
+      heading: "Создать новую группу"
+      action: "Создать"
+    edit:
+      heading: "Редактировать группу"
+    show:
+      invite: "Пригласить пользователя"
+      tasks: "К задачам"
+  common:
+    back: "Назад"
+    save_changes: "Сохранить изменения"
+    more: "Подробнее"
+    close: "Закрыть"
+    confirm: "Вы уверены?"
+    cancel: "Отмена"
+  group:
+    show:
+      name: "Название группы:"
+      public: "Публичная группа:"
+    edit:
+      delete: "Удалить группу"
+    card:
+      member: "участник"
+      members:
+        amount: "Количество участников: "
+    member:
+      invite:
+        heading: "Пригласить пользователя"
+        action: "Пригласить"
+  tasks:
+    index:
+      create: "Создать задачу"
+      heading: "Задачи для группы"
+    new:
+      heading: "Создать новую задачу"
+      action: "Создать задачу"
+    show:
+      description: "Описание:"
+      category: "Категория:"
+      created_by: "Создал(а) задачу:"
+      assigned_to: "Исполняет задачу:"
+      estimation:
+        first: "%{executor_name} оценил(а), что задача может быть выполнена к"
+        between_first: "Это через %{between_expires_at_and_now} от текущего момента"
+        repeated: "%{executor_name} запрашивает больше времени, новый срок:"
+        between_repeated: "Это через %{between_new_expires_at_and_expires_at} от предыдущего оценки"
+        required: "Требуется оценка времени"
+        set: "Получена оценка времени"
+        estimate: "Оцените время, необходимое на выполнение задачи"
+        confirm: "Подтвердить оценку времени"
+        pause:
+          heading: "Приостановить задачу \"%{title}\""
+          reason: "Причина"
+          reson_hint: "Укажите здесь причину приостановления задачи"
+          more_time: "Мне нужно больше времени"
+          action: "Приостановить"
+        new: "Новая оценка времени выполнения"
+        expires: "Время на выполнение истекает:"
+        agree: "Вы согласны?"
+        accept: "Согласиться с оценкой"
+        reject: "Отклонить оценку"
+      edit: "Редактировать задачу"
+      destroy: "Удалить задачу"
+    edit:
+      heading: "Редактировать задачу"
+  timer:
+    status:
+      not_started: "Не запущена"
+      paused: "На паузе"
+      finished: "Закончена"
+  rating:
+    current: "Текущий рейтинг:"
+    rate:
+      heading: "Оцените результаты выполнения задания:"
+      title: "Оцените задачу \"%{title}\""
+      submit: "Подтвердить рейтинг"
+  stats:
+    rating:
+      average: "Мой средний рейтинг"
+    tasks:
+      active: "Активных задач"
+      finished: "Выполненных задач"
+      created: "Создал(а) задач"
+    heading: "Личная статистика"
+  user:
+    profile:
+      name: "Имя"
+      email: "Электронная почта"
+      birthdate: "Дата рождения"
+      registration_date: "Зарегистрирован(а)"
+      edit:
+        action: "Редактировать профиль"
+      cancel:
+        action: "Удалить мой аккаунт"
+      register:
+        action: "Создать аккаунт"
+        min_char_hint: "минимум %{var} символов"
+        leave_blank_hint: "оставьте пустым, если не собираетесь менять"
+        confirm_pass_hint: "нам нужен ваш текущий пароль, чтобы подтвердить изменения"
+      awaiting_confirmation: "В данный момент ожидается подтверждение от:"
+      update:
+        action: "Обновить профиль"
+      stats: "Активность"
+  locale:
+    en: "Английский"
+    ru: "Русский"
+  search:
+    placeholder: "Искать..."
+    action: "Поиск"
+    by:
+      heading: "Искать по:"
+      groups: "Группам"
+      tasks: "Задачам"
+    groups:
+      empty: "Подходящие по критериям поиска группы не найдены."
+      heading: "Группы"
+    tasks:
+      empty: "Подходящие по критериям поиска задачи не найдены."
+      heading: "Задачи"
+  comment:
+    action:
+      comment:
+        heading: "Оставьте свой комментарий."
+        action: "Комментировать"
+      reply:
+        heading: "Оставьте ответ"
+        action: "Ответить"
+      edit:
+        action: "Редактировать"
+      delete:
+        action: "Удалить"
+    edited: "(ред.)"
+    postpone: "[Запросил отсрочку] Причина: %{content}"
+    accepted: "[Заявка одобрена]"
+    rejected: "[Заявка отклонена]"
+    malformed: "Ошибка при чтении комментария"
+  cancancan:
+    access_denied: "У вас нет прав на выполнение этого действия"
+  devise:
+    form:
+      login:
+        omniauth_facebook: "Войти через Facebook"

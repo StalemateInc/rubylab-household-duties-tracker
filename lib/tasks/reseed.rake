@@ -8,7 +8,8 @@ namespace :db do
   task reseed: [
       'environment',
       'safety_check',
-      'db:reset',
+      'db:schema:load',
+      'db:create_roles',
       'db:seed'
   ]
 end

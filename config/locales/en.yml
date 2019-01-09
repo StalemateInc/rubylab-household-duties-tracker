@@ -1,33 +1,171 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
+  landing:
+    index:
+      hello: "Nice to meet you, please, proceed to login or signing up procedure."
+      tip: "To start managing duties like a boss, first you need to"
+      or: "or"
+      login: "Log in"
+      signup: "Sign up"
+      language_select: "Select a language"
+    nav:
+      logged_as: "Logged as:"
+  dashboard:
+    nav:
+      profile: "Profile"
+      logout: "Log out"
+    side:
+      groups: "Groups"
+      home: "Home"
+      tasks: "Tasks"
+  groups:
+    index:
+      public_groups:
+        heading: "Public groups"
+        empty: "No public groups present, sorry."
+      my_groups:
+        heading: "My groups"
+        empty: "No groups found."
+    new:
+      heading: "Create new group"
+      action: "Create"
+    edit:
+      heading: "Edit group"
+    show:
+      invite: "Invite user"
+      tasks: "See tasks"
+  common:
+    back: "Back"
+    save_changes: "Save changes"
+    more: "More"
+    close: "Close"
+    confirm: "Are you sure?"
+    cancel: "Cancel"
+  group:
+    show:
+      name: "Group name:"
+      public: "Is public:"
+    edit:
+      delete: "Delete group"
+    card:
+      member: "member"
+      members:
+        amount: "Members amount: "
+    member:
+      invite:
+        heading: "Invite user"
+        action: "Invite"
+  tasks:
+    index:
+      create: "Create task"
+      heading: "Tasks for group"
+    new:
+      heading: "Create a new task"
+      action: "Create a task"
+    show:
+      description: "Description:"
+      category: "Category:"
+      created_by: "Created by:"
+      assigned_to: "Assigned to:"
+      estimation:
+        first: "%{executor_name} estimated that the work could be finished at"
+        between_first: "It is %{between_expires_at_and_now} from now."
+        repeated: "%{executor_name} requests more time, now the deadline is"
+        between_repeated: "It is %{between_new_expires_at_and_expires_at} after the previous estimate."
+        required: "Estimation required"
+        set: "Estimation set"
+        estimate: "Please, estimate required time"
+        confirm: "Confirm estimate"
+        pause:
+          heading: "Pause the task \"%{title}\""
+          reason: "Reason"
+          reson_hint: "Write reason to pause the task here"
+          more_time: "I need more time"
+          action: "Confirm pause"
+        new: "New task expiration time"
+        expires: "Expires at:"
+        agree: "Do you agree?"
+        accept: "Accept estimate"
+        reject: "Reject estimate"
+      edit: "Edit task"
+      destroy: "Destroy task"
+    edit:
+      heading: "Edit task"
+  timer:
+    status:
+      not_started: "Not started yet"
+      paused: "On pause"
+      finished: "Finished"
+  rating:
+    current: "Current rating:"
+    rate:
+      heading: "Rate the results of this task:"
+      title: "Rate the task \"%{title}\""
+      submit: "Submit rating"
+  stats:
+    rating:
+      average: "My average rating"
+    tasks:
+      active: "Active tasks"
+      finished: "Finished tasks"
+      created: "Created tasks"
+    heading: "Personal statistics"
+  user:
+    profile:
+      name: "Name"
+      email: "Email"
+      birthdate: "Date of birth"
+      registration_date: "Joined"
+      edit:
+        action: "Edit profile"
+      cancel:
+        action: "Cancel my account"
+      register:
+        action: "Sign up"
+        min_char_hint: "%{var} characters minimum"
+        leave_blank_hint: "leave it blank if you don't want to change it"
+        confirm_pass_hint: "we need your current password to confirm your changes"
+      awaiting_confirmation: "Currently waiting confirmation for:"
+      update:
+        action: "Update profile"
+      stats: "Activity"
+  locale:
+    en: "English"
+    ru: "Russian"
+  search:
+    placeholder: "Search for..."
+    action: "Search"
+    by:
+      heading: "Search for:"
+      groups: "Groups"
+      tasks: "Tasks"
+    groups:
+      empty: "No groups matched the search criteria."
+      heading: "Groups"
+    tasks:
+      empty: "No tasks matched the search criteria."
+      heading: "Tasks"
+  comment:
+    action:
+      comment:
+        heading: "Leave your comment."
+        action: "Comment"
+      reply:
+        heading: "Leave a reply"
+        action: "Reply"
+      edit:
+        action: "Edit"
+      delete:
+        action: "Destroy"
+    stamp: "%{display_name} commmented at %{var}"
+    edited: "(edited)"
+    postpone: "[Requested postponement] Reason: %{content}"
+    accepted: "[Request accepted]"
+    rejected: "[Request rejected]"
+    malformed: "Malformed comment, sorry :("
+  cancancan:
+    access_denied: "You are not authorized to perform this action"
+  devise:
+    form:
+      login:
+        omniauth_facebook: "Sign in with Facebook"

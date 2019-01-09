@@ -1,3 +1,28 @@
 // Place all the styles related to the Landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.landing_body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url("landing-0.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.landing-jumbo {
+  margin-bottom: 1rem;
+}
+
+.landing-nav {
+  flex-direction: row-reverse;
+  max-height: 35px;
+}
+
+.card-container {
+  max-width: 600px;
+  padding: 20px 20px;
+}
+.card-content {
+  padding: 30px;
+}

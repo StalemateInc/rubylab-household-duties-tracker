@@ -1,71 +1,58 @@
 class GroupsController < ApplicationController
+  layout "dashboard"
+  before_action :authenticate_user!
+  authorize_resource
+  before_action :find_group, except: %i[index create new]
 
   # GET /groups
   def index
-    @groups = current_user.groups
+    @public_groups = Group.where(visible_to_all: true) if can? :read_public, Group
+    @user_groups = current_user.groups
   end
 
   # POST /groups
   def create
     @group = Group.new(group_params)
-
-    if @group.save
-      add_current_user_as_adult(@group)
-      redirect_to @group
-    end
+    redirect_to @group if @group.save
   end
 
   # GET /groups/new
   def new
+    return redirect_to root_path unless can? :create, Group
+
     @group = Group.new
+    @group.memberships.build
   end
 
   # GET /groups/:id/edit
   def edit
-    redirect_to groups_path unless check_priviledge
-    @group = Group.find(params[:id])
+    redirect_to groups_path unless can? :edit, @group
   end
 
   # GET groups/:id
   def show
-    @group = Group.find(params[:id])
-    redirect_to root_path unless check_priviledge
+    redirect_to groups_path unless can? :read, @group
   end
 
   # PATCH/PUT groups/:id
   def update
-    @group = Group.find(params[:id])
-
-    if @group.update(group_params)
-      redirect_to @group
-    end
+    redirect_to @group if @group.update(group_params)
   end
 
   # DELETE group/:id
   def destroy
-    @group = Group.find(params[:id])
-    @group.destroy
-
+    @group.destroy if can? :destroy, @group
     redirect_to groups_path
   end
 
   private
 
-  def check_priviledge
-    current_user.groups.include?(Group.find(params[:id])) &&
-        current_user.memberships.find_by(group_id: params[:id]).role == "adult"
-  end
-
-  def add_current_user_as_adult(group)
-    membership = Membership.create(
-      group_id: group.id,
-      user_id: current_user.id,
-      role: :adult
-    )
-    membership.save
+  def find_group
+    @group = Group.find(params[:id])
   end
 
   def group_params
-    params.require(:group).permit(:name, :password, :visible_to_all)
+    params.require(:group).permit(:name, :password, :visible_to_all,
+                                  memberships_attributes: %i[group_id user_id role_id])
   end
 end

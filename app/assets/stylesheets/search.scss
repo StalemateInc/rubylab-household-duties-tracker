@@ -1,0 +1,24 @@
+// Place all the styles related to the Search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.navbar{
+  .search-result-description {
+    word-wrap: normal;
+  }
+  .search-result-button {
+    line-height: 1.0;
+  }
+  .navbar-input {
+    min-width: 350px;
+  }
+}
+
+.search-button {
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.search-button:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}

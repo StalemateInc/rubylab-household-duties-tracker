@@ -1,0 +1,25 @@
+<div id="pause-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t('rating.rate.title', title: @task.title) %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @task, url: group_task_rate_path(@group, @task), method: :post do |form| %>
+        <div class="modal-body">
+          <h2><%= t('rating.rate.heading') %></h2>
+          <div class="text-center">
+            <span><%= t('tasks.show.assigned_to') + @task.executor.display_name %></span>
+            <%= form.input :rating, class: "rating rating-loading", label: false, data: {min: "0", max: "5", size: "xl", step: "1"} %>
+          </div>
+        </div>
+        <div class="modal-footer form-actions">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('common.close') %></button>
+          <%= form.button :submit, t('rating.rate.submit'), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

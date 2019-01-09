@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2><%= t('tasks.show.estimation.estimate') %></h2>
+      <%= simple_form_for(@task, url: group_task_estimate_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+
+        <%= render :partial => 'form', locals: {f: f} %>
+
+        <div class="form-actions">
+          <%= f.button :submit, t('tasks.show.estimation.confirm'), class: "btn btn-md btn-primary" %>
+          <%= link_to t('common.back'), group_task_path(params[:group_id], params[:task_id]), class: "btn btn-md btn-secondary"%>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

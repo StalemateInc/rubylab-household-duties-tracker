@@ -37,12 +37,12 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # change to :mailgun?
-  config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.mailgun_settings = {
-  #     api_key: '142cab9b2cc5bb389c9ad4ddc08a85c1-52cbfb43-f54a620c',
-  #     domain: 'sandboxbf0fdffa3322402b9405934e0ab19a11.mailgun.org'
-  # }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.default_options = { from: 'householdduties@example.com' }
+  config.action_mailer.mailgun_settings = {
+    domain: Rails.application.credentials.mailgun[:domain],
+    api_key: Rails.application.credentials.mailgun[:private_api_key]
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -67,4 +67,6 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.active_job.queue_adapter = :sidekiq
 end
