@@ -59,6 +59,10 @@ gem 'cancancan'
 gem 'carrierwave'
 gem 'dotiw'
 gem 'file_validators'
+
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
 gem 'sidekiq-cron'

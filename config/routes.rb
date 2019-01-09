@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   end
 
   root to: 'landing#index'
-  devise_for :user, controllers: { registrations: 'users/registrations' }
+  devise_for :user, controllers: { registrations: 'users/registrations',
+                                   omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
     get '/user', to: 'users/registrations#show'
   end

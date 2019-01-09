@@ -168,3 +168,7 @@ ru:
     malformed: "Ошибка при чтении комментария"
   cancancan:
     access_denied: "У вас нет прав на выполнение этого действия"
+  devise:
+    form:
+      login:
+        omniauth_facebook: "Войти через Facebook"

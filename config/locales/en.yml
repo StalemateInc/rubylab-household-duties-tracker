@@ -165,3 +165,7 @@ en:
     malformed: "Malformed comment, sorry :("
   cancancan:
     access_denied: "You are not authorized to perform this action"
+  devise:
+    form:
+      login:
+        omniauth_facebook: "Sign in with Facebook"

@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+  devise :omniauthable, omniauth_providers: %i[facebook]
   mount_uploader :avatar, ImageUploader
 
   validates :avatar, file_size: { less_than: 1.megabytes }
@@ -28,5 +29,15 @@ class User < ApplicationRecord
 
   def active_tasks_count
     executed_tasks.where.not(status: %i[finished closed]).count
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.display_name = auth.info.name
+      user.avatar = auth.info.image if auth.info.image
+      user.skip_confirmation!
+    end
   end
 end
