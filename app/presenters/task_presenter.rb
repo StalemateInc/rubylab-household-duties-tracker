@@ -1,5 +1,5 @@
 class TaskPresenter < BasePresenter
-
+  include ActionView::Helpers::DateHelper
   def creator_name
     @model.creator.display_name
   end
@@ -31,11 +31,11 @@ class TaskPresenter < BasePresenter
   end
 
   def between_expires_at_and_now
-    time_difference(@model.expires_at, Time.now)
+    distance_of_time_in_words(@model.expires_at, Time.now, locale: I18n.locale)
   end
 
   def between_new_expires_at_and_expires_at
-    time_difference(@model.new_expires_at, @model.expires_at)
+    distance_of_time_in_words(@model.new_expires_at, @model.expires_at, locale: I18n.locale)
   end
 
   def got_initial_estimate?
@@ -47,10 +47,6 @@ class TaskPresenter < BasePresenter
   end
 
   private
-
-  def time_difference(sooner, later)
-    TimeDifference.between(sooner, later).humanize
-  end
 
   def format_date(date, timezone)
     date.in_time_zone(timezone).strftime('%Y-%m-%d %H:%M:%S')

@@ -4,8 +4,9 @@
 $(document).on 'turbolinks:load', ->
   'use strict'
   $ ->
+    locale = Cookies.get("locale")
     $('#task_expires_at').datetimepicker
-      locale: 'en-gb'
+      locale: if locale == 'en' then 'en-gb' else 'ru'
       inline: true
       format: 'YYYY-MM-DD HH:mm'
       minDate: moment().add(5, 'minutes')

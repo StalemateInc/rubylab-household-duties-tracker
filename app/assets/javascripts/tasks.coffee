@@ -1,13 +1,24 @@
 @startEveryTimer = (string_selector = '.expire_timer') ->
   clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   timersSpans = $(string_selector)
+  locale = Cookies.get("locale")
+  patterns = {
+    expiration_line: {
+      en: 'Expired'
+      ru: 'Время истекло'
+    },
+    messsage_pattern : {
+      en: '{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left'
+      ru: 'Осталось {days} дней, {hours} часов, {minutes} минут и {seconds} секунд'
+    }
+  }
   $.each timersSpans, (_index, timerSpan) ->
     data_expires = $(timerSpan).data('expires-at')
     timer = new Countdown(
       selector: '#' + $(timerSpan).attr('id')
       msgBefore: ''
-      msgAfter: 'Expired.'
-      msgPattern: '{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left'
+      msgAfter: patterns.expiration_line[locale]
+      msgPattern: patterns.messsage_pattern[locale]
       onEnd: ->
         $.ajax
           url: ''.concat('/groups/', $(timerSpan).data('group'), '/tasks/', $(timerSpan).data('id'), '/estimate/stop')
@@ -18,8 +29,9 @@
   return
 
 displayRatingWidget = () ->
+  locale = Cookies.get('locale')
   if ($('#shown-rating').parent('#rating-div').length)
-    $('#shown-rating').rating(displayOnly: true, step: 1, language: 'en', size: 'sm')
+    $('#shown-rating').rating(displayOnly: true, step: 1, language: locale, size: 'sm')
   return
 
 @showCardRatings = (string_selector = '.card-rating') ->
@@ -31,10 +43,15 @@ displayRatingWidget = () ->
   return
 
 showCategoriesSelector = () ->
+  locale = Cookies.get("locale")
+  patterns = {
+    en: 'Select category'
+    ru: 'Выберите категорию'
+  }
   $($('.category-select')[0]).select2
     width: 'resolve'
     theme: 'bootstrap'
-    placeholder: 'Select category'
+    placeholder: patterns[locale]
     minimumResultsForSearch: Infinity
     ajax:
       url: '/categories'

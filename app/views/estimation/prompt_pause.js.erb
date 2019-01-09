@@ -7,8 +7,13 @@ $form.on('hidden.bs.modal', function (e) {
 $form.on("shown.bs.modal", function (e) {
     var $picker = $($form.find('#estimation_new_expires_at').first());
     var $startDate = moment().add(5, 'minutes');
+    var locale = Cookies.get("locale");
+    var locales = {
+        en: 'en-gb',
+        ru: 'ru'
+    }
     $picker.datetimepicker({
-        locale: 'en-gb',
+        locale: locales[locale],
         inline: true,
         format: 'YYYY-MM-DD HH:mm',
         minDate: $startDate,

@@ -4,6 +4,7 @@ $form.on('hidden.bs.modal', function (e) {
     $form.remove();
 });
 $form.on("shown.bs.modal", function (e) {
-    $('#task_rating').rating( {showCaption: false, showClear: true, language: 'en', showLabel: false} );
+    var locale = Cookies.get('locale');
+    $('#task_rating').rating( {showCaption: false, showClear: true, language: locale, showLabel: false} );
 });
 $form.modal('show');

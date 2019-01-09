@@ -29,6 +29,10 @@ $(document).on 'turbolinks:before-cache', ->
   $('.typeahead').typeahead('destroy')
 
 $(document).on 'turbolinks:load', ->
+  header =
+    ru: "Группы и задачи",
+    en: "Groups and tasks"
+  locale = Cookies.get("locale")
   $('.typeahead').typeahead { minLength: 3 },
     name: 'tasks'
     display: 'name'
@@ -39,7 +43,7 @@ $(document).on 'turbolinks:load', ->
       fetchResults()
       return
     templates:
-      header: '<h3 class="text-center">Groups and tasks</h3>',
+      header: '<h3 class="text-center">' + header[locale] + '</h3>',
       suggestion: (data) ->
         if (data.index == "groups")
           template = "<div><i class='fas fa-users m-1'></i>" + shorten(data.name, 40) +
