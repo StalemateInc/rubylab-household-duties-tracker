@@ -31,7 +31,7 @@ class TaskPresenter < BasePresenter
   end
 
   def between_expires_at_and_now
-    distance_of_time_in_words(@model.expires_at, Time.now, locale: I18n.locale)
+    distance_of_time_in_words(@model.expires_at, Time.now.utc, locale: I18n.locale)
   end
 
   def between_new_expires_at_and_expires_at

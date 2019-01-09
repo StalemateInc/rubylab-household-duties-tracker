@@ -61,7 +61,6 @@ gem 'dotiw'
 gem 'file_validators'
 
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 
 gem 'interactor', '~> 3.0'
 gem 'sidekiq', '~> 5.2.3'
@@ -78,6 +77,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'faker', '~> 1.9.1'
+  gem 'erb2haml'
 end
 
 group :development do

@@ -19,7 +19,6 @@
                           label: t('simple_form.field.remember_me'),
                           as: :boolean if devise_mapping.rememberable? %>
             </div>
-            <%= link_to t('devise.form.login.omniauth_facebook'), user_facebook_omniauth_authorize_path %>
             <div class="form-actions">
               <%= f.button :submit, t('devise.form.login.action') %>
             </div>
