@@ -7,6 +7,7 @@ ru:
       or: "или"
       login: "Войти в систему"
       signup: "Создать аккаунт"
+      language_select: "Выберите язык"
     nav:
       logged_as: "Выполнен вход как:"
   dashboard:

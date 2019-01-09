@@ -10,9 +10,13 @@
   -o-background-size: cover;
 }
 
-.landing_nav {
-  background-color: rgba(193, 231, 249, 0.6);
-  max-height: 40px;
+.landing-jumbo {
+  margin-bottom: 1rem;
+}
+
+.landing-nav {
+  flex-direction: row-reverse;
+  max-height: 35px;
 }
 
 .card-container {

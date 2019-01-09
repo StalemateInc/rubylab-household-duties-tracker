@@ -19,18 +19,7 @@
     </form>
   <% end %>
 
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-    <%= t(I18n.locale) %>
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="header">Select a language</li>
-    <% I18n.available_locales.each do |lang| %>
-      <li>
-        <%= link_to t(lang), change_locale_path(lang) %>
-      </li>
-    <% end %>
-  </ul>
+  <%= render partial: "dashboard/locale_switcher" %>
 
   <% if user_signed_in? %>
     <ul class="navbar-nav ml-auto ml-md-0">
