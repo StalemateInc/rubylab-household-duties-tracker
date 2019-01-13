@@ -6,6 +6,9 @@
           <%= t('stats.heading') %>
         </button>
         <%= link_to t('groups.new.heading'), new_group_path, class: "btn btn-md btn-primary" %>
+        <button class="btn btn-md btn-secondary float-right" data-toggle="collapse" data-target="#collapsingTagCloud">
+          <%= t('stats.tag_cloud') %>
+        </button>
       </h5>
     </div>
     <div id="collapsingStats" class="collapse" aria-labelledby="statsHeading" data-parent="#accordion">
@@ -43,6 +46,15 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div id="collapsingTagCloud" class="collapse" aria-labelledby="statsHeading" data-parent="#accordion">
+      <div class="card-body">
+        <div id="tag_cloud">
+          <% tag_cloud Task.tag_counts, %w[tag-sm tag-md tag-lg] do |tag, css_class| %>
+            <%= link_to tag.name, search_path(params: {tag: true, "only[]": "tasks", query: tag.name}), class: ["tag",css_class].join(' ') %>
+          <% end %>
         </div>
       </div>
     </div>

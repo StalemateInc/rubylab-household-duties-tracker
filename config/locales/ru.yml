@@ -113,6 +113,7 @@ ru:
       finished: "Выполненных задач"
       created: "Создал(а) задач"
     heading: "Личная статистика"
+    tag_cloud: "Облако тегов"
   user:
     profile:
       name: "Имя"

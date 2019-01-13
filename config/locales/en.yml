@@ -109,6 +109,7 @@ en:
       finished: "Finished tasks"
       created: "Created tasks"
     heading: "Personal statistics"
+    tag_cloud: "Tag cloud"
   user:
     profile:
       name: "Name"
