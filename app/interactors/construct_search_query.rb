@@ -11,18 +11,11 @@ class ConstructSearchQuery
   private
 
   def build_elastic_query(q, user)
-    query = q.downcase.split(' ').map { |query_string| query_string + '*' }.join(' AND ')
     search_query = {
       "query": {
         "bool": {
           "must": [
-            {
-              "query_string": {
-                "query": query,
-                "analyze_wildcard": true,
-                "default_field": '*'
-              }
-            },
+            must_term(q),
             {
               "bool": {
                 "should": [
@@ -37,4 +30,24 @@ class ConstructSearchQuery
     }
     search_query.to_json
   end
+
+  def must_term(q)
+    if context.tag
+      {
+        "match": {
+          "tag_list": q
+        }
+      }
+    else
+      query = q.downcase.split(' ').map { |query_string| query_string + '*' }.join(' AND ')
+      {
+        "query_string": {
+          "query": query,
+          "analyze_wildcard": true,
+          "default_field": '*'
+        }
+      }
+    end
+  end
+
 end

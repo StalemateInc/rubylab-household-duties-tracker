@@ -148,6 +148,7 @@ ru:
     tasks:
       empty: "Подходящие по критериям поиска задачи не найдены."
       heading: "Задачи"
+      with_tag: "с тегом \"%{params}\""
   comment:
     action:
       comment:

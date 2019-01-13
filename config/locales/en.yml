@@ -144,6 +144,7 @@ en:
     tasks:
       empty: "No tasks matched the search criteria."
       heading: "Tasks"
+      with_tag: "with tag \"%{params}\""
   comment:
     action:
       comment:

@@ -5,8 +5,10 @@ class SearchController < ApplicationController
     params = search_params
     return if params.blank?
 
+    tag = params[:tag] || false
     search_result = PerformTextSearch.call(user: params[:user] ? User.find(params[:user]) : nil || current_user,
                                            only: params[:only],
+                                           tag: tag,
                                            query: params[:query])
     respond_to do |format|
       if search_result.success?
@@ -46,7 +48,7 @@ class SearchController < ApplicationController
   end
 
   def search_params
-    params.permit(:format, :query, :user, only: [])
+    params.permit(:format, :query, :user, :tag, only: [])
   end
 
 end

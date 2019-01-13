@@ -17,7 +17,7 @@
           <%= t('tasks.show.category') %>
           <%= hierarchy_string(task_presenter.category) %><br/>
           <% @task.tag_list.each do |tag| %>
-            <a class="tag" href="#"><%= tag %></a>
+            <a class="tag" href="<%= search_path(params: {tag: true, "only[]": "tasks", query: tag}) %>"><%= tag %></a>
           <% end %>
         </div>
       </div>

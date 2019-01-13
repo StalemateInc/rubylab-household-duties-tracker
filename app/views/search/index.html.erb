@@ -29,7 +29,7 @@
 
       <% if @tasks.present? %>
         <div id="tasks-search">
-            <h2><%= t('search.tasks.heading') %></h2>
+            <h2><%= t('search.tasks.heading') %> <%= t('search.tasks.with_tag', params: params[:query]) if params[:tag] %></h2>
             <% @tasks.each do |task| %>
               <%= render partial: "tasks/task_card", locals: {group: task.group, task: task} %><br/>
             <% end %>

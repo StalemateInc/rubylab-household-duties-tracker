@@ -30,7 +30,7 @@ class Ability
       end
       can :create, Task
       can [:edit, :update], Task do |task|
-        false
+        creator?(task, user)
       end
       can(:destroy, Task) { |task| creator?(task, user) }
       can(:estimate, Task) { |task| executor?(task, user) }

@@ -12,7 +12,11 @@ class PerformSearch
       context.elastic_failed = e.message
       results = []
       searched_models.each do |model|
-        results.concat(model.full_text_search(context.db_query))
+        if context.tag
+          results.concat(model.tagged_with(context.db_query))
+        else
+          results.concat(model.full_text_search(context.db_query))
+        end
       end
       results.select! { |entity| Ability.new(user).can?(:read, entity) }
     end
