@@ -9,7 +9,7 @@ class TasksController < ApplicationController
 
   # GET /groups/:group_id/tasks
   def index
-    @tasks = @group.tasks
+    @tasks = @group.tasks.page(params[:page])
   end
 
   # POST /groups/:group_id/tasks

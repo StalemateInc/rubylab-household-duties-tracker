@@ -2,28 +2,44 @@
   <%= render partial: "users/stats", locals: {user: current_user} %>
   <div class="row">
     <div class="col-md">
-      <h2><%= t('groups.index.public_groups.heading') %></h2>
-      <% if @public_groups.empty? %>
-        <%= t('groups.index.public_groups.empty') %>
-      <% else %>
-        <div id="public_groups_pager">
-          <%= paginate @public_groups, remote: true, param_name: "public_groups_page" %>
+      <div id="accordion-groups">
+        <div class="card">
+          <div class="card-header" id="publicGroupsHeading">
+            <h2 data-toggle="collapse" data-target="#collapsingPublicGroups"><%= t('groups.index.public_groups.heading') %></h2>
+          </div>
+          <div id="collapsingPublicGroups" class="collapse" aria-labelledby="publicGroupsHeading" data-parent="#accordion-groups">
+            <% if @public_groups.empty? %>
+              <%= t('groups.index.public_groups.empty') %>
+            <% else %>
+              <div id="public_groups_pager">
+                <%= paginate @public_groups, remote: true, param_name: "public_groups_page" %>
+              </div>
+              <div id="public_groups" class="scrolling-wrapper-flexbox">
+                <%  @public_groups.each do |g|  %>
+                  <%= render partial: "group_card", locals: {group: g} %>
+                <%  end  %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div id="public_groups" class="scrolling-wrapper-flexbox">
-        <%  @public_groups.each do |g|  %>
-          <%= render partial: "group_card", locals: {group: g} %>
-        <%  end  %>
+
+        <hr/>
+
+        <div class="card">
+          <div class="card-header" id="userGroupsHeading">
+            <h2 data-toggle="collapse" data-target="#collapsingUserGroups"><%= t('groups.index.my_groups.heading') %></h2>
+          </div>
+          <div id="collapsingUserGroups" class="collapse show" aria-labelledby="userGroupsHeading" data-parent="#accordion-groups">
+            <div id="user_groups_pager">
+              <%= paginate @user_groups, remote: true, param_name: "user_groups_page" %>
+            </div>
+            <div id="user_groups" class="scrolling-wrapper-flexbox">
+              <% @user_groups.each do |g| %>
+                <%= render partial: "group_card", locals: {group: g} %>
+              <% end %>
+            </div>
+          </div>
         </div>
-      <% end %>
-      <hr/>
-      <h2><%= t('groups.index.my_groups.heading') %></h2>
-      <div id="user_groups_pager">
-        <%= paginate @user_groups, remote: true, param_name: "user_groups_page" %>
-      </div>
-      <div id="user_groups" class="scrolling-wrapper-flexbox">
-        <% @user_groups.each do |g| %>
-          <%= render partial: "group_card", locals: {group: g} %>
-        <% end %>
       </div>
     </div>
   </div>

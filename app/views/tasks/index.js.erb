@@ -1,0 +1,4 @@
+$('#tasks').html('<%= j(render(partial: "task_card", collection: @tasks, as: :task, locals: {group: @group})) %>');
+$('#tasks_pager').html('<%= j(paginate(@tasks, remote: true).to_s) %>');
+startEveryTimer()
+showCardRatings()

@@ -25,6 +25,8 @@ class Task < ApplicationRecord
   enum status: %i[opened pending in_progress paused finished closed]
   validates :rating, inclusion: { in: 0..5 }
 
+  paginates_per 5
+
   scope :text_contains, (lambda do |query|
     where('LOWER(title) LIKE ?', "%#{query.downcase}%")
     .or(where('LOWER(description) LIKE ?', "%#{query.downcase}%"))

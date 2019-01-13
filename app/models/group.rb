@@ -19,7 +19,7 @@ class Group < ApplicationRecord
   scope :text_contains, ->(query) { where('LOWER(name) LIKE ?', "%#{query.downcase}%")}
   scope :full_text_search, ->(query) { text_contains(query) }
 
-  paginates_per 1
+  paginates_per 3
 
   def as_indexed_json(options = {})
     as_json(only: %i[id name visible_to_all], methods: :accessible_by)
