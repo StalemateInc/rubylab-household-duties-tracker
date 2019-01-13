@@ -1,5 +1,4 @@
 ru:
-  hello: "Привет мир"
   datetime:
     dotiw:
       words_connector: ','
@@ -183,3 +182,9 @@ ru:
               too_short: "слишком короток."
             password_confirmation:
               confirmation: "должен совпадать."
+  views:
+    pagination:
+      next: "Следующая"
+      last: "Последняя"
+      first: "Первая"
+      previous: "Предыдущая"

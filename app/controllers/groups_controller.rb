@@ -4,10 +4,12 @@ class GroupsController < ApplicationController
   authorize_resource
   before_action :find_group, except: %i[index create new]
 
+  GROUPS_PER_PAGE = 3
+
   # GET /groups
   def index
-    @public_groups = Group.where(visible_to_all: true) if can? :read_public, Group
-    @user_groups = current_user.groups
+    @public_groups = Group.where(visible_to_all: true).page(params[:public_groups_page]).per(GROUPS_PER_PAGE)
+    @user_groups = current_user.groups.page(params[:user_groups_page]).per(GROUPS_PER_PAGE)
   end
 
   # POST /groups

@@ -6,7 +6,10 @@
       <% if @public_groups.empty? %>
         <%= t('groups.index.public_groups.empty') %>
       <% else %>
-        <div class="scrolling-wrapper-flexbox">
+        <div id="public_groups_pager">
+          <%= paginate @public_groups, remote: true, param_name: "public_groups_page" %>
+        </div>
+        <div id="public_groups" class="scrolling-wrapper-flexbox">
         <%  @public_groups.each do |g|  %>
           <%= render partial: "group_card", locals: {group: g} %>
         <%  end  %>
@@ -14,7 +17,10 @@
       <% end %>
       <hr/>
       <h2><%= t('groups.index.my_groups.heading') %></h2>
-      <div class="scrolling-wrapper-flexbox">
+      <div id="user_groups_pager">
+        <%= paginate @user_groups, remote: true, param_name: "user_groups_page" %>
+      </div>
+      <div id="user_groups" class="scrolling-wrapper-flexbox">
         <% @user_groups.each do |g| %>
           <%= render partial: "group_card", locals: {group: g} %>
         <% end %>

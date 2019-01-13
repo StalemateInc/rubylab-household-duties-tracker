@@ -63,6 +63,7 @@ gem 'file_validators'
 gem 'omniauth-facebook'
 
 gem 'interactor', '~> 3.0'
+gem 'kaminari'
 gem 'sidekiq', '~> 5.2.3'
 gem 'sidekiq-cron'
 gem 'mailgun-ruby', '~>1.1.6'

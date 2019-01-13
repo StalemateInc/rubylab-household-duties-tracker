@@ -1,0 +1,5 @@
+$('#public_groups').html('<%= j(render(partial: "group_card", collection: @public_groups, as: :group)) %>');
+$('#public_groups_pager').html('<%= j(paginate(@public_groups, remote: true, param_name: "public_groups_page").to_s) %>');
+
+$('#user_groups').html('<%= j(render(partial: "group_card", collection: @user_groups, as: :group)) %>');
+$('#user_groups_pager').html('<%= j(paginate(@user_groups, remote: true, param_name: "user_groups_page").to_s) %>');
