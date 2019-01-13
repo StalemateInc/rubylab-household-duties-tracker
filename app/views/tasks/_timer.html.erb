@@ -10,6 +10,13 @@
   <%= content_tag(:span, t('timer.status.finished'), id: "expire_time_#{task.id}") %>
 <% end %>
 
+<% if task.opened? && can?(:estimate, task) %>
+  <%= link_to group_task_estimate_path(task.group, task), class: "btn btn-md btn-success",
+              method: :get, id: "resume_button_#{task.id}" do %>
+    <i class="fas fa-clock"></i>
+  <% end %>
+<% end %>
+
 <% if task.paused? && can?(:resume, task) %>
   <%= link_to group_task_estimate_resume_path(task.group, task), class: "btn btn-md btn-success",
               method: :post, remote: true, id: "resume_button_#{task.id}" do %>

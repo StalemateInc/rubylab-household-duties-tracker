@@ -129,6 +129,7 @@ en:
       update:
         action: "Update profile"
       stats: "Activity"
+      memberships: "Member of groups:"
   locale:
     en: "English"
     ru: "Russian"

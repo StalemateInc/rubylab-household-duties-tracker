@@ -24,13 +24,15 @@
       <hr/>
       <div class="col-lg-4">
         <div class="row">
-          <div class="col-6">
+          <div class="col-6 text-center">
             <%= t('tasks.show.created_by') %>
-            <%= task_presenter.creator_with_email %>
+            <%#= task_presenter.creator_with_email %>
+            <%= render partial: "assignee_card", locals: {user: @task.creator} %>
           </div>
-          <div class="col-6">
+          <div class="col-6 text-center">
             <%= t('tasks.show.assigned_to') %>
-            <%= task_presenter.executor_with_email %>
+            <%#= task_presenter.executor_with_email %>
+            <%= render partial: "assignee_card", locals: {user: @task.executor} %>
           </div>
         </div>
       </div>
@@ -75,8 +77,8 @@
       </div>
     </div>
     <div class="card-block">
-      <%= link_to t('tasks.show.edit'), edit_group_task_path(@task.group, @task), class: "btn btn-md btn-warning" %>
-      <%= link_to t('tasks.show.destroy'), group_task_path(@task.group, @task), class: "btn btn-md btn-danger", method: "delete" %>
+      <%= (link_to t('tasks.show.edit'), edit_group_task_path(@task.group, @task), class: "btn btn-md btn-warning") if can?(:edit, @task) %>
+      <%= (link_to t('tasks.show.destroy'), group_task_path(@task.group, @task), class: "btn btn-md btn-danger", method: "delete") if can?(:destroy, @task) %>
       <%= link_to t('common.back'), group_tasks_path(@task.group), class: "btn btn-md btn-info" %>
     </div>
   </div>

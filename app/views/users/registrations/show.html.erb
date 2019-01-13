@@ -66,6 +66,20 @@
           <%= current_user.active_tasks_count %>
         </li>
       </ul>
+
+      <br/>
+
+      <ul class="list-group">
+        <li class="list-group-item text-muted text-right"><%= t('user.profile.memberships') %></li>
+        <% current_user.groups.each do |group| %>
+          <li class="list-group-item text-right">
+            <span class="pull-left"><i class="fas fa-users mr-2"></i><%= group.name %></span>
+            <%= link_to group_member_path(group), method: :delete, class: "btn btn-sm btn-danger" do %>
+              <i class="fas fa-door-open"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
   <div class="row">

@@ -12,27 +12,28 @@ class Ability
         find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :destroy, Group do |group|
-        find_corresponding_role_for_group(user, group).group_owner?
+        find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :add_users, Group do |group|
         find_corresponding_role_for_group(user, group).in?([Role.adult.last, Role.group_owner.last])
       end
       can :remove_users, Group do |group|
-        find_corresponding_role_for_group(user, group).group_owner?
+        find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :manage_roles, Group do |group|
-        find_corresponding_role_for_group(user, group).group_owner?
+        find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :read_public, Task
       can :read, Task do |task|
-        creator?(task, user) || executor?(task, user) ||
-          find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last, Role.adult.last])
+        task.visible_to_all? || creator?(task, user) || executor?(task, user) ||
+          find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last])
       end
-      can :create, Task
-      can [:edit, :update], Task do |task|
-        creator?(task, user)
+      can :create, Task do |task|
+        member?(task.group, user)
       end
-      can(:destroy, Task) { |task| creator?(task, user) }
+      can [:edit, :update, :destroy], Task do |task|
+        creator?(task, user) || find_corresponding_role_for_group(user, task.group).in?([Role.group_owner.last])
+      end
       can(:estimate, Task) { |task| executor?(task, user) }
       can(:start, Task) { |task| creator?(task, user) }
       can %i[prompt_pause pause resume], Task do |task|
