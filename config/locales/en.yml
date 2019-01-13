@@ -169,3 +169,14 @@ en:
     form:
       login:
         omniauth_facebook: "Sign in with Facebook"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "is invalid or malformed."
+            password:
+              too_short: "is too short."
+            password_confirmation:
+              confirmation: "must match the password."

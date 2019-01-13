@@ -19,8 +19,10 @@
           <small>
             <% task = comment.commentable; group = task.group %>
             <%= link_to t('comment.action.reply.action'), polymorphic_path([:reply, group, task, comment]), class: "reply-comment-link", remote: true %>
-            <%= link_to t('comment.action.edit.action'), edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
-            <%= link_to t('comment.action.delete.action'), polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: t('common.confirm')}, class: "delete-comment-link"%>
+            <% if comment.user == current_user && comment.regular? %>
+              <%= link_to t('comment.action.edit.action'), edit_polymorphic_path([group, task, comment]), remote: true, class: "edit-comment-link" %>
+              <%= link_to t('comment.action.delete.action'), polymorphic_path([group, task, comment]), method: :delete, remote: :true, data: {confirm: t('common.confirm')}, class: "delete-comment-link"%>
+            <% end %>
           </small>
         </div>
       </div>

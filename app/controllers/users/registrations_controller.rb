@@ -10,7 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/profile
-  def show; end
+  def show
+    redirect_to new_user_registration_path unless current_user
+  end
 
   # POST /resource
   # def create

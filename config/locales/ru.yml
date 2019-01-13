@@ -172,3 +172,14 @@ ru:
     form:
       login:
         omniauth_facebook: "Войти через Facebook"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "неверен или введен неправильно."
+            password:
+              too_short: "слишком короток."
+            password_confirmation:
+              confirmation: "должен совпадать."

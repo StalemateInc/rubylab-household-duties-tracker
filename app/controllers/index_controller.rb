@@ -2,7 +2,8 @@ class IndexController < ActionController::Base
   def change_locale
     locale = locale_valid? ? params[:locale] : I18n.default_locale
     cookies.permanent[:locale] = locale
-    redirect_to request.referer || root_url
+    # redirect_to url.referrer || root_path
+    redirect_back(fallback_location: root_path)
   end
 
   private
