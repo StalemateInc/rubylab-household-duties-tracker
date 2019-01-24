@@ -182,3 +182,16 @@ en:
               too_short: "is too short."
             password_confirmation:
               confirmation: "must match the password."
+  flash:
+    group:
+      update_success: "Successfully updated group!"
+      update_failure: "Failed to update the group"
+      destroy_success: "Group destroyed!"
+      invite_success: "Successfully added user with email %{email}!"
+      invite_failure: "Failed to add user to group!"
+      leave_success: "Successfully left the group!"
+    task:
+      update_success: "Successfully updated task!"
+      update_failure: "Failed to update the task."
+      destroy_success: "Successfully destroyed task"
+      destroy_failure: "Failed to destroy task"

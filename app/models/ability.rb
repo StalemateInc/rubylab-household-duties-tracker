@@ -8,7 +8,7 @@ class Ability
         group.visible_to_all? || member?(group, user)
       end
       can :create, Group
-      can :edit, Group do |group|
+      can [:edit, :update], Group do |group|
         find_corresponding_role_for_group(user, group).group_owner? if member?(group, user)
       end
       can :destroy, Group do |group|

@@ -27,22 +27,34 @@ class GroupsController < ApplicationController
 
   # GET /groups/:id/edit
   def edit
-    redirect_to groups_path unless can? :edit, @group
+    unless can? :edit, @group
+      flash[:alert] = t('cancancan.access_denied')
+      redirect_to groups_path
+    end
   end
 
   # GET groups/:id
   def show
-    redirect_to groups_path unless can? :read, @group
+    unless can? :read, @group
+      flash[:alert] = t('cancancan.access_denied')
+      redirect_to groups_path
+    end
   end
 
   # PATCH/PUT groups/:id
   def update
-    redirect_to @group if @group.update(group_params)
+    if @group.update(group_params)
+      flash[:notice] = I18n.t('flash.group.update_success')
+    else
+      flash[:alert] = I18n.t('flash.group.update_failure')
+    end
+    redirect_to @group
   end
 
   # DELETE group/:id
   def destroy
     @group.destroy if can? :destroy, @group
+    flash[:notice] = I18n.t('flash.group.destroy_success')
     redirect_to groups_path
   end
 

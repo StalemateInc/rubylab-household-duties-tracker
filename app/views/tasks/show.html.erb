@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-1">
+      <div class="col-lg-1 d-none">
         <div class="comment-counter-div">
           <i class="far fa-comment-alt comment-counter-icon fa-2x"></i>
           <span id="comments-count-of-commentable-<%= task_presenter.id %>"><%= task_presenter.comment_count %></span>
@@ -60,7 +60,7 @@
           <%= content_tag(:h4, t('tasks.show.estimation.repeated', executor_name: task_presenter.executor_name)) %>
           <%= content_tag(:h2, "#{task_presenter.formatted_new_expires_at(session[:timezone])}") %>
           <%= content_tag(:span, t('tasks.show.estimation.between_repeated', between_new_expires_at_and_expires_at: task_presenter.between_new_expires_at_and_expires_at)) %><br/>
-          <%= render partial: "estimation/estimation_buttons", locals: { task: task_presenter } %>
+          <%= render partial: "estimation/estimation_buttons", locals: { presenter: task_presenter } %>
         </div>
       </div>
       <hr/>

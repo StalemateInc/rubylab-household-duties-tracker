@@ -1,4 +1,4 @@
-comment_form = $("#comment_<%= @comment.id %> .comment-form form");
+$comment_form = $("#comment_<%= @comment.id %> .comment-form form");
 $comment = $("#comment_<%= @comment.id %>");
 <% if @comment.errors.empty? %>
   $comment.html("<%=j render @comment %>");

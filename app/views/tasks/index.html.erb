@@ -15,7 +15,7 @@
           </div>
           <div id="tasks">
             <% @tasks.each do |task| %>
-              <%= render partial: "task_card", locals: {group: @group, task: task } %>
+              <%= (render partial: "task_card", locals: {group: @group, task: task }) %>
               <br/>
             <% end %>
           </div>

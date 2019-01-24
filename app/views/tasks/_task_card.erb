@@ -16,13 +16,10 @@
   <div class="card-body">
     <h4 class="card-title"><%= task.title %></h4>
     <p class="card-text"><%= task.description  %></p>
-    <%# if task.executor == current_user && task.opened? %>
-      <%#= link_to t('tasks.show.estimation.required'), group_task_estimate_path(group, task.id), class: "btn btn-md btn-primary" %>
-    <%# elsif task.creator == current_user && task.pending? %>
-      <%#= link_to t('tasks.show.estimation.set'), group_task_path(group, task.id), class: "btn btn btn-warning" %>
-    <%# else %>
     <%= link_to t('common.more'), group_task_path(group, task.id), class: "btn btn-md btn-success" %>
-    <%# end %>
-
+    <div class="comment-counter-div float-right">
+      <i class="far fa-comment-alt comment-counter-icon fa-2x"></i>
+      <span id="comments-count-of-commentable-<%= task.id %>"><%= task.comments.count %></span>
+    </div>
   </div>
 </div>

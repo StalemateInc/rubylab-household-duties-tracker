@@ -42,6 +42,11 @@ displayRatingWidget = () ->
     return
   return
 
+format = (state) ->
+  original = state.text
+  original = original.toString().replace('∟','')
+  return $.trim(original)
+
 showCategoriesSelector = () ->
   locale = Cookies.get("locale")
   patterns = {
@@ -53,6 +58,7 @@ showCategoriesSelector = () ->
     theme: 'bootstrap'
     placeholder: patterns[locale]
     minimumResultsForSearch: Infinity
+    templateSelection: format
     ajax:
       url: '/categories'
       dataType: 'json'

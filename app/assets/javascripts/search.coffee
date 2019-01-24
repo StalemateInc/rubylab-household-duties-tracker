@@ -25,6 +25,20 @@ shorten = (data, char_amount) ->
   )
   return mapped
 
+rememberCheckboxes = () ->
+  checkboxValues = JSON.parse(localStorage.getItem('searchTermsValues')) or {}
+  $checkboxes = $('#search-terms :checkbox')
+  $checkboxes.on 'change', ->
+    $checkboxes.each ->
+      checkboxValues[@id] = @checked
+      return
+    localStorage.setItem 'searchTermsValues', JSON.stringify(checkboxValues)
+    return
+  $.each checkboxValues, (key, value) ->
+    $('#' + key).prop 'checked', value
+    return
+  return
+
 $(document).on 'turbolinks:before-cache', ->
   $('.typeahead').typeahead('destroy')
 
@@ -33,6 +47,7 @@ $(document).on 'turbolinks:load', ->
     ru: "Группы и задачи",
     en: "Groups and tasks"
   locale = Cookies.get("locale")
+  rememberCheckboxes()
   $('.typeahead').typeahead { minLength: 3 },
     name: 'tasks'
     display: 'name'

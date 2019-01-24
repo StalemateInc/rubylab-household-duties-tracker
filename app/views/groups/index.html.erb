@@ -14,7 +14,7 @@
               <div id="public_groups_pager">
                 <%= paginate @public_groups, remote: true, param_name: "public_groups_page" %>
               </div>
-              <div id="public_groups" class="scrolling-wrapper-flexbox">
+              <div id="public_groups" class="mx-1">
                 <%  @public_groups.each do |g|  %>
                   <%= render partial: "group_card", locals: {group: g} %>
                 <%  end  %>
@@ -22,8 +22,6 @@
             <% end %>
           </div>
         </div>
-
-        <hr/>
 
         <div class="card">
           <div class="card-header" id="userGroupsHeading">
@@ -33,7 +31,7 @@
             <div id="user_groups_pager">
               <%= paginate @user_groups, remote: true, param_name: "user_groups_page" %>
             </div>
-            <div id="user_groups" class="scrolling-wrapper-flexbox">
+            <div id="user_groups" class="mx-1">
               <% @user_groups.each do |g| %>
                 <%= render partial: "group_card", locals: {group: g} %>
               <% end %>

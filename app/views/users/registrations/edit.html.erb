@@ -46,17 +46,8 @@
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <%= f.input :avatar, label: t('simple_form.field.avatar'), as: :file %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :locale,
-                          label: t('simple_form.field.language'),
-                          as: :select,
-                          collection: [[t('locale.en'), 'en'], [t('locale.ru'), 'ru']],
-                          input_html: { autocomplete: "locale" },
-                          include_blank: false,
-                          include_hidden: false %>
             </div>
           </div>
         </div>

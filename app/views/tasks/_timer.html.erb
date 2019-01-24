@@ -34,7 +34,7 @@
 <% if task.stoppable? && can?(:stop, task) %>
   <%= link_to group_task_estimate_stop_path(task.group, task), class: "btn btn-md btn-danger", remote: true,
       method: :post, id: "finish_button_#{task.id}" do %>
-    <i class="fas fa-stop"></i>
+    <i class="fas fa-times"></i>
   <% end %>
 <% end %>
 

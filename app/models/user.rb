@@ -7,6 +7,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook]
   mount_uploader :avatar, ImageUploader
 
+  validates_uniqueness_of :email
   validates :avatar, file_size: { less_than: 1.megabytes }
 
   has_many :memberships

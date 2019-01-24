@@ -19,8 +19,8 @@ class ConstructSearchQuery
             {
               "bool": {
                 "should": [
-                  { "term": { "accessible_by": user.id } },
-                  { "term": { "accessible_by": -1 } }
+                  { "match": { "accessible_by": user.id } },
+                  { "match": { "accessible_by": -1 } }
                 ]
               }
             }

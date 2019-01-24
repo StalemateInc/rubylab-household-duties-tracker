@@ -33,13 +33,23 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /groups/:group_id/tasks/:id
   def update
-    redirect_to [@group, @task] if @task.update(task_params)
+    if @task.update(task_params)
+      flash[:notice] = I18n.t('flash.task.update_success')
+    else
+      flash[:alert] = I18n.t('flash.task.update_failure')
+    end
+    redirect_to [@group, @task]
   end
 
   # DELETE /groups/:group_id/tasks/:id
   def destroy
-    @task.destroy
-    redirect_to group_tasks_path
+    if @task.destroy
+      flash[:notice] = I18n.t('flash.task.destroy_success')
+      redirect_to group_tasks_path
+    else
+      flash[:alert] = I18n.t('flash.task.destroy_failure')
+      redirect_to @task
+    end
   end
 
   def prompt_rate
